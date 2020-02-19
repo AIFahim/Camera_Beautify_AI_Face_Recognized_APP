@@ -42,6 +42,7 @@ import java.util.ArrayList;
 public class CameraWithFilterActivity extends Activity implements  View.OnClickListener {
 
 
+    private static final int READ_STORAGE_PERMISSION_REQUEST_CODE = 3;
     private ImageView BtnSticker;
 
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
@@ -598,20 +599,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             else if (buttonId ==  R.id.btn_gallery) {
 
 
-               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                       && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
-                       checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-               )
-               {
-                   requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                           PERMISSION_CALLBACK_CONSTANT);
-
-                   requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE},
-                           PERMISSION_CALLBACK_CONSTANT);
-
-
-
-               }
 
                 String pictureFolderPath = "/storage/emulated/0/Pictures/Camera Beautify";
                 String folderName = "Camera Beautify";
@@ -622,6 +609,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             }
         }
     };
+
+
 
     private void switchMode(){
         if(mode == MODE_PIC){
@@ -807,25 +796,15 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-
-
         GPUCamImgOperator =  new GPUCamImgOperator();
         LuoGLCameraView luoGLCameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
         GPUCamImgOperator.context = luoGLCameraView.getContext();
         GPUCamImgOperator.luoGLBaseView = luoGLCameraView;
-
-
-
-
-
         //Flash............
         FlashInitView();
         Sticker();
-
         MediaPlayer mp = MediaPlayer.create(this, R.raw.capturesound );
-
         initView();
-
         XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
         XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
     }
