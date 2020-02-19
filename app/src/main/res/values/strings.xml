@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Camera Beautify</string>
+    <string name="filter_none">Original</string>
+    <string name="filter_antique">Antique</string>
+    <string name="filter_cool">Cool</string>
+    <string name="filter_emerald">Emerald</string>
+    <string name="filter_evergreen">Evergreen</string>
+    <string name="filter_healthy">Healthy</string>
+    <string name="filter_nostalgia">Nostalgia</string>
+    <string name="filter_crayon">Crayon</string>
+
+    <string name="folderName">Folder Name</string>
+    <string name="appName">showfixfolder</string>
+    <string name="empty">No Images on this device</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

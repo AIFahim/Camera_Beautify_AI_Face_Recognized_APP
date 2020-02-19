@@ -1,0 +1,832 @@
+package com.example.camerabeautify.Activity;
+
+import android.Manifest;
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Point;
+import android.hardware.Camera;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
+import android.media.MediaPlayer;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.camerabeautify.ImageDisplay;
+import com.example.camerabeautify.R;
+import com.example.camerabeautify.camfilter.FilterRecyclerViewAdapter;
+import com.example.camerabeautify.camfilter.FilterTypeHelper;
+import com.example.camerabeautify.camfilter.GPUCamImgOperator;
+import com.example.camerabeautify.camfilter.widget.LuoGLCameraView;
+import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
+
+import java.util.ArrayList;
+
+@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+public class CameraWithFilterActivity extends Activity implements  View.OnClickListener {
+
+
+    private ImageView BtnSticker;
+
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
+
+    private Camera mCamera;
+//Flash............................
+    private LinearLayout llt_flash_col;
+    private ImageView img_flash, img_flash_on, img_flash_off, img_flash_auto, img_flash_light;
+    boolean isTorchOn = false;
+
+
+//........................................
+
+//    trangle....
+    private LinearLayout Trangle_1,Trangle_2,Trangle_3,Trangle_4;
+
+    private LinearLayout mFilterLayout;
+    private LinearLayout mFaceSurgeryLayout;
+    protected SeekBar mFaceSurgeryFaceShapeSeek;
+    protected SeekBar mFaceSurgeryBigEyeSeek;
+    protected SeekBar mSkinSmoothSeek;
+    protected SeekBar mSkinWihtenSeek;
+    protected SeekBar mRedFaceSeek;
+
+
+
+    private ArrayList<MenuBean> mStickerData;
+    private RecyclerView mMenuView;
+    private MenuAdapter mStickerAdapter;
+
+    private RecyclerView mFilterListView;
+    private FilterRecyclerViewAdapter mAdapter;
+    private com.example.camerabeautify.camfilter.GPUCamImgOperator GPUCamImgOperator;
+    private boolean isRecording = false;
+    private final int MODE_PIC = 1;
+    private final int MODE_VIDEO = 2;
+    private int mode = MODE_PIC;
+
+    private ImageView btn_shutter;
+    private ImageView btn_more,btn_touch;
+
+    private ObjectAnimator animator;
+    private int PERMISSION_CALLBACK_CONSTANT = 1000;
+
+    //final MediaPlayer mp = MediaPlayer.create(this,R.raw.capturesound );
+    final static MediaPlayer mp = new MediaPlayer();
+
+
+    private final com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType[] types = new GPUCamImgOperator.GPUImgFilterType[]{
+            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.NONE,
+            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.HEALTHY,
+            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.NOSTALGIA,
+            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.COOL,
+            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.EMERALD,
+            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.EVERGREEN,
+            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.CRAYON
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera_with_filter);
+        GPUCamImgOperator =  new GPUCamImgOperator();
+        LuoGLCameraView luoGLCameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
+        GPUCamImgOperator.context = luoGLCameraView.getContext();
+        GPUCamImgOperator.luoGLBaseView = luoGLCameraView;
+
+
+
+
+
+        //Flash............
+        FlashInitView();
+        Sticker();
+
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.capturesound );
+
+        initView();
+
+        XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
+        XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
+    }
+
+
+
+
+    //Flash Start...........................................
+    private void FlashInitView(){
+
+        img_flash = findViewById(R.id.img_main_flash);
+        Trangle_2 = findViewById(R.id.trangle_2);
+
+
+
+//        img_flash_auto = findViewById(R.id.img_main_flash_auto);
+        img_flash_on = findViewById(R.id.img_main_flash_on);
+        img_flash_off = findViewById(R.id.img_main_flash_off);
+//        img_flash_light = findViewById(R.id.img_main_flash_light);
+
+        llt_flash_col = findViewById(R.id.llt_main_flash_col);
+
+        findViewById(R.id.img_main_flash).setOnClickListener( this);
+        findViewById(R.id.llt_main_flash_on).setOnClickListener(this);
+        findViewById(R.id.llt_main_flash_off).setOnClickListener(this);
+        findViewById(R.id.btn_sticker).setOnClickListener(this);
+//        findViewById(R.id.llt_main_flash_auto).setOnClickListener(this);
+//        findViewById(R.id.llt_main_flash_toggle).setOnClickListener(this);
+
+        llt_flash_col.setVisibility(View.GONE);
+        Trangle_2.setVisibility(View.INVISIBLE);
+    }
+
+    private void Sticker(){
+        mMenuView= (RecyclerView)findViewById(R.id.mMenuView);
+        BtnSticker = findViewById(R.id.btn_sticker);
+        mMenuView.setVisibility(View.GONE);
+
+    }
+
+    private void initFlashMenu() {
+//        img_flash_auto.setImageResource(R.drawable.ico_flash_auto);
+        img_flash_on.setImageResource(R.drawable.ico_flash_on);
+        img_flash_off.setImageResource(R.drawable.ico_flash_off);
+//        img_flash_light.setImageResource(R.drawable.ico_flash_light);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+
+
+
+        switch (v.getId()) {
+            // ----- Flash column -----
+            case R.id.img_main_flash:
+
+                //TODO
+                if (llt_flash_col.getVisibility() == View.GONE)
+                {
+
+
+                    llt_flash_col.setVisibility(View.VISIBLE);
+
+                    Trangle_2.setVisibility(View.VISIBLE);
+
+                }
+                else if (llt_flash_col.getVisibility() == View.VISIBLE) {
+
+                    llt_flash_col.setVisibility(View.GONE);
+
+                    Trangle_2.setVisibility(View.INVISIBLE);
+
+                }
+                break;
+            case R.id.llt_main_flash_on:
+                initFlashMenu();
+                img_flash_on.setImageResource(R.drawable.ico_flash_on_sel);
+                Trangle_2.setVisibility(View.INVISIBLE);
+
+                torchToggle("on");
+
+                break;
+            case R.id.llt_main_flash_off:
+                initFlashMenu();
+                img_flash_off.setImageResource(R.drawable.ico_flash_off_sel);
+                Trangle_2.setVisibility(View.INVISIBLE);
+
+                torchToggle("off");
+                break;
+//            case R.id.llt_main_flash_auto:
+//                initFlashMenu();
+//                img_flash_auto.setImageResource(R.drawable.ico_flash_auto_sel);
+//                Toast.makeText(this, "Auto", Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.llt_main_flash_toggle:
+//                initFlashMenu();
+//                img_flash_light.setImageResource(R.drawable.ico_flash_light_sel);
+//                Toast.makeText(this, "Light", Toast.LENGTH_SHORT).show();
+//                break;
+
+            //Sticker_Button...................
+
+            case R.id.btn_sticker:
+
+
+                if (mMenuView.getVisibility() == View.GONE)
+                {
+                    mMenuView.setVisibility(View.VISIBLE);
+
+
+                }
+                else if (mMenuView.getVisibility() == View.VISIBLE) {
+
+                    mMenuView.setVisibility(View.GONE);
+                }
+                break;
+
+
+        }
+
+    }
+
+
+    private void torchToggle(String command) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            CameraManager camManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+            String cameraId = null; // Usually back camera is at 0 position.
+            try {
+                if (camManager != null) {
+                    cameraId = camManager.getCameraIdList()[0];
+                }
+                if (camManager != null) {
+                    if (command.equals("on")) {
+                        camManager.setTorchMode(cameraId, true);   // Turn ON
+                        isTorchOn = true;
+                    }
+                    else {
+                        camManager.setTorchMode(cameraId, false);  // Turn OFF
+                        isTorchOn = false;
+                    }
+                }
+            } catch (CameraAccessException e) {
+                e.getMessage();
+            }
+        }
+    }
+
+
+    //Flash End......................................................................
+
+
+
+    private void initView(){
+
+        mFilterLayout = (LinearLayout)findViewById(R.id.layout_filter);
+
+        mFaceSurgeryLayout = (LinearLayout)findViewById(R.id.layout_facesurgery);
+        mFaceSurgeryFaceShapeSeek = (SeekBar)findViewById(R.id.faceShapeValueBar);
+        mFaceSurgeryFaceShapeSeek.setProgress(0);
+        mFaceSurgeryBigEyeSeek = (SeekBar)findViewById(R.id.bigeyeValueBar);
+        mFaceSurgeryBigEyeSeek.setProgress(0);
+
+        mSkinSmoothSeek = (SeekBar)findViewById(R.id.skinSmoothValueBar);
+        mSkinSmoothSeek.setProgress(0);
+        mSkinWihtenSeek = (SeekBar)findViewById(R.id.skinWhitenValueBar);
+        mSkinWihtenSeek.setProgress(0);
+        mRedFaceSeek = (SeekBar)findViewById(R.id.redFaceValueBar);
+        mRedFaceSeek.setProgress(0);
+        XJGArSdkApi.XJGARSDKSetSkinSmoothParam(0);
+        XJGArSdkApi.XJGARSDKSetWhiteSkinParam(0);
+        XJGArSdkApi.XJGARSDKSetRedFaceParam(0);
+
+
+        mFaceSurgeryFaceShapeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public int value;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                value = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int strength = value;//(int)(value*(float)1.0/100);
+                XJGArSdkApi.XJGARSDKSetThinChinParam(strength);
+            }
+        });
+        mFaceSurgeryBigEyeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public int value;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                value = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int strength = value;//(int)(value*(float)1.0/100);
+                XJGArSdkApi.XJGARSDKSetBigEyeParam(strength);
+            }
+        });
+        mSkinSmoothSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public int value;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                value = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int level = value;//(int)(value/18);
+                XJGArSdkApi.XJGARSDKSetSkinSmoothParam(level);
+//                GPUCamImgOperator.setBeautyLevel(level);
+            }
+        });
+
+        mSkinWihtenSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public int value;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                value = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int level = value;//(int)(value/18);
+                XJGArSdkApi.XJGARSDKSetWhiteSkinParam(level);
+//                GPUCamImgOperator.setBeautyLevel(level);
+            }
+        });
+        mRedFaceSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public int value;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                value = i;
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int level = value;//(int)(value/18);
+                XJGArSdkApi.XJGARSDKSetRedFaceParam(level);
+//                GPUCamImgOperator.setBeautyLevel(level);
+            }
+        });
+
+        mFilterListView = (RecyclerView) findViewById(R.id.filter_listView);
+
+        btn_shutter = (ImageView)findViewById(R.id.btn_camera_shutter);
+        btn_more = (ImageView)findViewById(R.id.btn_more);
+        btn_touch = (ImageView)findViewById(R.id.btn_touch);
+
+
+        findViewById(R.id.btn_camera_filter).setOnClickListener(btn_listener);
+        //findViewById(R.id.btn_camera_closefilter).setOnClickListener(btn_listener);
+        findViewById(R.id.btn_camera_shutter).setOnClickListener(btn_listener);
+        findViewById(R.id.btn_camera_switch).setOnClickListener(btn_listener);
+        findViewById(R.id.btn_more).setOnClickListener(btn_listener);
+        findViewById(R.id.btn_camera_beauty).setOnClickListener(btn_listener);
+        findViewById(R.id.btn_gallery).setOnClickListener(btn_listener);
+        findViewById(R.id.btn_touch).setOnClickListener(btn_listener);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mFilterListView.setLayoutManager(linearLayoutManager);
+
+        mAdapter = new FilterRecyclerViewAdapter(this, types);
+        mFilterListView.setAdapter(mAdapter);
+        mAdapter.setOnFilterChangeListener(onFilterChangeListener);
+
+        animator = ObjectAnimator.ofFloat(btn_shutter,"rotation",0,360);
+        animator.setDuration(500);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        Point screenSize = new Point();
+        getWindowManager().getDefaultDisplay().getSize(screenSize);
+        LuoGLCameraView cameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) cameraView.getLayoutParams();
+        params.width = screenSize.x;
+        params.height = screenSize.y;//screenSize.x * 4 / 3;
+        cameraView.setLayoutParams(params);
+
+
+
+        mMenuView= (RecyclerView)findViewById(R.id.mMenuView);
+        mStickerData=new ArrayList<>();
+        mMenuView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+        mStickerAdapter=new MenuAdapter(this,mStickerData);
+        mStickerAdapter.setOnClickListener(new ClickUtils.OnClickListener() {
+            @Override
+            public void onClick(View v, int type, int pos, int child) {
+                MenuBean m=mStickerData.get(pos);
+                String name=m.name;
+                String path = m.path;
+                if (name.equals("None")) {
+                    XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
+                    mStickerAdapter.checkPos=pos;
+                    v.setSelected(true);
+//                }else if(name.equals("")){
+//
+//                    mStickerAdapter.checkPos=pos;
+//                    v.setSelected(true);
+                }else{
+                    String stickerPaperdir = XJGArSdkApi.getPrivateResDataDir(getApplicationContext());
+                    stickerPaperdir = stickerPaperdir +"/StickerPapers/"+ path;
+                    ZIP.unzipAStickPaperPackages(stickerPaperdir);
+
+                    XJGArSdkApi.XJGARSDKSetShowStickerPapers(true);
+                    XJGArSdkApi.XJGARSDKChangeStickpaper(path);
+                    mStickerAdapter.checkPos=pos;
+                    v.setSelected(true);
+                }
+                mStickerAdapter.notifyDataSetChanged();
+            }
+        });
+        mMenuView.setAdapter(mStickerAdapter);
+        initEffectMenu();
+    }
+
+
+    protected void initEffectMenu() {
+
+        MenuBean bean=new MenuBean();
+        bean.name="None";
+        bean.path="";
+        bean.image = R.drawable.orginal;
+
+        mStickerData.add(bean);
+
+        bean=new MenuBean();
+        bean.name="Mathal";
+        bean.path="mathal"; //mymask
+        bean.image = R.drawable.st_mathal;
+        mStickerData.add(bean);
+
+
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="headflag";
+        bean.image = R.drawable.st_headflag;
+        mStickerData.add(bean);
+
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="cheekflag";
+        bean.image = R.drawable.st_cheekflag;
+        mStickerData.add(bean);
+
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="cutepecha";
+        bean.image = R.drawable.st_cute_pecha;
+        mStickerData.add(bean);
+
+
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="pagri";
+        bean.image = R.drawable.st_pagri;
+        mStickerData.add(bean);
+
+
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="redghomta";
+        bean.image = R.drawable.st_ghomta_two;
+        mStickerData.add(bean);
+
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="flower";
+        bean.image = R.drawable.st_flower;
+        mStickerData.add(bean);
+
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="gamcha";
+        bean.image = R.drawable.st_gamcha;
+        mStickerData.add(bean);
+
+
+        mStickerAdapter.notifyDataSetChanged();
+    }
+
+    private FilterRecyclerViewAdapter.onFilterChangeListener onFilterChangeListener = new FilterRecyclerViewAdapter.onFilterChangeListener(){
+
+        @Override
+        public void onFilterChanged(com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType filterType) {
+//            GPUCamImgOperator.setFilter(filterType);
+            String filterName = FilterTypeHelper.FilterType2FilterName(filterType);
+            XJGArSdkApi.XJGARSDKChangeFilter(filterName);
+        }
+    };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        if (grantResults.length != 1 || grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if(mode == MODE_PIC)
+                takePhoto();
+            else
+                takeVideo();
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    static boolean bShowFaceSurgery = false;
+    static boolean bShowImgFilters = false;
+    private View.OnClickListener btn_listener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            int buttonId = v.getId();
+            if( buttonId == R.id.btn_more) {
+//                switchMode();
+
+                Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
+            }
+
+            if( buttonId == R.id.btn_touch) {
+
+                Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
+            }
+
+           if (buttonId == R.id.btn_camera_shutter) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                        checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            PERMISSION_CALLBACK_CONSTANT);
+                }  else {
+                    if(mode == MODE_PIC)
+                    {
+                        MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound );
+                        mp.start();
+                        takePhoto();
+
+                    }
+                    else
+                        takeVideo();
+                }
+            }
+            else if (buttonId == R.id.btn_camera_filter) {
+                bShowImgFilters = !bShowImgFilters;
+                if(bShowImgFilters)
+                    showFilters();
+                else
+                    hideFilters();
+            }
+            else if (buttonId == R.id.btn_camera_switch) {
+                GPUCamImgOperator.switchCamera();
+            }
+            else if (buttonId == R.id.btn_camera_beauty) {
+                bShowFaceSurgery = ! bShowFaceSurgery;
+                if(bShowFaceSurgery)
+                    showFaceSurgery();
+                else
+                    hideFaceSurgery();
+            }
+
+//            else if (buttonId ==  R.id.btn_camera_closefilter) {
+//                if(bShowImgFilters) {
+//                    hideFilters();
+//                    bShowImgFilters = false;
+//                }
+//            }
+            else if (buttonId ==  R.id.btn_gallery) {
+
+
+               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                       && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
+                       checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+               )
+               {
+                   requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                           PERMISSION_CALLBACK_CONSTANT);
+
+                   requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE},
+                           PERMISSION_CALLBACK_CONSTANT);
+
+
+
+               }
+
+                String pictureFolderPath = "/storage/emulated/0/Pictures/Camera Beautify";
+                String folderName = "Camera Beautify";
+                Intent galleryIntent = new Intent(CameraWithFilterActivity.this, ImageDisplay.class);
+                galleryIntent.putExtra("folderPath",pictureFolderPath);
+                galleryIntent.putExtra("folderName",folderName);
+                startActivity(galleryIntent);
+            }
+        }
+    };
+
+    private void switchMode(){
+        if(mode == MODE_PIC){
+            mode = MODE_VIDEO;
+            btn_more.setImageResource(R.drawable.icon_camera);
+        }else{
+            mode = MODE_PIC;
+            btn_more.setImageResource(R.drawable.icon_video);
+        }
+    }
+
+    private void takePhoto(){
+        GPUCamImgOperator.savePicture();
+    }
+
+    private void takeVideo(){
+        if(isRecording) {
+            animator.end();
+            GPUCamImgOperator.stopRecord();
+        }else {
+            animator.start();
+            GPUCamImgOperator.startRecord();
+        }
+        isRecording = !isRecording;
+    }
+
+
+    private void showFaceSurgery()
+    {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mFaceSurgeryLayout, "translationY", mFaceSurgeryLayout.getHeight(), 0);
+        animator.setDuration(200);
+        animator.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                findViewById(R.id.btn_camera_shutter).setClickable(false);
+                mFaceSurgeryLayout.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+        });
+        animator.start();
+
+    }
+
+    private void hideFaceSurgery()
+    {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mFaceSurgeryLayout, "translationY", 0 ,  mFaceSurgeryLayout.getHeight());
+        animator.setDuration(200);
+        animator.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                // TODO Auto-generated method stub
+                mFaceSurgeryLayout.setVisibility(View.INVISIBLE);
+                findViewById(R.id.btn_camera_shutter).setClickable(true);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                // TODO Auto-generated method stub
+                mFaceSurgeryLayout.setVisibility(View.INVISIBLE);
+                findViewById(R.id.btn_camera_shutter).setClickable(true);
+            }
+        });
+        animator.start();
+
+    }
+
+    private void showFilters(){
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mFilterLayout, "translationY", mFilterLayout.getHeight(), 0);
+        animator.setDuration(200);
+        animator.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                findViewById(R.id.btn_camera_shutter).setClickable(false);
+                mFilterLayout.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+        });
+        animator.start();
+    }
+
+
+    private void hideFilters(){
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mFilterLayout, "translationY", 0 ,  mFilterLayout.getHeight());
+        animator.setDuration(200);
+        animator.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                // TODO Auto-generated method stub
+                mFilterLayout.setVisibility(View.INVISIBLE);
+                findViewById(R.id.btn_camera_shutter).setClickable(true);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                // TODO Auto-generated method stub
+                mFilterLayout.setVisibility(View.INVISIBLE);
+                findViewById(R.id.btn_camera_shutter).setClickable(true);
+            }
+        });
+        animator.start();
+
+
+    }
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mCamera!= null)
+        {
+            mCamera.stopPreview();
+            mCamera.release();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(mCamera!= null)
+        {
+
+            mCamera.release();
+            mCamera=null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        GPUCamImgOperator =  new GPUCamImgOperator();
+        LuoGLCameraView luoGLCameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
+        GPUCamImgOperator.context = luoGLCameraView.getContext();
+        GPUCamImgOperator.luoGLBaseView = luoGLCameraView;
+
+
+
+
+
+        //Flash............
+        FlashInitView();
+        Sticker();
+
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.capturesound );
+
+        initView();
+
+        XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
+        XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
+    }
+}
