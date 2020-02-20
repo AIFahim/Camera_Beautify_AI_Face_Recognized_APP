@@ -322,6 +322,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
             case R.id.btn_sticker:
 
+                mFilterLayout.setVisibility(View.GONE);
+                llt_face_col.setVisibility(View.GONE);
+                llt_face_seek.setVisibility(View.GONE);
+
 
                 if (mMenuView.getVisibility() == View.GONE)
                 {
@@ -343,6 +347,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //                img_face.setImageResource(R.drawable.ico_face_sel);
 //                llt_face_col.setVisibility(View.VISIBLE);
 //                break;
+
+            
 //            case R.id.llt_main_face_rosy:
 //                faceeffect = FACEEFFECT.ROSY;
 //                initFaceMenu(redValue);
@@ -997,6 +1003,12 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             public void onAnimationStart(Animator animation) {
                 findViewById(R.id.btn_camera_shutter).setClickable(false);
                 mFilterLayout.setVisibility(View.VISIBLE);
+
+                llt_face_col.setVisibility(View.GONE);
+                llt_face_seek.setVisibility(View.GONE);
+                mMenuView.setVisibility(View.GONE);
+
+
             }
 
             @Override
