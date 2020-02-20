@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.camerabeautify.R;
 import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
@@ -25,6 +24,7 @@ public class Splash_Screen extends AppCompatActivity {
     private int PERMISSION_CALLBACK_CONSTANT = 1000;
 
     private Camera mCamera;
+    static int a;
 
     Thread splashTread;
     GifImageView l2;
@@ -35,11 +35,14 @@ public class Splash_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_splash__screen);
         l2 =  findViewById(R.id.l2);
 
+        a = 0;
 
         checkAndGivePermission();
         licence();
 
-        thread();
+        if(a==1)
+            thread();
+
     }
 
     private void licence(){
@@ -98,11 +101,14 @@ public class Splash_Screen extends AppCompatActivity {
 
         } else {
             initialize();
+
         }
+
     }
 
     private void initialize() {
         mCamera = getCameraInstance();
+        a=1;
     }
     public static Camera getCameraInstance(){
 
@@ -157,9 +163,10 @@ public class Splash_Screen extends AppCompatActivity {
                 Toast.makeText(Splash_Screen.this,"Permission is mandatory, Try giving it from App Settings",Toast.LENGTH_LONG).show();
             }
 
-//            thread();
 
         }
+
+
     }
 
 
