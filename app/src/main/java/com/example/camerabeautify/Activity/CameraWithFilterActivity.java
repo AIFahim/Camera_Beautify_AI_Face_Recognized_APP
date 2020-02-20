@@ -739,13 +739,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //                switchMode();
 
 
-                if (llt_face_col.getVisibility() == View.GONE || llt_face_seek.getVisibility()==View.GONE)
+                if (llt_face_col.getVisibility() == View.GONE )
                 {
 
-                    //  if ( img_face_brasion.getDrawable() != getDrawable(R.drawable.ico_smoothly_sel))
 
                     llt_face_col.setVisibility(View.VISIBLE);
                     llt_face_seek.setVisibility(View.GONE);
+
 
 
                 }
