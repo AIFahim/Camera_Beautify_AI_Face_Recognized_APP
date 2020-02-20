@@ -43,6 +43,7 @@ import java.util.ArrayList;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class CameraWithFilterActivity extends Activity implements  View.OnClickListener , SeekBar.OnSeekBarChangeListener {
 
+    //test
     //new seekbar..............
     private LinearLayout llt_face_seek,llt_face_col;
 
