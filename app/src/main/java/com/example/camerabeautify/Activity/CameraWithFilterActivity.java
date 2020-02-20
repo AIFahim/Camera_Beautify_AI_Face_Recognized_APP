@@ -443,6 +443,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private void showFaceBeauty(){
 
+        mFilterLayout.setVisibility(View.GONE);
+        mMenuView.setVisibility(View.GONE);
+
+
         if (llt_face_col.getVisibility() == View.GONE )
         {
             llt_face_col.setVisibility(View.VISIBLE);
