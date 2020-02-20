@@ -23,6 +23,7 @@ import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -103,8 +104,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private ObjectAnimator animator;
     private int PERMISSION_CALLBACK_CONSTANT = 1000;
 
+    LinearLayout onTouchLayout;
+
     //final MediaPlayer mp = MediaPlayer.create(this,R.raw.capturesound );
     final static MediaPlayer mp = new MediaPlayer();
+    final static MediaPlayer mpp = new MediaPlayer();
 
 
     private final com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType[] types = new GPUCamImgOperator.GPUImgFilterType[]{
@@ -138,12 +142,26 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         Sticker();
         beauty();
 
-        MediaPlayer mp = MediaPlayer.create(this,R.raw.capturesound );
+
 
         initView();
 
         XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
         XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
+
+        onTouchLayout = (LinearLayout)findViewById(R.id.idOnTouch);
+
+        onTouchLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
+                mpp.start();
+                takePhoto();
+
+                return false;
+            }
+        });
 
     }
 
@@ -851,15 +869,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
 
 
-    private void switchMode(){
-        if(mode == MODE_PIC){
-            mode = MODE_VIDEO;
-            btn_more.setImageResource(R.drawable.icon_camera);
-        }else{
-            mode = MODE_PIC;
-            btn_more.setImageResource(R.drawable.icon_video);
-        }
-    }
+
 
     private void takePhoto(){
         GPUCamImgOperator.savePicture();
