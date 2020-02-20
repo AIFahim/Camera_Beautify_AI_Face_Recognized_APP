@@ -1031,5 +1031,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        onCreate();
+    }
 }
