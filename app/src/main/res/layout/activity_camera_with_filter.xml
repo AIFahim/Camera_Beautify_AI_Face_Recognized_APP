@@ -69,6 +69,7 @@
 
         <LinearLayout
 
+
             style="@style/trangle_layout_size"
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
@@ -128,6 +129,7 @@
 
 
         <LinearLayout
+
             android:id="@+id/llt_main_flash_col"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -158,6 +160,99 @@
 
 
         </LinearLayout>
+
+
+
+        <LinearLayout
+
+            android:layout_above="@+id/llt_main_face_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+            <SeekBar
+                android:id="@+id/skb_main_scale"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:progressDrawable="@drawable/back_seekbar_progress"
+                android:thumb="@drawable/back_seekbar_thumb"
+                android:rotation="270"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_above="@+id/llt_main_beauty_col"
+            android:id="@+id/llt_main_face_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical">
+
+            <SeekBar
+                android:id="@+id/skb_main_face"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:progressDrawable="@drawable/back_seekbar_progress"
+                android:thumb="@drawable/back_seekbar_thumb" />
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/llt_main_beauty_col"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/mOtherMenu"
+            android:background="@drawable/rectanguler_shape"
+            android:orientation="horizontal"
+            android:padding="6.5dp">
+
+            <LinearLayout
+                android:id="@+id/llt_main_smooth"
+                style="@style/llt_menu_item">
+
+                <ImageView
+                    android:id="@+id/img_main_smooth"
+                    style="@style/img_main_item"
+                    android:src="@drawable/ico_smoothly" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llt_main_white"
+                style="@style/llt_menu_item">
+
+                <ImageView
+                    android:id="@+id/img_main_white"
+                    style="@style/img_main_item"
+                    android:src="@drawable/ico_whitening" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llt_main_slimming"
+                style="@style/llt_menu_item">
+
+                <ImageView
+                    android:id="@+id/img_main_slimming"
+                    style="@style/img_main_item"
+                    android:src="@drawable/ico_slimming" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llt_main_big_eye"
+                style="@style/llt_menu_item">
+
+                <ImageView
+                    android:id="@+id/img_main_big_eye"
+                    style="@style/img_main_item"
+                    android:src="@drawable/ico_bigeye" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
 
         <LinearLayout
 
@@ -288,7 +383,7 @@
             android:background="@android:color/transparent"
             android:visibility="invisible"
             android:layout_above="@id/mOtherMenu"
-            android:layout_marginBottom="7dp"/>
+            android:layout_marginBottom="0dp"/>
 
         <include
             android:id="@+id/layout_facesurgery"

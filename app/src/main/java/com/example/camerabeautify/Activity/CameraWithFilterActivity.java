@@ -1,11 +1,19 @@
 package com.example.camerabeautify.Activity;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
@@ -22,12 +30,6 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.camerabeautify.ImageDisplay;
 import com.example.camerabeautify.R;
 import com.example.camerabeautify.camfilter.FilterRecyclerViewAdapter;
@@ -39,16 +41,29 @@ import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 import java.util.ArrayList;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class CameraWithFilterActivity extends Activity implements  View.OnClickListener {
+public class CameraWithFilterActivity extends Activity implements  View.OnClickListener , SeekBar.OnSeekBarChangeListener {
+
+    //new seekbar..............
+    private LinearLayout llt_face_seek,llt_face_col;
+
+    private ImageView img_face_rosy,img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
+    private SeekBar seekBarScale, seekBarFace;
+    private int seekBarValue = 0;
+    private enum FACEEFFECT {
+        ROSY,
+        WHITE,
+        BRASION,
+        LIFTING,
+        BIGEYES
+    }
+    private FACEEFFECT faceeffect = FACEEFFECT.ROSY;
+    private int smoothVal, whiteVal, liftingVal, bigEyesVal, redValue;
 
 
-    private static final int READ_STORAGE_PERMISSION_REQUEST_CODE = 3;
     private ImageView BtnSticker;
 
-    private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
-
     private Camera mCamera;
-//Flash............................
+    //Flash............................
     private LinearLayout llt_flash_col;
     private ImageView img_flash, img_flash_on, img_flash_off, img_flash_auto, img_flash_light;
     boolean isTorchOn = false;
@@ -56,7 +71,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 //........................................
 
-//    trangle....
+    //    trangle....
     private LinearLayout Trangle_1,Trangle_2,Trangle_3,Trangle_4;
 
     private LinearLayout mFilterLayout;
@@ -105,28 +120,88 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_with_filter);
+
+        onCreate();
+
+    }
+
+    private void onCreate(){
         GPUCamImgOperator =  new GPUCamImgOperator();
         LuoGLCameraView luoGLCameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
         GPUCamImgOperator.context = luoGLCameraView.getContext();
         GPUCamImgOperator.luoGLBaseView = luoGLCameraView;
 
 
-
-
-
         //Flash............
         FlashInitView();
         Sticker();
+        beauty();
 
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.capturesound );
+        MediaPlayer mp = MediaPlayer.create(this,R.raw.capturesound );
 
         initView();
 
         XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
         XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
+
+    }
+
+    //seekbar beauty
+
+    private void beauty(){
+
+        img_face_brasion = findViewById(R.id.img_main_smooth);
+        //   img_face_rosy = findViewById(R.id.img_main_face_rosy);
+        img_face_white = findViewById(R.id.img_main_white);
+        img_face_lifting = findViewById(R.id.img_main_slimming);
+        img_face_eyes = findViewById(R.id.img_main_big_eye);
+
+//        findViewById(R.id.llt_main_face).setOnClickListener(this);
+//        findViewById(R.id.llt_main_face_rosy).setOnClickListener(this);
+        findViewById(R.id.llt_main_smooth).setOnClickListener(this);
+        findViewById(R.id.llt_main_white).setOnClickListener(this);
+        findViewById(R.id.llt_main_slimming).setOnClickListener(this);
+        findViewById(R.id.llt_main_big_eye).setOnClickListener(this);
+
+        seekBarScale = findViewById(R.id.skb_main_scale);
+        seekBarScale.setOnSeekBarChangeListener(this);
+
+        seekBarFace = findViewById(R.id.skb_main_face);
+        seekBarFace.setOnSeekBarChangeListener(this);
+
+        smoothVal = 0;
+        whiteVal = 0;
+        liftingVal = 0;
+        bigEyesVal = 0;
+        redValue = 0;
+
+        initBeautyIcons();
+
+    }
+
+    private void initBeautyIcons() {
+
+        llt_face_col = findViewById(R.id.llt_main_beauty_col);
+        llt_face_seek = findViewById(R.id.llt_main_face_seekbar);
+
+        img_face_eyes.setImageResource(R.drawable.ico_bigeye);
+        img_face_brasion.setImageResource(R.drawable.ico_smoothly);
+        img_face_white.setImageResource(R.drawable.ico_whitening);
+//        img_face_rosy.setImageResource(R.drawable.ico_flash);
+        img_face_lifting.setImageResource(R.drawable.ico_slimming);
+
+        llt_face_seek.setVisibility(View.GONE);
+        llt_face_col.setVisibility(View.GONE);
     }
 
 
+
+    private void initFaceMenu(int value) {
+//        img_face.setImageResource(R.drawable.ico_face_sel);
+        llt_face_col.setVisibility(View.VISIBLE);
+        llt_face_seek.setVisibility(View.VISIBLE);
+        seekBarFace.setProgress(value);
+    }
 
 
     //Flash Start...........................................
@@ -241,9 +316,118 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 break;
 
 
+
+            //face
+
+//            case R.id.llt_main_face:
+//                img_face.setImageResource(R.drawable.ico_face_sel);
+//                llt_face_col.setVisibility(View.VISIBLE);
+//                break;
+//            case R.id.llt_main_face_rosy:
+//                faceeffect = FACEEFFECT.ROSY;
+//                initFaceMenu(redValue);
+//                img_face_rosy.setImageResource(R.drawable.ico_face_sel);
+//                break;
+            case R.id.llt_main_smooth:
+                faceeffect = FACEEFFECT.BRASION;
+                initFaceMenu(smoothVal);
+                img_face_brasion.setImageResource(R.drawable.ico_smoothly_sel);
+                img_face_white.setImageResource(R.drawable.ico_whitening);
+                img_face_lifting.setImageResource(R.drawable.ico_slimming);
+                img_face_eyes.setImageResource(R.drawable.ico_bigeye);
+
+                //      txt_face_smooth.setTextColor(getResources().getColor(R.color.color_yellow_sel));
+                break;
+            case R.id.llt_main_white:
+                faceeffect = FACEEFFECT.WHITE;
+                initFaceMenu(whiteVal);
+                img_face_brasion.setImageResource(R.drawable.ico_smoothly);
+                img_face_white.setImageResource(R.drawable.ico_whitening_sel);
+                img_face_lifting.setImageResource(R.drawable.ico_slimming);
+                img_face_eyes.setImageResource(R.drawable.ico_bigeye);
+
+                //    txt_face_white.setTextColor(getResources().getColor(R.color.color_yellow_sel));
+                break;
+            case R.id.llt_main_slimming:
+                faceeffect = FACEEFFECT.LIFTING;
+                initFaceMenu(liftingVal);
+                img_face_brasion.setImageResource(R.drawable.ico_smoothly);
+                img_face_white.setImageResource(R.drawable.ico_whitening);
+                img_face_lifting.setImageResource(R.drawable.ico_slimming_sel);
+                img_face_eyes.setImageResource(R.drawable.ico_bigeye);
+                //    txt_face_slimming.setTextColor(getResources().getColor(R.color.color_yellow_sel));
+                break;
+            case R.id.llt_main_big_eye:
+                faceeffect = FACEEFFECT.BIGEYES;
+                initFaceMenu(bigEyesVal);
+                img_face_brasion.setImageResource(R.drawable.ico_smoothly);
+                img_face_white.setImageResource(R.drawable.ico_whitening);
+                img_face_lifting.setImageResource(R.drawable.ico_slimming);
+                img_face_eyes.setImageResource(R.drawable.ico_bigeye_sel);
+                //   txt_face_bigeye.setTextColor(getResources().getColor(R.color.color_yellow_sel));
+                break;
+
+
+
+
+
         }
 
     }
+
+
+    //.....................................
+
+
+
+
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        seekBarValue = progress;
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        //
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        switch (seekBar.getId()) {
+//            case R.id.skb_main_scale:
+////                activity.changeCameraZoomExposure(seekBarValue, true);
+//                break;
+            case R.id.skb_main_face:
+                switch (faceeffect) {
+
+                    case WHITE:
+                        whiteVal = seekBarValue;
+                        XJGArSdkApi.XJGARSDKSetWhiteSkinParam(whiteVal);
+                        break;
+                    case BIGEYES:
+                        bigEyesVal = seekBarValue;
+                        XJGArSdkApi.XJGARSDKSetBigEyeParam(bigEyesVal);
+                        break;
+                    case BRASION:
+                        smoothVal = seekBarValue;
+                        XJGArSdkApi.XJGARSDKSetSkinSmoothParam(smoothVal);
+                        break;
+                    case LIFTING:
+                        liftingVal = seekBarValue;
+                        XJGArSdkApi.XJGARSDKSetThinChinParam(liftingVal);
+                        break;
+                }
+                break;
+        }
+    }
+
+
+
+
+    //.....................................
+
+
 
 
     private void torchToggle(String command) {
@@ -534,6 +718,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        if (requestCode==1){
+            if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     static boolean bShowFaceSurgery = false;
@@ -546,7 +737,28 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             if( buttonId == R.id.btn_more) {
 //                switchMode();
 
-                Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
+
+                if (llt_face_col.getVisibility() == View.GONE || llt_face_seek.getVisibility()==View.GONE)
+                {
+
+                    //  if ( img_face_brasion.getDrawable() != getDrawable(R.drawable.ico_smoothly_sel))
+
+                    llt_face_col.setVisibility(View.VISIBLE);
+                    llt_face_seek.setVisibility(View.GONE);
+
+
+                }
+                else if (llt_face_col.getVisibility() == View.VISIBLE || llt_face_seek.getVisibility()==View.VISIBLE) {
+
+                    llt_face_col.setVisibility(View.GONE);
+                    llt_face_seek.setVisibility(View.GONE);
+
+                }
+
+
+                //  llt_face_col.setVisibility(View.VISIBLE);
+
+                //       Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
             }
 
             if( buttonId == R.id.btn_touch) {
@@ -554,7 +766,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
             }
 
-           if (buttonId == R.id.btn_camera_shutter) {
+            if (buttonId == R.id.btn_camera_shutter) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                         && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
                         checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -563,7 +775,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 }  else {
                     if(mode == MODE_PIC)
                     {
-                        MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound );
+                        MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
                         mp.start();
                         takePhoto();
 
@@ -598,18 +810,44 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //            }
             else if (buttonId ==  R.id.btn_gallery) {
 
+                if (ContextCompat.checkSelfPermission(CameraWithFilterActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
+                    String pictureFolderPath = "/storage/emulated/0/Pictures/Camera Beautify";
+                    String folderName = "Camera Beautify";
+                    Intent galleryIntent = new Intent(CameraWithFilterActivity.this, ImageDisplay.class);
+                    galleryIntent.putExtra("folderPath",pictureFolderPath);
+                    galleryIntent.putExtra("folderName",folderName);
+                    startActivity(galleryIntent);
+                }else{
+                    requestStoragePermission();
+                }
 
-
-                String pictureFolderPath = "/storage/emulated/0/Pictures/Camera Beautify";
-                String folderName = "Camera Beautify";
-                Intent galleryIntent = new Intent(CameraWithFilterActivity.this, ImageDisplay.class);
-                galleryIntent.putExtra("folderPath",pictureFolderPath);
-                galleryIntent.putExtra("folderName",folderName);
-                startActivity(galleryIntent);
             }
         }
     };
 
+    private void  requestStoragePermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed because of this and that")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            ActivityCompat.shouldShowRequestPermissionRationale(CameraWithFilterActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE);
+                        }
+                    })
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        }else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }
+    }
 
 
     private void switchMode(){
@@ -793,19 +1031,5 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        GPUCamImgOperator =  new GPUCamImgOperator();
-        LuoGLCameraView luoGLCameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
-        GPUCamImgOperator.context = luoGLCameraView.getContext();
-        GPUCamImgOperator.luoGLBaseView = luoGLCameraView;
-        //Flash............
-        FlashInitView();
-        Sticker();
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.capturesound );
-        initView();
-        XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
-        XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
-    }
+
 }
