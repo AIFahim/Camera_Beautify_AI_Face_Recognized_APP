@@ -161,6 +161,18 @@
 
         </LinearLayout>
 
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:id="@+id/idOnTouch"
+            android:layout_below="@+id/llt_main_flash_col"
+            android:layout_above="@+id/llt_main_face_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </LinearLayout>
+
 
 
         <LinearLayout
