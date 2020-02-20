@@ -143,6 +143,7 @@ public class CameraEngine {
         camera.setParameters(params);
     }
 
+    //Todo
     public static void takePicture(Camera.ShutterCallback shutterCallback, Camera.PictureCallback rawCallback,
                                    Camera.PictureCallback jpegCallback){
         camera.takePicture(shutterCallback, rawCallback, jpegCallback);

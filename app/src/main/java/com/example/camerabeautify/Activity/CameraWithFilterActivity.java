@@ -441,6 +441,20 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }
     }
 
+    private void showFaceBeauty(){
+
+        if (llt_face_col.getVisibility() == View.GONE )
+        {
+            llt_face_col.setVisibility(View.VISIBLE);
+            llt_face_seek.setVisibility(View.GONE);
+
+        }
+        else if (llt_face_col.getVisibility() == View.VISIBLE || llt_face_seek.getVisibility()==View.VISIBLE) {
+            llt_face_col.setVisibility(View.GONE);
+            llt_face_seek.setVisibility(View.GONE);
+        }
+    }
+
 
 
 
@@ -756,28 +770,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             if( buttonId == R.id.btn_more) {
 //                switchMode();
 
-
-                if (llt_face_col.getVisibility() == View.GONE )
-                {
-
-
-                    llt_face_col.setVisibility(View.VISIBLE);
-                    llt_face_seek.setVisibility(View.GONE);
-
-
-
-                }
-                else if (llt_face_col.getVisibility() == View.VISIBLE || llt_face_seek.getVisibility()==View.VISIBLE) {
-
-                    llt_face_col.setVisibility(View.GONE);
-                    llt_face_seek.setVisibility(View.GONE);
-
-                }
-
-
-                //  llt_face_col.setVisibility(View.VISIBLE);
-
-                //       Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
             }
 
             if( buttonId == R.id.btn_touch) {
@@ -814,19 +807,12 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 GPUCamImgOperator.switchCamera();
             }
             else if (buttonId == R.id.btn_camera_beauty) {
-                bShowFaceSurgery = ! bShowFaceSurgery;
-                if(bShowFaceSurgery)
-                    showFaceSurgery();
-                else
-                    hideFaceSurgery();
+
+                showFaceBeauty();
+
             }
 
-//            else if (buttonId ==  R.id.btn_camera_closefilter) {
-//                if(bShowImgFilters) {
-//                    hideFilters();
-//                    bShowImgFilters = false;
-//                }
-//            }
+
             else if (buttonId ==  R.id.btn_gallery) {
 
                 if (ContextCompat.checkSelfPermission(CameraWithFilterActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
@@ -843,6 +829,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             }
         }
     };
+
+
 
     private void  requestStoragePermission(){
         if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
