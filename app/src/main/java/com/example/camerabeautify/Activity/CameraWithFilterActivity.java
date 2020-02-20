@@ -105,6 +105,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private int PERMISSION_CALLBACK_CONSTANT = 1000;
 
     LinearLayout onTouchLayout;
+    static int b = 0;
 
     //final MediaPlayer mp = MediaPlayer.create(this,R.raw.capturesound );
     final static MediaPlayer mp = new MediaPlayer();
@@ -151,17 +152,17 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         onTouchLayout = (LinearLayout)findViewById(R.id.idOnTouch);
 
-        onTouchLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
-                mpp.start();
-                takePhoto();
-
-                return false;
-            }
-        });
+//        onTouchLayout.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
+//                mpp.start();
+//                takePhoto();
+//
+//                return false;
+//            }
+//        });
 
     }
 
@@ -448,7 +449,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
         if (llt_face_col.getVisibility() == View.GONE )
+
+
         {
+
             llt_face_col.setVisibility(View.VISIBLE);
             llt_face_seek.setVisibility(View.GONE);
 
@@ -779,7 +783,46 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
             if( buttonId == R.id.btn_touch) {
 
-                Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
+                if(b==0){
+
+
+                }
+                else {
+                    b=0;
+                }
+                //btn_touch.setImageResource(R.drawable.icon_touch_enble_sel);
+
+                if (btn_touch.getDrawable() != getDrawable(R.drawable.icon_touch_enble)){
+
+                    btn_touch.setImageResource(R.drawable.icon_touch_enble_sel);
+
+                    onTouchLayout.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+
+                            MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
+                            mpp.start();
+                            takePhoto();
+
+                            return false;
+                        }
+                    });
+                }
+
+                else {
+
+                    btn_touch.setImageResource(R.drawable.icon_touch_enble);
+
+                }
+
+
+
+//                if (b==1){
+//
+//
+//                }
+
+               // Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
             }
 
             if (buttonId == R.id.btn_camera_shutter) {
