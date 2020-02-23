@@ -23,8 +23,10 @@ import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -38,6 +40,7 @@ import com.example.camerabeautify.camfilter.FilterRecyclerViewAdapter;
 import com.example.camerabeautify.camfilter.FilterTypeHelper;
 import com.example.camerabeautify.camfilter.GPUCamImgOperator;
 
+import com.example.camerabeautify.camfilter.SharedPref;
 import com.example.camerabeautify.camfilter.widget.LuoGLCameraView;
 import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 
@@ -48,6 +51,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     //Switch
     private Switch Swt_Setting_SDcard,Swt_Setting_Shutter_Sound;
+    SharedPref sharedPref;
 
 
     //layout more.......
@@ -146,7 +150,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private void onCreate(){
 
 
-
+        sharedPref = new SharedPref(this);
 
         GPUCamImgOperator =  new GPUCamImgOperator();
         LuoGLCameraView luoGLCameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
@@ -170,17 +174,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         onTouchLayout = (LinearLayout)findViewById(R.id.idOnTouch);
 
-//        onTouchLayout.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
-//                mpp.start();
-//                takePhoto();
-//
-//                return false;
-//            }
-//        });
 
     }
 
@@ -189,6 +182,22 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         Swt_Setting_SDcard = findViewById(R.id.swt_setting_sdcard);
         Swt_Setting_Shutter_Sound = findViewById(R.id.swt_setting_shutter_sound);
+        Swt_Setting_SDcard.setChecked(true);
+        if (sharedPref.loadSoundModeState()==true){
+            Swt_Setting_Shutter_Sound.setChecked(true);
+        }
+        Swt_Setting_Shutter_Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.d("TMP",isChecked+" ");
+                if (isChecked){
+                    sharedPref.setSoundModeState(true);
+                }
+                else {
+                    sharedPref.setSoundModeState(false);
+                }
+            }
+        });
 
 
 
@@ -395,7 +404,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
                                 MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
-                                mpp.start();
+
+                                if (sharedPref.loadSoundModeState()==true){
+                                    mpp.start();
+                                }
+
                                 takePhoto();
 
 
@@ -895,7 +908,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     if(mode == MODE_PIC)
                     {
                         MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
-                        mp.start();
+                        if (sharedPref.loadSoundModeState()==true){
+                            mp.start();
+                        }
+
                         takePhoto();
 
                     }
