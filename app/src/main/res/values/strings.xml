@@ -17,4 +17,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="frg_setting_sd_detail">The photos are saved in SD Card</string>
     <string name="frg_setting_shutter_sound">Shutter Sound</string>
+    <string name="developer_information">Developer Info</string>
+    <string name="short_des_Dev_info">Application Developers information</string>
+    <string name="about">About</string>
+    <string name="about_app">About Application</string>
 </resources>
