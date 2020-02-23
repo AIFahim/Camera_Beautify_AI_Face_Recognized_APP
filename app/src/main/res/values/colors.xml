@@ -19,6 +19,7 @@
 
     <color name="color_frg_back">#50000000</color>
     <color name="transparent_white">#79FFFFFF</color>
+    <color name="color_txt_white">#f8f8f8</color>
 
 
     <color name="grey">#848282</color>

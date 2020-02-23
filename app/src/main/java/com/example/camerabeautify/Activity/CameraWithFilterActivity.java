@@ -44,7 +44,9 @@ import java.util.ArrayList;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class CameraWithFilterActivity extends Activity implements  View.OnClickListener , SeekBar.OnSeekBarChangeListener {
 
-    //test
+    //layout more.......
+    private LinearLayout llt_layout_more;
+
     //new seekbar..............
     private LinearLayout llt_face_seek,llt_face_col;
 
@@ -166,6 +168,34 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     }
 
+    private void more_button(){
+
+
+        llt_flash_col.setVisibility(View.GONE);
+        mMenuView.setVisibility(View.GONE);
+
+
+        if (llt_layout_more.getVisibility() == View.GONE )
+
+
+        {
+
+            llt_layout_more.setVisibility(View.VISIBLE);
+
+
+        }
+        else if (llt_layout_more.getVisibility() == View.VISIBLE) {
+            llt_layout_more.setVisibility(View.GONE);
+
+        }
+
+
+
+       // Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
+
+
+    }
+
     //seekbar beauty
 
     private void beauty(){
@@ -275,6 +305,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             case R.id.img_main_flash:
 
                 //TODO
+                llt_layout_more.setVisibility(View.GONE);
+
                 if (llt_flash_col.getVisibility() == View.GONE)
                 {
 
@@ -348,7 +380,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //                llt_face_col.setVisibility(View.VISIBLE);
 //                break;
 
-            
+
 //            case R.id.llt_main_face_rosy:
 //                faceeffect = FACEEFFECT.ROSY;
 //                initFaceMenu(redValue);
@@ -611,6 +643,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         btn_shutter = (ImageView)findViewById(R.id.btn_camera_shutter);
         btn_more = (ImageView)findViewById(R.id.btn_more);
+        llt_layout_more = findViewById(R.id.layout_more);
         btn_touch = (ImageView)findViewById(R.id.btn_touch);
 
 
@@ -782,9 +815,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         public void onClick(View v) {
             int buttonId = v.getId();
             if( buttonId == R.id.btn_more) {
-//                switchMode();
 
-                Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
+                more_button();
+
+
             }
 
             if( buttonId == R.id.btn_touch) {

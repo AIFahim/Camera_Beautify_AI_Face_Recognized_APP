@@ -130,6 +130,7 @@
 
         <LinearLayout
 
+            android:visibility="gone"
             android:id="@+id/llt_main_flash_col"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -160,6 +161,8 @@
 
 
         </LinearLayout>
+
+
 
         <LinearLayout
 
@@ -333,44 +336,11 @@
 
 
 
-
-
-            <!--            <ImageView-->
-            <!--                android:id="@+id/btn_camera_beauty"-->
-            <!--                android:layout_width="0dip"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:layout_weight="1.0"-->
-            <!--                android:scaleType="center"-->
-            <!--                android:src="@drawable/btn_camera_beauty"-->
-            <!--                android:background="@android:color/transparent"></ImageView>-->
-            <!--            <ImageView-->
-            <!--                android:layout_width="0dip"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:layout_weight="1.0"-->
-            <!--                android:id="@+id/btn_camera_shutter"-->
-            <!--                android:src="@drawable/btn_camera_shutter"-->
-            <!--                android:background="@android:color/transparent">-->
-            <!--            </ImageView>-->
-            <!--            <ImageView-->
-            <!--                android:id="@+id/btn_camera_filter"-->
-            <!--                android:layout_width="0dip"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:layout_weight="1.0"-->
-            <!--                android:scaleType="center"-->
-            <!--                android:src="@drawable/btn_camera_filter"-->
-            <!--                android:background="@android:color/transparent"></ImageView>-->
-
-
         </LinearLayout>
 
 
 
-        <!--        <android.support.v7.widget.RecyclerView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_above="@id/mOtherMenu"-->
-        <!--            android:id="@+id/mMenuView" >-->
-        <!--        </android.support.v7.widget.RecyclerView>-->
+
 
 
         <!--      Sticker-->
@@ -383,6 +353,17 @@
             android:layout_marginBottom="7dp">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+
+        <include
+
+            android:id="@+id/layout_more"
+            layout="@layout/more_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@id/header_layout"
+            />
 
         <include
 
