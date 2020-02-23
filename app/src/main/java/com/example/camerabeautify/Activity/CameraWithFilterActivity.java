@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.camerabeautify.ImageDisplay;
@@ -43,6 +44,10 @@ import java.util.ArrayList;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class CameraWithFilterActivity extends Activity implements  View.OnClickListener , SeekBar.OnSeekBarChangeListener {
+
+    //Switch
+    private Switch Swt_Setting_SDcard,Swt_Setting_Shutter_Sound;
+
 
     //layout more.......
     private LinearLayout llt_layout_more;
@@ -144,7 +149,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         FlashInitView();
         Sticker();
         beauty();
-
+        SwitchButton();
 
 
         initView();
@@ -165,6 +170,15 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //                return false;
 //            }
 //        });
+
+    }
+
+
+    private void SwitchButton(){
+
+        Swt_Setting_SDcard = findViewById(R.id.swt_setting_sdcard);
+        Swt_Setting_Shutter_Sound = findViewById(R.id.swt_setting_shutter_sound);
+
 
     }
 
