@@ -171,6 +171,7 @@
             android:layout_below="@+id/llt_main_flash_col"
             android:layout_above="@+id/llt_main_face_seekbar"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content">
 
 
