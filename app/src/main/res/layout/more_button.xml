@@ -85,6 +85,53 @@
 
             <LinearLayout style="@style/llt_setting_spec" />
 
+
+            <LinearLayout style="@style/llt_setting_content">
+
+                <ImageView
+                    style="@style/img_setting_content"
+                    android:src="@drawable/icon_dev_info_white" />
+
+                <LinearLayout style="@style/llt_setting_content_spec" >
+                    <TextView
+                        android:textColor="@color/white"
+                        style="@style/txt_setting_content"
+                        android:text="@string/developer_information" />
+
+                    <TextView
+                        style="@style/txt_setting_content_detail"
+                        android:text="@string/short_des_Dev_info"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/llt_setting_spec" />
+
+            <LinearLayout style="@style/llt_setting_content">
+
+                <ImageView
+                    style="@style/img_setting_content"
+                    android:src="@drawable/icon_about_white" />
+
+                <LinearLayout style="@style/llt_setting_content_spec" >
+                    <TextView
+                        android:textColor="@color/white"
+                        style="@style/txt_setting_content"
+                        android:text="@string/about" />
+
+                    <TextView
+                        android:textColor="@color/white"
+                        style="@style/txt_setting_content_detail"
+                        android:text="@string/about_app" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/llt_setting_spec" />
+
         </LinearLayout>
     </ScrollView>
 
