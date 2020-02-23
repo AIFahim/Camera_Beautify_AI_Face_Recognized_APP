@@ -825,44 +825,32 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
                 if(b==0){
 
-
-                }
-                else {
-                    b=0;
-                }
-                //btn_touch.setImageResource(R.drawable.icon_touch_enble_sel);
-
-                if (btn_touch.getDrawable() != getDrawable(R.drawable.icon_touch_enble)){
-
                     btn_touch.setImageResource(R.drawable.icon_touch_enble_sel);
 
                     onTouchLayout.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View v, MotionEvent event) {
 
-                            MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
-                            mpp.start();
-                            takePhoto();
+                            b=1;
+                            if(b==1) {
 
-                            return false;
+                                MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
+                                mpp.start();
+                                takePhoto();
+                            }
+
+                                return false;
+
                         }
                     });
-                }
 
+
+                }
                 else {
-
+                    b=0;
                     btn_touch.setImageResource(R.drawable.icon_touch_enble);
-
                 }
 
-
-
-//                if (b==1){
-//
-//
-//                }
-
-               // Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
             }
 
             if (buttonId == R.id.btn_camera_shutter) {
