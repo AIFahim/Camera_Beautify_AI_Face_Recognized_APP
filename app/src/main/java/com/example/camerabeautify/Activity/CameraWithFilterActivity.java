@@ -64,6 +64,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     //new seekbar..............
     private LinearLayout llt_face_seek,llt_face_col;
 
+    //view
     private ImageView img_face_rosy,img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
     private SeekBar seekBarScale, seekBarFace;
     private int seekBarValue = 0;
