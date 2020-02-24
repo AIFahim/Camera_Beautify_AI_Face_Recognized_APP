@@ -48,6 +48,11 @@ import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 
 import java.util.ArrayList;
 
+
+
+
+
+
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class CameraWithFilterActivity extends Activity implements  View.OnClickListener , SeekBar.OnSeekBarChangeListener {
 
@@ -60,6 +65,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     //layout more.......
     private LinearLayout llt_layout_more;
+    private RelativeLayout relativeLayout;
 
     //new seekbar..............
     private LinearLayout llt_face_seek,llt_face_col;
@@ -170,18 +176,52 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         SwitchButton();
         DevInfo();
 
-
         initView();
+        OffTouchMode();
 
         XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
         XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
 
 
+    }
 
 
+    private void OffTouchMode(){
+
+
+        relativeLayout = (RelativeLayout)findViewById(R.id.idrl);
+        relativeLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                llt_layout_more.setVisibility(View.GONE);
+                llt_flash_col.setVisibility(View.GONE);
+                mFilterLayout.setVisibility(View.GONE);
+                llt_face_col.setVisibility(View.GONE);
+                llt_face_seek.setVisibility(View.GONE);
+                mMenuView.setVisibility(View.GONE);
+
+
+
+                if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel)
+                {
+                    onTouchLayout.setVisibility(View.VISIBLE);
+
+                }
+                else if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel)
+                {
+                    onTouchLayout.setVisibility(View.GONE);
+                }
+
+
+                return false;
+            }
+        });
 
 
     }
+
 
     private void DevInfo(){
         Dev_Info = findViewById(R.id.idDev_info);
@@ -420,6 +460,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 {
                     onTouchLayout.setVisibility(View.VISIBLE);
                     Btn_Touch.setImageResource(R.drawable.icon_touch_enble_sel);
+                    Btn_Touch.setTag(R.drawable.icon_touch_enble_sel);
                     onTouchLayout.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View v, MotionEvent event) {
@@ -459,6 +500,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
                     onTouchLayout.setVisibility(View.GONE);
                     Btn_Touch.setImageResource(R.drawable.icon_touch_enble);
+                    Btn_Touch.setTag(R.drawable.icon_touch_enble);
                 }
                 break;
 
