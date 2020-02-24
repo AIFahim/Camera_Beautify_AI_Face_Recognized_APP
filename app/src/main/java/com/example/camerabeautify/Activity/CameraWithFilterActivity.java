@@ -409,11 +409,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                                     mpp.start();
                                 }
 
+                            if(mode == MODE_PIC){
                                 takePhoto();
+                            }
 
-
-                                return true;
-
+                            return true;
                         }
                     });
 
