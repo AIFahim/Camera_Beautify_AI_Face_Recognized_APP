@@ -13,18 +13,5 @@
         android:padding="5.0dip"
         android:scrollbars="none"
         android:background="@android:color/transparent"/>
-<!--    <View -->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1px"-->
-<!--        android:background="@android:color/black"/>-->
 
-<!--    <ImageView-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:id="@+id/btn_camera_closefilter" -->
-<!--        android:layout_width="match_parent" -->
-<!--        android:layout_height="26dip"-->
-<!--        android:scaleType="center"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:src="@drawable/btn_layout_filters_bar_close"-->
-<!--        />-->
 </LinearLayout>
