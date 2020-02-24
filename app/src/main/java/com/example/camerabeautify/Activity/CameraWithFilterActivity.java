@@ -23,6 +23,7 @@ import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -427,8 +428,20 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                                     mpp.start();
                                 }
 
+                            onTouchLayout.setVisibility(View.GONE);
                             if(mode == MODE_PIC){
                                 takePhoto();
+
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
+                                        onTouchLayout.setVisibility(View.VISIBLE);
+                                    }
+
+                                }, 1000);
                             }
 
                             return false;
@@ -932,7 +945,20 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                             mp.start();
                         }
 
+                        btn_shutter.setVisibility(View.GONE);
+
                         takePhoto();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+                               // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
+                                btn_shutter.setVisibility(View.VISIBLE);
+                            }
+
+                        }, 1000);
+
 
                     }
                     else

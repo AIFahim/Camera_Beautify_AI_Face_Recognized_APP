@@ -198,7 +198,7 @@ public class Splash_Screen extends AppCompatActivity {
 
                     }
 
-                }, 2500);
+                }, 2000);
 
             } else {
                 // Permission Denied
@@ -219,7 +219,7 @@ public class Splash_Screen extends AppCompatActivity {
 
                 try {
                     // Thread will sleep for 10 seconds
-                    sleep(2500);
+                    sleep(2000);
 
                     startActivity(new Intent(getApplicationContext(),CameraWithFilterActivity.class));
                     finish();
