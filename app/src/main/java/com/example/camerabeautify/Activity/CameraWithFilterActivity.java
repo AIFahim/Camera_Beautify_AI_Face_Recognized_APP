@@ -34,6 +34,7 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.camerabeautify.Dev_Infos;
 import com.example.camerabeautify.ImageDisplay;
 import com.example.camerabeautify.R;
 import com.example.camerabeautify.camfilter.FilterRecyclerViewAdapter;
@@ -53,6 +54,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private Switch Swt_Setting_SDcard,Swt_Setting_Shutter_Sound;
     SharedPref sharedPref;
 
+    //Developer info
+    private LinearLayout Dev_Info;
 
     //layout more.......
     private LinearLayout llt_layout_more;
@@ -163,6 +166,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         Sticker();
         beauty();
         SwitchButton();
+        DevInfo();
 
 
         initView();
@@ -174,6 +178,21 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
 
+
+    }
+
+    private void DevInfo(){
+        Dev_Info = findViewById(R.id.idDev_info);
+
+        Dev_Info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intents = new Intent(CameraWithFilterActivity.this, Dev_Infos.class);
+                startActivity(intents);
+
+            }
+        });
 
     }
 
