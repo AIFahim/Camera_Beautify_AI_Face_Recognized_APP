@@ -172,7 +172,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
 
-        onTouchLayout = (LinearLayout)findViewById(R.id.idOnTouch);
+
 
 
     }
@@ -182,7 +182,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         Swt_Setting_SDcard = findViewById(R.id.swt_setting_sdcard);
         Swt_Setting_Shutter_Sound = findViewById(R.id.swt_setting_shutter_sound);
-        Swt_Setting_SDcard.setChecked(true);
         if (sharedPref.loadSoundModeState()==true){
             Swt_Setting_Shutter_Sound.setChecked(true);
         }
@@ -413,7 +412,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                                 takePhoto();
                             }
 
-                            return true;
+                            return false;
+
                         }
                     });
 
@@ -616,6 +616,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private void initView(){
 
         mFilterLayout = (LinearLayout)findViewById(R.id.layout_filter);
+        onTouchLayout = (LinearLayout)findViewById(R.id.idOnTouch);
 
         mFaceSurgeryLayout = (LinearLayout)findViewById(R.id.layout_facesurgery);
         mFaceSurgeryFaceShapeSeek = (SeekBar)findViewById(R.id.faceShapeValueBar);

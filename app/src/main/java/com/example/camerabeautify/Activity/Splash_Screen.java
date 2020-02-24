@@ -1,11 +1,14 @@
 package com.example.camerabeautify.Activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,18 +18,17 @@ import androidx.core.app.ActivityCompat;
 import com.example.camerabeautify.R;
 import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import pl.droidsonroids.gif.GifImageView;
 
 public class Splash_Screen extends AppCompatActivity {
 
-    private Intent intent;
-    private static final int REQUEST_PERMISSION = 233;
-    private int PERMISSION_CALLBACK_CONSTANT = 1000;
+    private static final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 1;
 
-    private Camera mCamera;
-    static int a;
-
-    Thread splashTread;
     GifImageView l2;
 
     @Override
@@ -35,13 +37,10 @@ public class Splash_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_splash__screen);
         l2 =  findViewById(R.id.l2);
 
-        a = 0;
 
-        checkAndGivePermission();
+        permissioncheck();
         licence();
 
-        if(a==1)
-            thread();
 
     }
 
@@ -51,123 +50,193 @@ public class Splash_Screen extends AppCompatActivity {
 
     }
 
-    private void thread() {
 
-        splashTread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    int waited = 0;
-                    // Splash screen pause time
-                    while (waited < 2500) {
-                        sleep(100);
-                        waited += 100;
-                    }
-                    Intent intent = new Intent(Splash_Screen.this,
-                            CameraWithFilterActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
-                    Splash_Screen.this.finish();
-                } catch (InterruptedException e) {
-                    // do nothing
-                } finally {
-                    Splash_Screen.this.finish();
-                }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    private void permissioncheck() {
+        List<String> permissionsNeeded = new ArrayList<String>();
+
+        final List<String> permissionsList = new ArrayList<String>();
+        if (!addPermission(permissionsList, Manifest.permission.CAMERA))
+            permissionsNeeded.add("CAMERA");
+        if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            permissionsNeeded.add("WRITE");
+        if (!addPermission(permissionsList, Manifest.permission.READ_EXTERNAL_STORAGE))
+            permissionsNeeded.add("READ");
+//        if (!addPermission(permissionsList, Manifest.permission.READ_SMS))
+//            permissionsNeeded.add("SMS");
+
+        if (permissionsList.size() > 0) {
+            if (permissionsNeeded.size() > 0) {
+                // Need Rationale
+                String message = "You need to grant access to " + permissionsNeeded.get(0);
+                for (int i = 1; i < permissionsNeeded.size(); i++)
+                    message = message + ", " + permissionsNeeded.get(i);
+                showMessageOKCancel(message,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                if (Build.VERSION.SDK_INT >= 23) {
+                                    // Marshmallow+
+                                    requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                                            REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+
+
+                                } else {
+                                    // Pre-Marshmallow
+                                }
+
+                            }
+                        });
+                return;
+            }
+
+            if (Build.VERSION.SDK_INT >= 23) {
+                // Marshmallow+
+                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                        REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+
+
+            } else {
+                // Pre-Marshmallow
 
             }
-        };
-        splashTread.start();
 
+            return;
+        }else
+        {
+            // Toast.makeText(this,"Permission",Toast.LENGTH_LONG).show();
+            LaunchApp();
+        }
 
+        //insertDummyContact();
     }
 
 
+    private boolean addPermission(List<String> permissionsList, String permission) {
 
-    private void checkAndGivePermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
-                checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-                && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&
-                checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-        )
-        {
-            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    PERMISSION_CALLBACK_CONSTANT);
+        Boolean cond;
+        if (Build.VERSION.SDK_INT >= 23) {
+            // Marshmallow+
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsList.add(permission);
+                // Check for Rationale Option
+                if (!shouldShowRequestPermissionRationale(permission))
+                    //  return false;
 
-            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE},
-                    PERMISSION_CALLBACK_CONSTANT);
+                    cond = false;
+            }
+            //  return true;
 
+            cond = true;
 
 
         } else {
-            initialize();
-
+            // Pre-Marshmallow
+            cond = true;
         }
 
-    }
-
-    private void initialize() {
-        mCamera = getCameraInstance();
-        a=1;
-    }
-    public static Camera getCameraInstance(){
-
-        // I
-        Camera c = null;
-        return c;
+        return cond;
 
     }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(Splash_Screen.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == PERMISSION_CALLBACK_CONSTANT){
-            boolean allgranted = false;
-            for(int i=0;i<grantResults.length;i++){
-                if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    allgranted = true;
-                } else {
-                    allgranted = false;
-                    break;
-                }
-            }
 
+        //Checking the request code of our request
+        if (requestCode == 23) {
 
-            if(allgranted){
-                initialize();
-            } else if(ActivityCompat.shouldShowRequestPermissionRationale(Splash_Screen.this,Manifest.permission.CAMERA)){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA},PERMISSION_CALLBACK_CONSTANT);
-                }
-            } else if(ActivityCompat.shouldShowRequestPermissionRationale(Splash_Screen.this,Manifest.permission.WRITE_EXTERNAL_STORAGE )){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    },PERMISSION_CALLBACK_CONSTANT);
-                }
+            //If permission is granted
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                //Displaying a toast
+                Toast.makeText(this, "Permission granted", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(Splash_Screen.this,"Permission is mandatory, Try giving it from App Settings",Toast.LENGTH_LONG).show();
+                //Displaying another toast if permission is not granted
+                Toast.makeText(this, "Permission Needed To Run The App", Toast.LENGTH_LONG).show();
             }
+        }
+        if (requestCode == REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS) {
+            Map<String, Integer> perms = new HashMap<String, Integer>();
+            // Initial
+            perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
+            perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+            perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+//            perms.put(Manifest.permission.READ_SMS, PackageManager.PERMISSION_GRANTED);
+            //Toast.makeText(SplashScreen.this, " Permissions are jddddd", Toast.LENGTH_SHORT).show();
+            // Fill with results
+            for (int i = 0; i < permissions.length; i++)
+                perms.put(permissions[i], grantResults[i]);
+            // Check for ACCESS_FINE_LOCATION
+            if (perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                    && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                    perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ) {
+                // All Permissions Granted
+                // Here start the activity
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
 
-            if(allgranted){
-                initialize();
-            } else if(ActivityCompat.shouldShowRequestPermissionRationale(Splash_Screen.this,Manifest.permission.CAMERA)){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(new String[]{Manifest.permission.CAMERA},PERMISSION_CALLBACK_CONSTANT);
-                }
-            } else if(ActivityCompat.shouldShowRequestPermissionRationale(Splash_Screen.this,Manifest.permission.READ_EXTERNAL_STORAGE )){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE
-                    },PERMISSION_CALLBACK_CONSTANT);
-                }
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(Splash_Screen.this, CameraWithFilterActivity.class);
+                        startActivity(i);
+                        finish();
+
+                    }
+
+                }, 2500);
+
             } else {
-                Toast.makeText(Splash_Screen.this,"Permission is mandatory, Try giving it from App Settings",Toast.LENGTH_LONG).show();
-            }
+                // Permission Denied
+                Toast.makeText(Splash_Screen.this, "Some Permission is Denied", Toast.LENGTH_SHORT)
+                        .show();
 
+                finish();
+            }
 
         }
+    }
+
+
+    public void LaunchApp()
+    {
+        Thread background = new Thread() {
+            public void run() {
+
+                try {
+                    // Thread will sleep for 10 seconds
+                    sleep(2500);
+
+                    startActivity(new Intent(getApplicationContext(),CameraWithFilterActivity.class));
+                    finish();
+
+                } catch (Exception e) {
+
+                }
+            }
+        };
+
+        // start thread
+        background.start();
 
 
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////
 
 
 }
