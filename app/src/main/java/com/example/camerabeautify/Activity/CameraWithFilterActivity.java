@@ -226,6 +226,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private void more_button(){
 
 
+        onTouchLayout.setVisibility(View.GONE);
         llt_flash_col.setVisibility(View.GONE);
         mMenuView.setVisibility(View.GONE);
 
@@ -362,6 +363,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             // ----- Flash column -----
             case R.id.img_main_flash:
 
+                onTouchLayout.setVisibility(View.GONE);
+
                 //TODO
                 llt_layout_more.setVisibility(View.GONE);
 
@@ -461,6 +464,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
             case R.id.btn_sticker:
 
+                onTouchLayout.setVisibility(View.GONE);
                 mFilterLayout.setVisibility(View.GONE);
                 llt_face_col.setVisibility(View.GONE);
                 llt_face_seek.setVisibility(View.GONE);
@@ -589,6 +593,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private void showFaceBeauty(){
 
+        onTouchLayout.setVisibility(View.GONE);
         mFilterLayout.setVisibility(View.GONE);
         mMenuView.setVisibility(View.GONE);
 
@@ -1110,6 +1115,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     }
 
+    //todo
     private void showFilters(){
         ObjectAnimator animator = ObjectAnimator.ofFloat(mFilterLayout, "translationY", mFilterLayout.getHeight(), 0);
         animator.setDuration(200);
@@ -1117,7 +1123,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
             @Override
             public void onAnimationStart(Animator animation) {
-                findViewById(R.id.btn_camera_shutter).setClickable(false);
+                findViewById(R.id.btn_camera_shutter).setClickable(true);
+
+                onTouchLayout.setVisibility(View.GONE);
                 mFilterLayout.setVisibility(View.VISIBLE);
 
                 llt_face_col.setVisibility(View.GONE);
