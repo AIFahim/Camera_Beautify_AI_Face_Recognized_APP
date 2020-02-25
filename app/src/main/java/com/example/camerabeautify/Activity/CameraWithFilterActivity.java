@@ -89,8 +89,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private Camera mCamera;
     //Flash............................
-    private LinearLayout llt_flash_col;
-    private ImageView img_flash, img_flash_on, img_flash_off, img_flash_auto, img_flash_light;
+    private LinearLayout llt_timer_col;
+
+    //,llt_timer_normal,llt_timer_three,llt_timer_five,llt_timer_ten
+
+    private ImageView img_timer_normal, img_timer_three, img_timer_five, img_timer_ten, img_timer;
     boolean isTorchOn = false;
 
 
@@ -170,7 +173,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
         //Flash............
-        FlashInitView();
+        TimerInitView();
         Sticker();
         beauty();
         SwitchButton();
@@ -196,7 +199,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
                 llt_layout_more.setVisibility(View.GONE);
-                llt_flash_col.setVisibility(View.GONE);
+                llt_timer_col.setVisibility(View.GONE);
                 mFilterLayout.setVisibility(View.GONE);
                 llt_face_col.setVisibility(View.GONE);
                 llt_face_seek.setVisibility(View.GONE);
@@ -268,7 +271,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
         onTouchLayout.setVisibility(View.GONE);
-        llt_flash_col.setVisibility(View.GONE);
+        llt_timer_col.setVisibility(View.GONE);
         mMenuView.setVisibility(View.GONE);
 
 
@@ -352,32 +355,43 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
     //Flash Start...........................................
-    private void FlashInitView(){
+    private void TimerInitView(){
 
-        img_flash = findViewById(R.id.img_main_flash);
-        Trangle_2 = findViewById(R.id.trangle_2);
+        img_timer = findViewById(R.id.img_main_timer);
+//        img_timer = findViewById(R.id.img_main_timer);
+//        img_timer = findViewById(R.id.img_main_timer);
+//        img_timer = findViewById(R.id.img_main_timer);
 
 
+        img_timer_normal = findViewById(R.id.img_main_timer_normal);
+        img_timer_three = findViewById(R.id.img_main_timer_three);
+        img_timer_five = findViewById(R.id.img_main_timer_five);
+        img_timer_ten = findViewById(R.id.img_main_timer_ten);
 
-//        img_flash_auto = findViewById(R.id.img_main_flash_auto);
-        img_flash_on = findViewById(R.id.img_main_flash_on);
-        img_flash_off = findViewById(R.id.img_main_flash_off);
-//        img_flash_light = findViewById(R.id.img_main_flash_light);
+        llt_timer_col = findViewById(R.id.llt_main_timer_col);
 
-        llt_flash_col = findViewById(R.id.llt_main_flash_col);
+//        llt_timer_normal = findViewById(R.id.llt_main_timer_normal);
+//        llt_timer_three = findViewById(R.id.llt_main_timer_three);
+//        llt_timer_five = findViewById(R.id.llt_main_timer_five);
+//        llt_timer_ten = findViewById(R.id.llt_main_timer_ten);
+
       //  Btn_Touch = findViewById(R.id.btn_touch);
 
-        findViewById(R.id.img_main_flash).setOnClickListener( this);
-        findViewById(R.id.llt_main_flash_on).setOnClickListener(this);
-        findViewById(R.id.llt_main_flash_off).setOnClickListener(this);
+        findViewById(R.id.img_main_timer).setOnClickListener( this);
+        findViewById(R.id.llt_main_timer_normal).setOnClickListener(this);
+        findViewById(R.id.llt_main_timer_three).setOnClickListener(this);
+        findViewById(R.id.llt_main_timer_five).setOnClickListener(this);
+        findViewById(R.id.llt_main_timer_ten).setOnClickListener(this);
+
+
+
         findViewById(R.id.btn_sticker).setOnClickListener(this);
         findViewById(R.id.btn_touch).setOnClickListener(this);
 
-//        findViewById(R.id.llt_main_flash_auto).setOnClickListener(this);
-//        findViewById(R.id.llt_main_flash_toggle).setOnClickListener(this);
 
-        llt_flash_col.setVisibility(View.GONE);
-        Trangle_2.setVisibility(View.INVISIBLE);
+
+        llt_timer_col.setVisibility(View.GONE);
+
     }
 
     private void Sticker(){
@@ -387,70 +401,105 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     }
 
-    private void initFlashMenu() {
-//        img_flash_auto.setImageResource(R.drawable.ico_flash_auto);
-        img_flash_on.setImageResource(R.drawable.ico_flash_on);
-        img_flash_off.setImageResource(R.drawable.ico_flash_off);
-//        img_flash_light.setImageResource(R.drawable.ico_flash_light);
-    }
+//    private void initFlashMenu() {
+//
+//        img_flash_on.setImageResource(R.drawable.ico_flash_on);
+//        img_flash_off.setImageResource(R.drawable.ico_flash_off);
+//
+//    }
 
     @Override
     public void onClick(View v) {
-
-
-
-
         switch (v.getId()) {
-            // ----- Flash column -----
-            case R.id.img_main_flash:
 
+
+
+            case R.id.img_main_timer:
                 onTouchLayout.setVisibility(View.GONE);
-
-                //TODO
                 llt_layout_more.setVisibility(View.GONE);
 
-                if (llt_flash_col.getVisibility() == View.GONE)
+                if (llt_timer_col.getVisibility() == View.GONE)
                 {
-
-
-                    llt_flash_col.setVisibility(View.VISIBLE);
-
-                    Trangle_2.setVisibility(View.VISIBLE);
+                    llt_timer_col.setVisibility(View.VISIBLE);
 
                 }
-                else if (llt_flash_col.getVisibility() == View.VISIBLE) {
-
-                    llt_flash_col.setVisibility(View.GONE);
-
-                    Trangle_2.setVisibility(View.INVISIBLE);
-
+                else if (llt_timer_col.getVisibility() == View.VISIBLE)
+                {
+                   llt_timer_col.setVisibility(View.GONE);
                 }
                 break;
-            case R.id.llt_main_flash_on:
-                initFlashMenu();
-                img_flash_on.setImageResource(R.drawable.ico_flash_on_sel);
-                Trangle_2.setVisibility(View.INVISIBLE);
 
-                torchToggle("on");
-
+            case R.id.llt_main_timer_normal:
+                llt_timer_col.setVisibility(View.GONE);
+                img_timer.setImageResource(R.drawable.icon_timer_normal);
                 break;
-            case R.id.llt_main_flash_off:
-                initFlashMenu();
-                img_flash_off.setImageResource(R.drawable.ico_flash_off_sel);
-                Trangle_2.setVisibility(View.INVISIBLE);
 
-                torchToggle("off");
+            case R.id.llt_main_timer_three:
+                llt_timer_col.setVisibility(View.GONE);
+                img_timer.setImageResource(R.drawable.icon_timer_three);
                 break;
-//            case R.id.llt_main_flash_auto:
-//                initFlashMenu();
-//                img_flash_auto.setImageResource(R.drawable.ico_flash_auto_sel);
-//                Toast.makeText(this, "Auto", Toast.LENGTH_SHORT).show();
+
+            case R.id.llt_main_timer_five:
+                llt_timer_col.setVisibility(View.GONE);
+                img_timer.setImageResource(R.drawable.icon_timer_five);
+                break;
+
+            case R.id.llt_main_timer_ten:
+                llt_timer_col.setVisibility(View.GONE);
+                img_timer.setImageResource(R.drawable.icon_timer_ten);
+                break;
+
+
+
+
+
+
+
+
+                    // ----- Flash column -----
+
+//            case R.id.img_main_flash:
+//
+//                onTouchLayout.setVisibility(View.GONE);
+//
+//                //TODO
+//                llt_layout_more.setVisibility(View.GONE);
+//
+//                if (llt_timer_col.getVisibility() == View.GONE)
+//                {
+//
+//
+//                    llt_timer_col.setVisibility(View.VISIBLE);
+//
+//                    Trangle_2.setVisibility(View.VISIBLE);
+//
+//                }
+//                else if (llt_timer_col.getVisibility() == View.VISIBLE) {
+//
+//                    llt_timer_col.setVisibility(View.GONE);
+//
+//                    Trangle_2.setVisibility(View.INVISIBLE);
+//
+//                }
 //                break;
-//            case R.id.llt_main_flash_toggle:
+
+
+//           case R.id.llt_main_flash_on:
 //                initFlashMenu();
-//                img_flash_light.setImageResource(R.drawable.ico_flash_light_sel);
-//                Toast.makeText(this, "Light", Toast.LENGTH_SHORT).show();
+//                img_flash_on.setImageResource(R.drawable.ico_flash_on_sel);
+//                Trangle_2.setVisibility(View.INVISIBLE);
+//
+//                torchToggle("on");
+//
 //                break;
+//            case R.id.llt_main_flash_off:
+//                initFlashMenu();
+//                img_flash_off.setImageResource(R.drawable.ico_flash_off_sel);
+//                Trangle_2.setVisibility(View.INVISIBLE);
+//
+//                torchToggle("off");
+//                break;
+
 
             //Sticker_Button...................
 
