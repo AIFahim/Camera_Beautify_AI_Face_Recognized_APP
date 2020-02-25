@@ -203,18 +203,18 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 mMenuView.setVisibility(View.GONE);
 
 
+                try {
 
-                if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel)
-                {
-                    onTouchLayout.setVisibility(View.VISIBLE);
+                    if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel) {
+                        onTouchLayout.setVisibility(View.VISIBLE);
 
+                    } else if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel) {
+                        onTouchLayout.setVisibility(View.GONE);
+                    }
+
+                }catch(Exception ex) {
+                    ex.printStackTrace();
                 }
-                else if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel)
-                {
-                    onTouchLayout.setVisibility(View.GONE);
-                }
-
-
                 return false;
             }
         });
