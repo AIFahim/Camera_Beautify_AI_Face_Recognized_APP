@@ -1,5 +1,6 @@
 package com.example.camerabeautify;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.camerabeautify.Activity.CameraWithFilterActivity;
 import com.example.camerabeautify.camfilter.utils.MarginDecoration;
 import com.example.camerabeautify.camfilter.utils.PicHolder;
 import com.example.camerabeautify.camfilter.utils.itemClickListener;
@@ -116,4 +118,5 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
     public void onPicClicked(String pictureFolderPath,String folderName) {
 
     }
+
 }

@@ -68,100 +68,100 @@
 
         </LinearLayout>
 
-<!--        <LinearLayout-->
+        <!--        <LinearLayout-->
 
 
-<!--            style="@style/trangle_layout_size"-->
-<!--            android:gravity="center_horizontal"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:orientation="horizontal">-->
+        <!--            style="@style/trangle_layout_size"-->
+        <!--            android:gravity="center_horizontal"-->
+        <!--            android:layout_gravity="center_horizontal"-->
+        <!--            android:orientation="horizontal">-->
 
-<!--            <LinearLayout-->
-<!--                android:visibility="invisible"-->
-<!--                android:id="@+id/trangle_1"-->
-<!--                style="@style/trangle">-->
+        <!--            <LinearLayout-->
+        <!--                android:visibility="invisible"-->
+        <!--                android:id="@+id/trangle_1"-->
+        <!--                style="@style/trangle">-->
 
-<!--                <ImageView-->
+        <!--                <ImageView-->
 
-<!--                    style="@style/trangle_layout_icon_size"-->
-<!--                    android:src="@drawable/trangle" />-->
+        <!--                    style="@style/trangle_layout_icon_size"-->
+        <!--                    android:src="@drawable/trangle" />-->
 
-<!--            </LinearLayout>-->
+        <!--            </LinearLayout>-->
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/trangle_2"-->
-<!--                style="@style/trangle">-->
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/trangle_2"-->
+        <!--                style="@style/trangle">-->
 
-<!--                <ImageView-->
+        <!--                <ImageView-->
 
-<!--                    style="@style/trangle_layout_icon_size"-->
-<!--                    android:src="@drawable/trangle"/>-->
-<!--            </LinearLayout>-->
-
-
-
-<!--            <LinearLayout-->
-<!--                android:visibility="invisible"-->
-<!--                android:id="@+id/trangle_3"-->
-<!--                style="@style/trangle">-->
-
-<!--                <ImageView-->
-
-<!--                    style="@style/trangle_layout_icon_size"-->
-<!--                    android:src="@drawable/trangle" />-->
-
-<!--            </LinearLayout>-->
+        <!--                    style="@style/trangle_layout_icon_size"-->
+        <!--                    android:src="@drawable/trangle"/>-->
+        <!--            </LinearLayout>-->
 
 
-<!--            <LinearLayout-->
-<!--                android:visibility="invisible"-->
-<!--                android:id="@+id/trangle_4"-->
-<!--                style="@style/trangle">-->
 
-<!--                <ImageView-->
+        <!--            <LinearLayout-->
+        <!--                android:visibility="invisible"-->
+        <!--                android:id="@+id/trangle_3"-->
+        <!--                style="@style/trangle">-->
 
-<!--                    style="@style/trangle_layout_icon_size"-->
-<!--                    android:src="@drawable/trangle" />-->
+        <!--                <ImageView-->
 
-<!--            </LinearLayout>-->
+        <!--                    style="@style/trangle_layout_icon_size"-->
+        <!--                    android:src="@drawable/trangle" />-->
 
-
-<!--        </LinearLayout>-->
+        <!--            </LinearLayout>-->
 
 
-<!--        <LinearLayout-->
+        <!--            <LinearLayout-->
+        <!--                android:visibility="invisible"-->
+        <!--                android:id="@+id/trangle_4"-->
+        <!--                style="@style/trangle">-->
 
-<!--            android:visibility="gone"-->
-<!--            android:id="@+id/llt_main_flash_col"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@id/header_layout"-->
-<!--            android:background="@drawable/rectanguler_shape"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:padding="6.5dp">-->
+        <!--                <ImageView-->
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/llt_main_flash_on"-->
-<!--                style="@style/llt_menu_item">-->
+        <!--                    style="@style/trangle_layout_icon_size"-->
+        <!--                    android:src="@drawable/trangle" />-->
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/img_main_flash_on"-->
-<!--                    style="@style/img_main_item"-->
-<!--                    android:src="@drawable/ico_flash_on" />-->
-<!--            </LinearLayout>-->
-
-<!--            <LinearLayout-->
-<!--                android:id="@+id/llt_main_flash_off"-->
-<!--                style="@style/llt_menu_item">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/img_main_flash_off"-->
-<!--                    style="@style/img_main_item"-->
-<!--                    android:src="@drawable/ico_flash_off" />-->
-<!--            </LinearLayout>-->
+        <!--            </LinearLayout>-->
 
 
-<!--        </LinearLayout>-->
+        <!--        </LinearLayout>-->
+
+
+        <!--        <LinearLayout-->
+
+        <!--            android:visibility="gone"-->
+        <!--            android:id="@+id/llt_main_flash_col"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/header_layout"-->
+        <!--            android:background="@drawable/rectanguler_shape"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:padding="6.5dp">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/llt_main_flash_on"-->
+        <!--                style="@style/llt_menu_item">-->
+
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/img_main_flash_on"-->
+        <!--                    style="@style/img_main_item"-->
+        <!--                    android:src="@drawable/ico_flash_on" />-->
+        <!--            </LinearLayout>-->
+
+        <!--            <LinearLayout-->
+        <!--                android:id="@+id/llt_main_flash_off"-->
+        <!--                style="@style/llt_menu_item">-->
+
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/img_main_flash_off"-->
+        <!--                    style="@style/img_main_item"-->
+        <!--                    android:src="@drawable/ico_flash_off" />-->
+        <!--            </LinearLayout>-->
+
+
+        <!--        </LinearLayout>-->
 
 
         <LinearLayout

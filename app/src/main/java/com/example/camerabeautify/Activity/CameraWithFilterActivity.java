@@ -70,6 +70,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     //new seekbar..............
     private LinearLayout llt_face_seek,llt_face_col;
 
+    public static int x=0;
+
     //view
     private ImageView img_face_rosy,img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
     private SeekBar seekBarScale, seekBarFace;
@@ -244,7 +246,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private void SwitchButton(){
 
-        Swt_Setting_SDcard = findViewById(R.id.swt_setting_sdcard);
+//        Swt_Setting_SDcard = findViewById(R.id.swt_setting_sdcard);
         Swt_Setting_Shutter_Sound = findViewById(R.id.swt_setting_shutter_sound);
         if (sharedPref.loadSoundModeState()==true){
             Swt_Setting_Shutter_Sound.setChecked(true);
@@ -291,7 +293,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
 
-       // Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
 
 
     }
@@ -375,7 +377,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //        llt_timer_five = findViewById(R.id.llt_main_timer_five);
 //        llt_timer_ten = findViewById(R.id.llt_main_timer_ten);
 
-      //  Btn_Touch = findViewById(R.id.btn_touch);
+        //  Btn_Touch = findViewById(R.id.btn_touch);
 
         findViewById(R.id.img_main_timer).setOnClickListener( this);
         findViewById(R.id.llt_main_timer_normal).setOnClickListener(this);
@@ -425,35 +427,33 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 }
                 else if (llt_timer_col.getVisibility() == View.VISIBLE)
                 {
-                   llt_timer_col.setVisibility(View.GONE);
+                    llt_timer_col.setVisibility(View.GONE);
                 }
                 break;
 
             case R.id.llt_main_timer_normal:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_normal);
-
-
+                x=0;
 
                 break;
 
             case R.id.llt_main_timer_three:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_three);
-
-
+                x=3;
                 break;
 
             case R.id.llt_main_timer_five:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_five);
+                x=5;
                 break;
 
             case R.id.llt_main_timer_ten:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_ten);
-
-
+                x=10;
 
                 break;
 
@@ -464,7 +464,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
 
-                    // ----- Flash column -----
+            // ----- Flash column -----
 
 //            case R.id.img_main_flash:
 //
@@ -524,15 +524,18 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
 
-                                MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
-
-                                if (sharedPref.loadSoundModeState()==true){
-                                    mpp.start();
-                                }
 
                             onTouchLayout.setVisibility(View.GONE);
                             if(mode == MODE_PIC){
-                                takePhoto();
+                               // takePhoto();
+
+                                capturewithtime();
+                                //MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
+
+//                                if (sharedPref.loadSoundModeState()==true){
+//                                    mpp.start();
+//                                }
+
 
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
@@ -867,7 +870,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         findViewById(R.id.btn_more).setOnClickListener(btn_listener);
         findViewById(R.id.btn_camera_beauty).setOnClickListener(btn_listener);
         findViewById(R.id.btn_gallery).setOnClickListener(btn_listener);
-       // findViewById(R.id.btn_touch).setOnClickListener(btn_listener);
+        // findViewById(R.id.btn_touch).setOnClickListener(btn_listener);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -1045,24 +1048,23 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 }  else {
                     if(mode == MODE_PIC)
                     {
-                        MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
-                        if (sharedPref.loadSoundModeState()==true){
-                            mp.start();
-                        }
 
                         btn_shutter.setVisibility(View.GONE);
+                        capturewithtime();
 
-                        takePhoto();
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
 
-                            @Override
-                            public void run() {
-                               // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
-                                btn_shutter.setVisibility(View.VISIBLE);
-                            }
+                       // takePhoto();
 
-                        }, 1000);
+//                        Handler handler = new Handler();
+//                        handler.postDelayed(new Runnable() {
+//
+//                            @Override
+//                            public void run() {
+//                                // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
+//                                btn_shutter.setVisibility(View.VISIBLE);
+//                            }
+//
+//                        }, 1000);
 
 
                     }
@@ -1318,5 +1320,34 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         super.onResume();
 
         onCreate();
+    }
+
+    public void capturewithtime(){
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                //Toast.makeText(CameraWithFilterActivity.this, "capture "+x, Toast.LENGTH_SHORT).show();
+                takePhoto();
+                MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
+                if (sharedPref.loadSoundModeState()==true){
+                    mp.start();
+                }
+
+                Handler handlerr = new Handler();
+                handlerr.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
+                        btn_shutter.setVisibility(View.VISIBLE);
+                    }
+
+                }, 1000);
+            }
+
+        }, x*1000);
     }
 }
