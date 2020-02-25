@@ -27,29 +27,29 @@
                     android:text="Settings" />
             </LinearLayout>
 
-            <LinearLayout style="@style/llt_setting_content">
+<!--            <LinearLayout style="@style/llt_setting_content">-->
 
-                <ImageView
-                    style="@style/img_setting_content"
-                    android:src="@drawable/ico_sd_card" />
+<!--                <ImageView-->
+<!--                    style="@style/img_setting_content"-->
+<!--                    android:src="@drawable/ico_sd_card" />-->
 
-                <LinearLayout style="@style/llt_setting_content_spec" >
-                    <TextView
-                        android:textColor="@color/white"
-                        style="@style/txt_setting_content"
-                        android:text="SD Card Save" />
-                    <TextView
-                        android:textColor="@color/white"
-                        style="@style/txt_setting_content_detail"
-                        android:text="@string/frg_setting_sd_detail" />
-                </LinearLayout>
+<!--                <LinearLayout style="@style/llt_setting_content_spec" >-->
+<!--                    <TextView-->
+<!--                        android:textColor="@color/white"-->
+<!--                        style="@style/txt_setting_content"-->
+<!--                        android:text="SD Card Save" />-->
+<!--                    <TextView-->
+<!--                        android:textColor="@color/white"-->
+<!--                        style="@style/txt_setting_content_detail"-->
+<!--                        android:text="@string/frg_setting_sd_detail" />-->
+<!--                </LinearLayout>-->
 
-                <Switch
-                    android:id="@+id/swt_setting_sdcard"
-                    style="@style/swi_setting_content" />
-            </LinearLayout>
+<!--                <Switch-->
+<!--                    android:id="@+id/swt_setting_sdcard"-->
+<!--                    style="@style/swi_setting_content" />-->
+<!--            </LinearLayout>-->
 
-            <LinearLayout style="@style/llt_setting_spec" />
+<!--            <LinearLayout style="@style/llt_setting_spec" />-->
 
             <LinearLayout style="@style/llt_setting_content">
 

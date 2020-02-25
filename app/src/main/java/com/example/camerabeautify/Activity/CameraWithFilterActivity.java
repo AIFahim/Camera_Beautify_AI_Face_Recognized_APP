@@ -432,11 +432,16 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             case R.id.llt_main_timer_normal:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_normal);
+
+
+
                 break;
 
             case R.id.llt_main_timer_three:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_three);
+
+
                 break;
 
             case R.id.llt_main_timer_five:
@@ -447,6 +452,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             case R.id.llt_main_timer_ten:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_ten);
+
+
+
                 break;
 
 
