@@ -23,6 +23,7 @@ import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -33,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.camerabeautify.Dev_Infos;
@@ -64,9 +66,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private LinearLayout Dev_Info;
 
     //layout more.......
-    private LinearLayout llt_layout_more;
+    private LinearLayout llt_layout_more, Timing_layout;
     private RelativeLayout relativeLayout;
 
+
+    private TextView TimeShow;
     //new seekbar..............
     private LinearLayout llt_face_seek,llt_face_col;
 
@@ -74,6 +78,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     //view
     private ImageView img_face_rosy,img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
+
     private SeekBar seekBarScale, seekBarFace;
     private int seekBarValue = 0;
     private enum FACEEFFECT {
@@ -159,6 +164,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_with_filter);
 
+
+
         onCreate();
 
     }
@@ -175,13 +182,14 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
         //Flash............
+        initView();
         TimerInitView();
         Sticker();
         beauty();
         SwitchButton();
         DevInfo();
 
-        initView();
+
         OffTouchMode();
 
         XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
@@ -529,7 +537,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                             if(mode == MODE_PIC){
                                // takePhoto();
 
-                                capturewithtime();
+                                //capturewithtime();
+                                startcount();
                                 //MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
 
 //                                if (sharedPref.loadSoundModeState()==true){
@@ -758,6 +767,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         mFilterLayout = (LinearLayout)findViewById(R.id.layout_filter);
         onTouchLayout = (LinearLayout)findViewById(R.id.idOnTouch);
 
+        Timing_layout = (LinearLayout)findViewById(R.id.idtiminglayout);
+        TimeShow = (TextView) findViewById(R.id.idshowtime);
         mFaceSurgeryLayout = (LinearLayout)findViewById(R.id.layout_facesurgery);
         mFaceSurgeryFaceShapeSeek = (SeekBar)findViewById(R.id.faceShapeValueBar);
         mFaceSurgeryFaceShapeSeek.setProgress(0);
@@ -1050,9 +1061,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     {
 
                         btn_shutter.setVisibility(View.GONE);
-                        capturewithtime();
+                        //capturewithtime();
 
 
+                        startcount();
                        // takePhoto();
 
 //                        Handler handler = new Handler();
@@ -1322,15 +1334,53 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         onCreate();
     }
 
-    public void capturewithtime(){
+//    public void capturewithtime(){
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                //Toast.makeText(CameraWithFilterActivity.this, "capture "+x, Toast.LENGTH_SHORT).show();
+//
+//                takePhoto();
+//                MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
+//                if (sharedPref.loadSoundModeState()==true){
+//                    mp.start();
+//                }
+//
+//                Handler handlerr = new Handler();
+//                handlerr.postDelayed(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
+//                        btn_shutter.setVisibility(View.VISIBLE);
+//                    }
+//
+//                }, 1000);
+//            }
+//
+//        }, x*1000);
+//    }
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-                //Toast.makeText(CameraWithFilterActivity.this, "capture "+x, Toast.LENGTH_SHORT).show();
+    public void startcount(){
+
+
+        new CountDownTimer(x*1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+                Timing_layout.setVisibility(View.VISIBLE);
+                TimeShow.setText( ""+ millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+
+                Toast.makeText(CameraWithFilterActivity.this, "Captured", Toast.LENGTH_SHORT).show();
                 takePhoto();
+                Timing_layout.setVisibility(View.GONE);
                 MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
                 if (sharedPref.loadSoundModeState()==true){
                     mp.start();
@@ -1341,13 +1391,15 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
                     @Override
                     public void run() {
-                        // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
+
                         btn_shutter.setVisibility(View.VISIBLE);
                     }
 
                 }, 1000);
             }
 
-        }, x*1000);
+        }.start();
+
     }
+
 }
