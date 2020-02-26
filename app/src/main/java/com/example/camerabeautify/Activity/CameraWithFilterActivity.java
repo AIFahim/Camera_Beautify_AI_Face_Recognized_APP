@@ -75,6 +75,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private LinearLayout llt_face_seek,llt_face_col;
 
     public static int x=0;
+   // public static String rstrt = "0";
 
     //view
     private ImageView img_face_rosy,img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
@@ -165,6 +166,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         setContentView(R.layout.activity_camera_with_filter);
 
 
+        //rstrt = "0";
 
         onCreate();
 
@@ -190,10 +192,14 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         DevInfo();
 
 
+
+
         OffTouchMode();
 
         XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
         XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
+
+
 
 
     }
@@ -1104,12 +1110,14 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             else if (buttonId ==  R.id.btn_gallery) {
 
                 if (ContextCompat.checkSelfPermission(CameraWithFilterActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
-                    String pictureFolderPath = "/storage/emulated/0/Pictures/Camera Beautify";
-                    String folderName = "Camera Beautify";
-                    Intent galleryIntent = new Intent(CameraWithFilterActivity.this, ImageDisplay.class);
-                    galleryIntent.putExtra("folderPath",pictureFolderPath);
-                    galleryIntent.putExtra("folderName",folderName);
-                    startActivity(galleryIntent);
+//                    String pictureFolderPath = "/storage/emulated/0/Pictures/Camera Beautify";
+//                    String folderName = "Camera Beautify";
+//                    Intent galleryIntent = new Intent(CameraWithFilterActivity.this, ImageDisplay.class);
+//                    galleryIntent.putExtra("folderPath",pictureFolderPath);
+//                    galleryIntent.putExtra("folderName",folderName);
+//                    startActivity(galleryIntent);
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivity(pickPhoto);
                 }else{
                     requestStoragePermission();
                 }
@@ -1313,6 +1321,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             mCamera.stopPreview();
             mCamera.release();
         }
+
+
+
+
     }
 
     @Override
@@ -1325,6 +1337,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             mCamera.release();
             mCamera=null;
         }
+
+        finish();
     }
 
     @Override
@@ -1332,6 +1346,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         super.onResume();
 
         onCreate();
+
     }
 
 //    public void capturewithtime(){
@@ -1401,5 +1416,26 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }.start();
 
     }
+
+
+//    private void restartFirstActivity()
+//    {
+//
+//        Intent intent = getIntent();
+//        rstrt =  intent.getExtras().getString("IntentValue");
+//
+//        if(rstrt.equals(1)) {
+//
+//
+//            Intent i = getApplicationContext().getPackageManager()
+//                    .getLaunchIntentForPackage(getApplicationContext().getPackageName());
+//
+//            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(i);
+//
+//        }
+//
+//        rstrt = "0";
+//    }
 
 }
