@@ -119,13 +119,13 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        Intent intent=new Intent(ImageDisplay.this,CameraWithFilterActivity.class);
-        intent.putExtra("IntentValue","1");
-        //intent.putExtra("IntentValue","9");
-        startActivity(intent);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//
+//        Intent intent=new Intent(ImageDisplay.this,CameraWithFilterActivity.class);
+//        intent.putExtra("IntentValue","1");
+//        //intent.putExtra("IntentValue","9");
+//        startActivity(intent);
+//    }
 }
