@@ -1115,6 +1115,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     hideFilters();
             }
             else if (buttonId == R.id.btn_camera_switch) {
+                Dev_Info_layout.setVisibility(View.GONE);
                 GPUCamImgOperator.switchCamera();
             }
             else if (buttonId == R.id.btn_camera_beauty) {
