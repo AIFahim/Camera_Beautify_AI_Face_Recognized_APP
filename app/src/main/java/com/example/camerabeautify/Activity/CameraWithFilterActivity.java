@@ -1387,6 +1387,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
             public void onTick(long millisUntilFinished) {
 
+                onTouchLayout.setVisibility(View.GONE);
+                btn_shutter.setVisibility(View.GONE);
                 Timing_layout.setVisibility(View.VISIBLE);
                 TimeShow.setText( ""+ millisUntilFinished / 1000);
             }
@@ -1411,6 +1413,19 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     }
 
                 }, 1000);
+
+                try {
+
+                    if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel) {
+                        onTouchLayout.setVisibility(View.VISIBLE);
+
+                    } else if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel) {
+                        onTouchLayout.setVisibility(View.GONE);
+                    }
+
+                }catch(Exception ex) {
+                    ex.printStackTrace();
+                }
             }
 
         }.start();
