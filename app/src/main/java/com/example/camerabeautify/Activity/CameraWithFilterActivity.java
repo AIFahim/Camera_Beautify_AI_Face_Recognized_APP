@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
@@ -28,6 +29,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,15 +61,22 @@ import java.util.ArrayList;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class CameraWithFilterActivity extends Activity implements  View.OnClickListener , SeekBar.OnSeekBarChangeListener {
 
+    //Webview
+    WebView webView;
+
+
     //Switch
     private Switch Swt_Setting_SDcard,Swt_Setting_Shutter_Sound;
     SharedPref sharedPref;
 
     //Transparent dev_info
     private LinearLayout Dev_Info_layout;
+    private RelativeLayout About_layout;
+
 
     //Developer info
     private LinearLayout Dev_Info;
+    private LinearLayout About_App;
 
     //layout more.......
     private LinearLayout llt_layout_more, Timing_layout;
@@ -193,6 +203,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         beauty();
         SwitchButton();
         DevInfo();
+        About_App_func();
 
 
 
@@ -268,6 +279,31 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         });
 
     }
+    private void About_App_func(){
+        About_App = findViewById(R.id.llt_About_layout);
+        About_layout = findViewById(R.id.layout_about);
+
+        webView = findViewById(R.id.webViewForHtml);
+
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.loadUrl("file:///android_asset/like.html");
+        webView.setBackgroundColor(Color.TRANSPARENT);
+
+        About_App.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*Intent intents = new Intent(CameraWithFilterActivity.this, AboutApp.class);
+                startActivity(intents);*/
+                llt_layout_more.setVisibility(View.GONE);
+                About_layout.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+
+    }
 
 
     private void SwitchButton(){
@@ -305,17 +341,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
         if (llt_layout_more.getVisibility() == View.GONE )
-
-
         {
-
             llt_layout_more.setVisibility(View.VISIBLE);
-
-
         }
         else if (llt_layout_more.getVisibility() == View.VISIBLE) {
             llt_layout_more.setVisibility(View.GONE);
-
         }
 
 
@@ -1065,14 +1095,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         public void onClick(View v) {
             int buttonId = v.getId();
             if( buttonId == R.id.btn_more) {
-
                 more_button();
-
-
             }
-
-
-
             if (buttonId == R.id.btn_camera_shutter) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                         && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED &&

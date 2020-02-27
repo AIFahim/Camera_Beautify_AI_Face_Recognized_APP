@@ -151,6 +151,16 @@
             android:visibility="gone"
             android:layout_below="@id/header_layout"
             />
+        <include
+
+            android:id="@+id/layout_about"
+            layout="@layout/activity_about_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:visibility="gone"
+            android:layout_below="@id/header_layout"
+            />
 
 
         <LinearLayout
