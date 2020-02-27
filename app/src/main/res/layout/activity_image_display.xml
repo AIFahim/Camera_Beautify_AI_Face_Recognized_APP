@@ -9,12 +9,25 @@
 
 
 
-    <RelativeLayout
+
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+
+            android:layout_above="@+id/head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/app_bar_layout"
+                android:id="@+id/Gallery_toolbar"/>
+        </LinearLayout>
+
 
         <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -51,7 +64,7 @@
 
         </com.example.camerabeautify.camfilter.utils.AutoFitRecyclerView>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 

@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:noHistory="true">
-        <activity android:name=".Dev_Infos"></activity>
+        <activity android:name=".Dev_Infos"
+            android:parentActivityName=".Activity.CameraWithFilterActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity
             android:name=".Activity.CameraWithFilterActivity"

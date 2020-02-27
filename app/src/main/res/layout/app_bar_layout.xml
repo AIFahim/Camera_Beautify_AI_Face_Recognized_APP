@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/transparent_white"
+    android:background="@drawable/rectanguler_shape"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <TextView

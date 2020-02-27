@@ -9,6 +9,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/app_bar_layout"
+            android:id="@+id/dev_toolbar"/>
+    </LinearLayout>
+
     <RelativeLayout
 
         android:layout_width="match_parent"
