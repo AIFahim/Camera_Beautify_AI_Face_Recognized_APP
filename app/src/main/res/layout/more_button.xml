@@ -102,7 +102,9 @@
 
             <LinearLayout style="@style/llt_setting_spec" />
 
-            <LinearLayout style="@style/llt_setting_content">
+            <LinearLayout
+                android:id="@+id/llt_About_layout"
+                style="@style/llt_setting_content">
 
                 <ImageView
                     style="@style/img_setting_content"

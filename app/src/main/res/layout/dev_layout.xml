@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/rectanguler_shape"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:textSize="20dp"
+                android:gravity="center"
+                android:text="ANDROID DEVELOPERS"
+                android:background="#D3E9E5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="70dp"
+
+                    android:layout_marginLeft="10dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/img_asif_fahim"
+                        android:elevation="1dp"
+                        android:layout_centerHorizontal="true">
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardBackgroundColor="#D3E9E5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="70dp"
+                        app:cardCornerRadius="10dp"
+                        app:contentPaddingBottom="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingTop="5dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+
+                                android:layout_marginLeft="80dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="0dp"
+                                    android:text="Md. Asif Iqbal Fahim"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="5dp"
+                                    android:text="asif.iqbal.fahim.bd@gmail.com"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
+
+                    app:cardCornerRadius="70dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/moinakash"
+
+                        android:layout_centerHorizontal="true">
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardBackgroundColor="#D3E9E5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_marginLeft="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:contentPaddingBottom="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingTop="5dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+                                android:id="@+id/Details"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="70dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="0dp"
+                                    android:text="Md. Mainuddin Akash"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <!--                        <TextView-->
+                                <!--                            android:layout_width="wrap_content"-->
+                                <!--                            android:layout_height="wrap_content"-->
+                                <!--                            android:layout_gravity="left"-->
+                                <!--                            android:layout_marginTop="5dp"-->
+                                <!--                            android:text="love to work with creative things"-->
+                                <!--                            android:textSize="14sp" />-->
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="5dp"
+                                    android:text="moinakashll@gmail.com"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="70dp"
+
+                    android:layout_marginLeft="10dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/img_farhad_hossen"
+                        android:elevation="1dp"
+                        android:layout_centerHorizontal="true">
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardBackgroundColor="#D3E9E5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="70dp"
+                        app:cardCornerRadius="10dp"
+                        app:contentPaddingBottom="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingTop="5dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+
+                                android:layout_marginLeft="80dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="0dp"
+                                    android:text="MD. Farhad Hossen"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <!--                        <TextView-->
+                                <!--                            android:layout_width="wrap_content"-->
+                                <!--                            android:layout_height="wrap_content"-->
+                                <!--                            android:layout_gravity="left"-->
+                                <!--                            android:layout_marginTop="5dp"-->
+                                <!--                            android:text="love to work with creative things"-->
+                                <!--                            android:textSize="14sp" />-->
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="5dp"
+                                    android:text="farhad5130@gmail.com"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:text="UI/UX Designer"
+                android:background="#D3E9E5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
+
+                    app:cardCornerRadius="70dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/img_nakib_mim"
+
+                        android:layout_centerHorizontal="true">
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardBackgroundColor="#D3E9E5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_marginLeft="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:contentPaddingBottom="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingTop="5dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="70dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="0dp"
+                                    android:text="Nakib Mim"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="5dp"
+                                    android:text="nakibmim@gmail.com"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:text="Graphic Artist"
+                android:background="#D3E9E5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="70dp"
+
+                    android:layout_marginLeft="10dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/img_md_arif_mahmud"
+                        android:elevation="1dp"
+                        android:layout_centerHorizontal="true">
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardBackgroundColor="#D3E9E5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="70dp"
+                        app:cardCornerRadius="10dp"
+                        app:contentPaddingBottom="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingTop="5dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+
+                                android:layout_marginLeft="80dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="0dp"
+                                    android:text="Md.Arif Mahmud"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="5dp"
+                                    android:text="arif.mahmud.3178@gmail.com"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
+
+                    app:cardCornerRadius="70dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/img_liza"
+
+                        android:layout_centerHorizontal="true">
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardBackgroundColor="#D3E9E5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_marginLeft="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:contentPaddingBottom="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingTop="5dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="70dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="0dp"
+                                    android:text="Umme Kulsum Liza"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="5dp"
+                                    android:text="ummekulsumliza000@gmail.com "
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="70dp"
+
+                    android:layout_marginLeft="10dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/img_md_ariful_islam"
+                        android:elevation="1dp"
+                        android:layout_centerHorizontal="true">
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardBackgroundColor="#D3E9E5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="70dp"
+                        app:cardCornerRadius="10dp"
+                        app:contentPaddingBottom="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingTop="5dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+
+                                android:layout_marginLeft="80dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="0dp"
+                                    android:text="Md.Ariful Islam"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="left"
+                                    android:layout_marginTop="5dp"
+                                    android:text="arif.cse50th@gmail.com"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

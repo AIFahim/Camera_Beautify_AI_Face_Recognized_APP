@@ -62,6 +62,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private Switch Swt_Setting_SDcard,Swt_Setting_Shutter_Sound;
     SharedPref sharedPref;
 
+    //Transparent dev_info
+    private LinearLayout Dev_Info_layout;
+
     //Developer info
     private LinearLayout Dev_Info;
 
@@ -241,16 +244,29 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     }
 
+    private void DevInfoT(){
+
+
+        
+    }
+
+
+
 
     private void DevInfo(){
         Dev_Info = findViewById(R.id.idDev_info);
+        Dev_Info_layout = findViewById(R.id.layout_dev_info);
 
         Dev_Info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intents = new Intent(CameraWithFilterActivity.this, Dev_Infos.class);
-                startActivity(intents);
+//                Intent intents = new Intent(CameraWithFilterActivity.this, Dev_Infos.class);
+//                startActivity(intents);
+
+                llt_layout_more.setVisibility(View.GONE);
+
+
 
             }
         });
