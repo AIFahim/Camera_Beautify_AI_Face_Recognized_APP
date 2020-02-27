@@ -275,6 +275,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 Dev_Info_layout.setVisibility(View.VISIBLE);
 
 
+                llt_timer_col.setVisibility(View.GONE);
+                mFilterLayout.setVisibility(View.GONE);
+                mMenuView.setVisibility(View.GONE);
+                llt_face_col.setVisibility(View.GONE);
+                llt_face_seek.setVisibility(View.GONE);
+
+
             }
         });
 
@@ -298,6 +305,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 startActivity(intents);*/
                 llt_layout_more.setVisibility(View.GONE);
                 About_layout.setVisibility(View.VISIBLE);
+
+                llt_timer_col.setVisibility(View.GONE);
+                mFilterLayout.setVisibility(View.GONE);
+                mMenuView.setVisibility(View.GONE);
+                llt_face_col.setVisibility(View.GONE);
+                llt_face_seek.setVisibility(View.GONE);
+
 
 
             }
@@ -338,6 +352,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         llt_timer_col.setVisibility(View.GONE);
         mMenuView.setVisibility(View.GONE);
         Dev_Info_layout.setVisibility(View.GONE);
+        About_layout.setVisibility(View.GONE);
 
 
         if (llt_layout_more.getVisibility() == View.GONE )
@@ -477,6 +492,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 onTouchLayout.setVisibility(View.GONE);
                 llt_layout_more.setVisibility(View.GONE);
                 Dev_Info_layout.setVisibility(View.GONE);
+                About_layout.setVisibility(View.GONE);
 
                 if (llt_timer_col.getVisibility() == View.GONE)
                 {
@@ -572,6 +588,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
             case R.id.btn_touch:
                 Dev_Info_layout.setVisibility(View.GONE);
+                About_layout.setVisibility(View.GONE);
                 if (onTouchLayout.getVisibility() == View.GONE)
                 {
                     onTouchLayout.setVisibility(View.VISIBLE);
@@ -627,6 +644,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
             case R.id.btn_sticker:
 
+                About_layout.setVisibility(View.GONE);
                 Dev_Info_layout.setVisibility(View.GONE);
                 onTouchLayout.setVisibility(View.GONE);
                 mFilterLayout.setVisibility(View.GONE);
@@ -757,6 +775,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private void showFaceBeauty(){
 
+        About_layout.setVisibility(View.GONE);
         Dev_Info_layout.setVisibility(View.GONE);
         onTouchLayout.setVisibility(View.GONE);
         mFilterLayout.setVisibility(View.GONE);
@@ -1140,6 +1159,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             }
             else if (buttonId == R.id.btn_camera_switch) {
                 Dev_Info_layout.setVisibility(View.GONE);
+                About_layout.setVisibility(View.GONE);
                 GPUCamImgOperator.switchCamera();
             }
             else if (buttonId == R.id.btn_camera_beauty) {
@@ -1201,6 +1221,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private void takePhoto(){
         Dev_Info_layout.setVisibility(View.GONE);
+        About_layout.setVisibility(View.GONE);
         GPUCamImgOperator.savePicture();
     }
 
@@ -1293,6 +1314,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                // findViewById(R.id.btn_camera_shutter).setClickable(true);
 
                 Dev_Info_layout.setVisibility(View.GONE);
+                About_layout.setVisibility(View.GONE);
                 onTouchLayout.setVisibility(View.GONE);
                 mFilterLayout.setVisibility(View.VISIBLE);
 
