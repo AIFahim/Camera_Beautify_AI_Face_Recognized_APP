@@ -28,17 +28,17 @@ public class FilterTypeHelper {
 		case NONE:
 			return R.drawable.filter_thumb_original;
 		case COOL:
-			return R.drawable.filter_thumb_original;
+			return R.drawable.f_cool;
 		case EMERALD:
-			return R.drawable.filter_thumb_original;
+			return R.drawable.f_emerald;
 		case EVERGREEN:
-			return R.drawable.filter_thumb_original;
+			return R.drawable.f_everfreen;
 		case HEALTHY:
-			return R.drawable.filter_thumb_original;
+			return R.drawable.f_healthy;
 		case NOSTALGIA:
-			return R.drawable.filter_thumb_original;
+			return R.drawable.f_nostalogia;
 		default:
-			return R.drawable.filter_thumb_original;
+			return R.drawable.f_creaon;
 		}
 	}
 	
