@@ -603,15 +603,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
                             onTouchLayout.setVisibility(View.GONE);
                             if(mode == MODE_PIC){
-                               // takePhoto();
 
-                                //capturewithtime();
+                                Log.d("TEMP","Touch");
                                 startcount();
-                                //MediaPlayer mpp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
-
-//                                if (sharedPref.loadSoundModeState()==true){
-//                                    mpp.start();
-//                                }
 
 
                                 Handler handler = new Handler();
@@ -1129,20 +1123,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                         btn_shutter.setVisibility(View.GONE);
                         //capturewithtime();
 
-
+                        Log.d("TEMP","Button");
                         startcount();
-                       // takePhoto();
-
-//                        Handler handler = new Handler();
-//                        handler.postDelayed(new Runnable() {
-//
-//                            @Override
-//                            public void run() {
-//                                // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
-//                                btn_shutter.setVisibility(View.VISIBLE);
-//                            }
-//
-//                        }, 1000);
 
 
                     }
@@ -1417,35 +1399,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     }
 
-//    public void capturewithtime(){
-//
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                //Toast.makeText(CameraWithFilterActivity.this, "capture "+x, Toast.LENGTH_SHORT).show();
-//
-//                takePhoto();
-//                MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
-//                if (sharedPref.loadSoundModeState()==true){
-//                    mp.start();
-//                }
-//
-//                Handler handlerr = new Handler();
-//                handlerr.postDelayed(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
-//                        btn_shutter.setVisibility(View.VISIBLE);
-//                    }
-//
-//                }, 1000);
-//            }
-//
-//        }, x*1000);
-//    }
 
 
     public void startcount(){
