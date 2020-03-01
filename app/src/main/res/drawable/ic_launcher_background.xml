@@ -1,190 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<vector/>
-<!--<project version="4">-->
-<!--    <component name="AndroidLayouts">-->
-<!--        <shared>-->
-<!--            <config />-->
-<!--        </shared>-->
-<!--    </component>-->
-<!--    <component name="AndroidLogFilters">-->
-<!--        <option-->
-<!--            name="TOOL_WINDOW_LOG_LEVEL"-->
-<!--            value="error" />-->
-<!--        <option-->
-<!--            name="TOOL_WINDOW_CONFIGURED_FILTER"-->
-<!--            value="Show only selected application" />-->
-<!--    </component>-->
-<!--    <component name="ChangeListManager">-->
-<!--        <list-->
-<!--            name="Default Changelist"-->
-<!--            comment=""-->
-<!--            default="true"-->
-<!--            id="b87761ec-73e5-4d4d-9761-f17e62c18c29" />-->
-<!--        <ignored path="$PROJECT_DIR$/build/classes/" />-->
-<!--        <option-->
-<!--            name="EXCLUDED_CONVERTED_TO_IGNORED"-->
-<!--            value="true" />-->
-<!--        <option-->
-<!--            name="SHOW_DIALOG"-->
-<!--            value="false" />-->
-<!--        <option-->
-<!--            name="HIGHLIGHT_CONFLICTS"-->
-<!--            value="true" />-->
-<!--        <option-->
-<!--            name="HIGHLIGHT_NON_ACTIVE_CHANGELIST"-->
-<!--            value="false" />-->
-<!--        <option-->
-<!--            name="LAST_RESOLUTION"-->
-<!--            value="IGNORE" />-->
-<!--    </component>-->
-<!--    <component name="DefaultGradleProjectSettings">-->
-<!--        <option-->
-<!--            name="isMigrated"-->
-<!--            value="true" />-->
-<!--    </component>-->
-<!--    <component-->
-<!--        name="ExecutionTargetManager"-->
-<!--        SELECTED_TARGET="Pixel_2_API_29" />-->
-<!--    <component name="ExternalProjectsManager">-->
-<!--        <system id="GRADLE">-->
-<!--            <state>-->
-<!--                <projects_view />-->
-<!--            </state>-->
-<!--        </system>-->
-<!--    </component>-->
-<!--    <component name="FileEditorManager">-->
-<!--        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">-->
-<!--            <file-->
-<!--                current-in-tab="false"-->
-<!--                pinned="false">-->
-<!--                <entry file="file://$PROJECT_DIR$/app/build.gradle">-->
-<!--                    <provider-->
-<!--                        editor-type-id="text-editor"-->
-<!--                        selected="true">-->
-<!--                        <state relative-caret-position="437">-->
-<!--                            <caret-->
-<!--                                line="19"-->
-<!--                                selection-end-line="19"-->
-<!--                                selection-start-line="19" />-->
-<!--                        </state>-->
-<!--                    </provider>-->
-<!--                </entry>-->
-<!--            </file>-->
-<!--            <file-->
-<!--                current-in-tab="true"-->
-<!--                pinned="false">-->
-<!--                <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">-->
-<!--                    <provider-->
-<!--                        editor-type-id="text-editor"-->
-<!--                        selected="true">-->
-<!--                        <state relative-caret-position="179">-->
-<!--                            <caret-->
-<!--                                column="4"-->
-<!--                                line="38"-->
-<!--                                selection-end-column="4"-->
-<!--                                selection-end-line="38"-->
-<!--                                selection-start-column="4"-->
-<!--                                selection-start-line="38" />-->
-<!--                        </state>-->
-<!--                    </provider>-->
-<!--                    <provider editor-type-id="android-designer2" />-->
-<!--                </entry>-->
-<!--            </file>-->
-<!--            <file-->
-<!--                current-in-tab="false"-->
-<!--                pinned="false">-->
-<!--                <entry file="file://$PROJECT_DIR$/app/src/main/java/in/tvac/akshayejh/fingerprintauthapp/MainActivity.java">-->
-<!--                    <provider-->
-<!--                        editor-type-id="text-editor"-->
-<!--                        selected="true">-->
-<!--                        <state relative-caret-position="621">-->
-<!--                            <caret-->
-<!--                                column="46"-->
-<!--                                line="59"-->
-<!--                                selection-end-column="46"-->
-<!--                                selection-end-line="59"-->
-<!--                                selection-start-column="46"-->
-<!--                                selection-start-line="59" />-->
-<!--                        </state>-->
-<!--                    </provider>-->
-<!--                </entry>-->
-<!--            </file>-->
-<!--            <file-->
-<!--                current-in-tab="false"-->
-<!--                pinned="false">-->
-<!--                <entry file="file://$PROJECT_DIR$/app/src/main/java/in/tvac/akshayejh/fingerprintauthapp/FingerprintHandler.java">-->
-<!--                    <provider-->
-<!--                        editor-type-id="text-editor"-->
-<!--                        selected="true">-->
-<!--                        <state relative-caret-position="1334">-->
-<!--                            <caret-->
-<!--                                line="69"-->
-<!--                                selection-end-line="69"-->
-<!--                                selection-start-line="69" />-->
-<!--                        </state>-->
-<!--                    </provider>-->
-<!--                </entry>-->
-<!--            </file>-->
-<!--        </leaf>-->
-<!--    </component>-->
-<!--    <component name="IdeDocumentHistory">-->
-<!--        <option name="CHANGED_PATHS">-->
-<!--            <list>-->
-<!--                <option value="$PROJECT_DIR$/app/build.gradle" />-->
-<!--                <option value="$PROJECT_DIR$/app/src/main/java/in/tvac/akshayejh/fingerprintauthapp/MainActivity.java" />-->
-<!--                <option value="$PROJECT_DIR$/app/src/main/java/in/tvac/akshayejh/fingerprintauthapp/FingerprintHandler.java" />-->
-<!--                <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />-->
-<!--            </list>-->
-<!--        </option>-->
-<!--    </component>-->
-<!--    <component-->
-<!--        name="ProjectFrameBounds"-->
-<!--        extendedState="6">-->
-<!--        <option-->
-<!--            name="x"-->
-<!--            value="-7" />-->
-<!--        <option-->
-<!--            name="width"-->
-<!--            value="761" />-->
-<!--        <option-->
-<!--            name="height"-->
-<!--            value="735" />-->
-<!--    </component>-->
-<!--    <component-->
-<!--        name="ProjectLevelVcsManager"-->
-<!--        settingsEditedManually="true" />-->
-<!--    <component name="ProjectView">-->
-<!--        <navigator-->
-<!--            proportions=""-->
-<!--            version="1">-->
-<!--            <foldersAlwaysOnTop value="true" />-->
-<!--        </navigator>-->
-<!--        <panes>-->
-<!--            <pane id="PackagesPane" />-->
-<!--            <pane id="AndroidView">-->
-<!--                <subPane>-->
-<!--                    <expand>-->
-<!--                        <path>-->
-<!--                            <item-->
-<!--                                name="Android-Fingerprint-Authentication-App-master"-->
-<!--                                type="1abcf292:AndroidViewProjectNode" />-->
-<!--                            <item-->
-<!--                                name="Gradle Scripts"-->
-<!--                                type="ae0cef3a:AndroidBuildScriptsGroupNode" />-->
-<!--                        </path>-->
-<!--                    </expand>-->
-<!--                    <select />-->
-<!--                </subPane>-->
-<!--            </pane>-->
-<!--            <pane id="Scope" />-->
-<!--            <pane id="ProjectPane" />-->
-<!--        </panes>-->
-<!--    </component>-->
-<!--    <component name="PropertiesComponent">-->
-<!--        <property-->
-<!--            name="SHARE_PROJECT_CONFIGURATION_FILES"-->
-<!--            value="true" />-->
-<!--        <property name="last_directory_s"/>-->
-<!--    </component>-->
-
-<!--    </project>-->
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="108dp"
+    android:width="108dp"
+    android:viewportHeight="108"
+    android:viewportWidth="108"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#3DDC84"
+          android:pathData="M0,0h108v108h-108z"/>
+    <path android:fillColor="#00000000" android:pathData="M9,0L9,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,0L19,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M29,0L29,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M39,0L39,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M49,0L49,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M59,0L59,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M69,0L69,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M79,0L79,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M89,0L89,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M99,0L99,108"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,9L108,9"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,19L108,19"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,29L108,29"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,39L108,39"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,49L108,49"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,59L108,59"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,69L108,69"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,79L108,79"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,89L108,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M0,99L108,99"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,29L89,29"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,39L89,39"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,49L89,49"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,59L89,59"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,69L89,69"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M19,79L89,79"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M29,19L29,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M39,19L39,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M49,19L49,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M59,19L59,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M69,19L69,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+    <path android:fillColor="#00000000" android:pathData="M79,19L79,89"
+          android:strokeColor="#33FFFFFF" android:strokeWidth="0.8"/>
+</vector>
