@@ -260,7 +260,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private void DevInfo(){
 
-        findViewById(R.id.btn_camera_shutter).setClickable(false);
+       // findViewById(R.id.btn_camera_shutter).setClickable(false);
         Dev_Info = findViewById(R.id.idDev_info);
         Dev_Info_layout = findViewById(R.id.layout_dev_info);
 
