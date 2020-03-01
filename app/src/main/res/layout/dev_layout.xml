@@ -919,7 +919,7 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="140dp"
                         android:layout_height="140dp"
-                        android:src="@drawable/img_ariful_islam"
+                        android:src="@drawable/img_ariful_islamm"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
                     </de.hdodenhof.circleimageview.CircleImageView>
@@ -992,7 +992,7 @@
 
                 </LinearLayout>
             </RelativeLayout>
-            
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
