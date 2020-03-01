@@ -95,10 +95,17 @@
         <item name="android:textStyle">bold</item>
     </style>
     <style name="llt_setting_header">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">30dp</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:background">#666</item>
+</style>
+
+    <style name="llt_about_header">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">30dp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:background">#666</item>
+        <item name="android:background">@color/transparent_white</item>
     </style>
 
     <style name="txt_setting_header">

@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.AboutApp"
-    android:padding="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     >
 
     <ScrollView
@@ -30,8 +31,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="10dp">
 
             <androidx.cardview.widget.CardView
 
@@ -40,13 +40,13 @@
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="70dp"
+                app:cardCornerRadius="50dp"
 
                 android:layout_marginLeft="10dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/about_app_logo"
                     android:elevation="1dp"
                     android:layout_centerHorizontal="true">
@@ -80,7 +80,7 @@
                     <LinearLayout
 
                         android:layout_width="match_parent"
-                        android:layout_height="150dp">
+                        android:layout_height="110dp">
 
 
 
@@ -94,10 +94,10 @@
         </RelativeLayout>
 
         <TextView
-            style="@style/llt_setting_header"
+            style="@style/llt_about_header"
             android:textSize="20dp"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:text="ORGANISED BY">
 
         </TextView>
@@ -123,8 +123,8 @@
 
                 <ImageView
                     android:padding="5dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/about_digital_bangladesh"
                     android:elevation="1dp"
                     android:layout_centerHorizontal="true">
@@ -149,8 +149,8 @@
 
                 <ImageView
                     android:padding="5dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/about_ict_logo"
                     android:elevation="1dp"
                     android:layout_centerHorizontal="true">
@@ -175,8 +175,8 @@
 
                 <ImageView
                     android:padding="5dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/about_mobile_game_logo"
                     android:elevation="1dp"
                     android:layout_centerHorizontal="true">
@@ -192,10 +192,10 @@
         </LinearLayout>
 
         <TextView
-            style="@style/llt_setting_header"
+            style="@style/llt_about_header"
             android:textSize="20dp"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:text="CONDUCTED BY">
 
         </TextView>
@@ -221,8 +221,8 @@
 
                 <ImageView
                     android:padding="5dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/about_leotech_logo"
                     android:elevation="1dp"
                     android:layout_centerHorizontal="true">
@@ -247,8 +247,8 @@
 
                 <ImageView
                     android:padding="5dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/about_virtual_digital"
                     android:elevation="1dp"
                     android:layout_centerHorizontal="true">
@@ -263,6 +263,15 @@
 
 
         </LinearLayout>
+
+        <TextView
+            style="@style/llt_about_header"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="CREDITS">
+
+        </TextView>
 
 
     </LinearLayout>
