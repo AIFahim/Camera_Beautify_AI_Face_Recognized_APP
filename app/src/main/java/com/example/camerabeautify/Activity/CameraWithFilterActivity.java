@@ -591,6 +591,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 About_layout.setVisibility(View.GONE);
                 if (onTouchLayout.getVisibility() == View.GONE)
                 {
+                    
                     onTouchLayout.setVisibility(View.VISIBLE);
                     Btn_Touch.setImageResource(R.drawable.icon_touch_enble_sel);
                     Btn_Touch.setTag(R.drawable.icon_touch_enble_sel);
