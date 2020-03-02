@@ -1179,6 +1179,12 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         bean.image = R.drawable.st_gamcha;
         mStickerData.add(bean);
 
+//        bean=new MenuBean();
+//        bean.name="";
+//        bean.path="tip";
+//        bean.image = R.drawable.st_gamcha;
+//        mStickerData.add(bean);
+
 
 
         mStickerAdapter.notifyDataSetChanged();
@@ -1276,7 +1282,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //                    galleryIntent.putExtra("folderPath",pictureFolderPath);
 //                    galleryIntent.putExtra("folderName",folderName);
 //                    startActivity(galleryIntent);
-                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent pickPhoto = new Intent(Intent.ACTION_VIEW, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivity(pickPhoto);
                 }else{
                     requestStoragePermission();
