@@ -1161,6 +1161,12 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         bean.image = R.drawable.st_gamcha;
         mStickerData.add(bean);
 
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="scrf";
+        bean.image = R.drawable.st_gamcha;
+        mStickerData.add(bean);
+
 
 
         mStickerAdapter.notifyDataSetChanged();
