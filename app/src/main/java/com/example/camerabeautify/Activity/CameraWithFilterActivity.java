@@ -88,7 +88,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private LinearLayout llt_face_seek,llt_face_col;
 
     public static int x=0;
-   // public static String rstrt = "0";
+    // public static String rstrt = "0";
 
     //view
     private ImageView img_face_rosy,img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
@@ -260,7 +260,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private void DevInfo(){
 
-       // findViewById(R.id.btn_camera_shutter).setClickable(false);
+        // findViewById(R.id.btn_camera_shutter).setClickable(false);
         Dev_Info = findViewById(R.id.idDev_info);
         Dev_Info_layout = findViewById(R.id.layout_dev_info);
 
@@ -1140,6 +1140,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         mStickerData.add(bean);
 
 
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="kalacasma";
+        bean.image = R.drawable.st_gamcha;
+        mStickerData.add(bean);
+
+
 
         mStickerAdapter.notifyDataSetChanged();
     }
@@ -1367,7 +1374,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
             @Override
             public void onAnimationStart(Animator animation) {
-               // findViewById(R.id.btn_camera_shutter).setClickable(true);
+                // findViewById(R.id.btn_camera_shutter).setClickable(true);
 
                 Dev_Info_layout.setVisibility(View.GONE);
                 About_layout.setVisibility(View.GONE);
