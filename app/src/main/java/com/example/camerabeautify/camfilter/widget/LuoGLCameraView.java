@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+
 import com.example.camerabeautify.camfilter.CameraEngine;
 import com.example.camerabeautify.camfilter.LuoGPUCameraInputFilter;
 import com.example.camerabeautify.camfilter.LuoGPUImgBaseFilter;
@@ -36,15 +37,15 @@ public class LuoGLCameraView extends LuoGLBaseView {
 
 
     public LuoGLCameraView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.getHolder().addCallback(this);
-        scaleType = ScaleType.CENTER_CROP;
+        super(context, attrs);//基类的Opengl初始化工作
+        this.getHolder().addCallback(this);//获取surfaceholder对象，并设置回调函数
+        scaleType = ScaleType.CENTER_CROP;//设置相机的缩放类型
         XJGArSdkApi.XJGARSDKReleaseAllOpenglResources();
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        super.onSurfaceCreated(gl, config);
+        super.onSurfaceCreated(gl, config);//基类关于Opengl初始化的一些设置
         if(cameraInputFilter == null)
             cameraInputFilter = new LuoGPUCameraInputFilter();
         cameraInputFilter.init();
@@ -56,27 +57,27 @@ public class LuoGLCameraView extends LuoGLBaseView {
         if (textureId == OpenGlUtils.NO_TEXTURE) {
             textureId = OpenGlUtils.getExternalOESTextureID();
             if (textureId != OpenGlUtils.NO_TEXTURE) {
-                surfaceTexture = new SurfaceTexture(textureId);
-                surfaceTexture.setOnFrameAvailableListener(onFrameAvailableListener);
+                surfaceTexture = new SurfaceTexture(textureId);//把opengl纹理对象指定给surfacetexture，surfacetexture在纹理发生变化时，将会将纹理id代表的纹理更新
+                surfaceTexture.setOnFrameAvailableListener(onFrameAvailableListener);//设置纹理变化四的监听函数
             }
         }
     }
 
     @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
+    public void onSurfaceChanged(GL10 gl, int width, int height) {//如果表面发生改变，则先通知基类，基类会通知各个过滤器大小变化了。然后打开相机。
         super.onSurfaceChanged(gl, width, height);
-        openCamera();
+        openCamera();//打开相机，调整渲染尺寸，通知相机输入纹理尺寸发生变换，并绑定surfacetexture到相机用于预览
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        super.onDrawFrame(gl);
+        super.onDrawFrame(gl);//调用基类清除屏幕内容，glClear
         if(surfaceTexture == null)
             return;
-        surfaceTexture.updateTexImage();
+        surfaceTexture.updateTexImage();//从相机中更新纹理内容，
         float[] mtx = new float[16];
-        surfaceTexture.getTransformMatrix(mtx);
-        cameraInputFilter.setTextureTransformMatrix(mtx);
+        surfaceTexture.getTransformMatrix(mtx);//从surfacetexture中获取纹理变换矩阵（列主序opengles可以直接用）
+        cameraInputFilter.setTextureTransformMatrix(mtx);//将输入纹理过滤器的纹理变换矩阵设置为surfacetexture获取的矩阵
         int resultTexture=0;
         resultTexture = cameraInputFilter.onDrawToTexture(textureId,gLCubeBuffer,gLTextureBuffer);
 //        int[] resultTex = new int[1];
@@ -117,7 +118,7 @@ public class LuoGLCameraView extends LuoGLBaseView {
             if(timeToSleep>1.0)
             {
                 try {
-                    Thread.sleep((long)timeToSleep);
+                    Thread.sleep((long)timeToSleep);//休眠
                 }
                 catch (InterruptedException e) {
                 }
@@ -138,7 +139,7 @@ public class LuoGLCameraView extends LuoGLBaseView {
         }
     };
 
-
+    //打开相机，同时通知相机输入过滤器大小发生了变化，然后调整视图与图像的大小，同时设置相机预览的对象为surfacetexture
     private void openCamera(){
         if(CameraEngine.getCamera() == null)
             CameraEngine.openCamera();
@@ -162,7 +163,7 @@ public class LuoGLCameraView extends LuoGLBaseView {
         adjustSize(orientation, info.isFront, true);
 
         if(surfaceTexture != null)
-            CameraEngine.startPreview(surfaceTexture);
+            CameraEngine.startPreview(surfaceTexture);//将表面纹理设置为相机的预览纹理，这样相机图像就会传递给surfacetexture进行处理
     }
 
     @Override
@@ -190,7 +191,7 @@ public class LuoGLCameraView extends LuoGLBaseView {
                         final Bitmap photo = drawPhoto(bitmap,CameraEngine.getCameraInfo().isFront);
                         GLES20.glViewport(0, 0, bitmap.getWidth(), bitmap.getHeight());
                         if (photo != null) {
-                           savePictureTask.execute(photo);
+                            savePictureTask.execute(photo);
 //                            savePictureTask.execute(bitmap);
                         }
                     }
@@ -204,7 +205,7 @@ public class LuoGLCameraView extends LuoGLBaseView {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         Bitmap result;
-        if(isRotated)
+        if(isRotated)// 自拍相机
             result = XJGArSdkApi.XJGARSDKRenderImage(bitmap,true);
         else
             result = XJGArSdkApi.XJGARSDKRenderImage(bitmap,false);

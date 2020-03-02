@@ -28,7 +28,6 @@
                 android:background="@color/cardview_shadow_start_color"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/f1"
                 tools:ignore="ContentDescription" />
 
             <View
