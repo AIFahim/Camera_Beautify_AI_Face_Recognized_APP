@@ -591,7 +591,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 About_layout.setVisibility(View.GONE);
                 if (onTouchLayout.getVisibility() == View.GONE)
                 {
-                    
+
                     onTouchLayout.setVisibility(View.VISIBLE);
                     Btn_Touch.setImageResource(R.drawable.icon_touch_enble_sel);
                     Btn_Touch.setTag(R.drawable.icon_touch_enble_sel);
@@ -1088,6 +1088,12 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         bean=new MenuBean();
         bean.name="";
         bean.path="cutetiger";
+        bean.image = R.drawable.st_gamcha;
+        mStickerData.add(bean);
+
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="nurse";
         bean.image = R.drawable.st_gamcha;
         mStickerData.add(bean);
 
