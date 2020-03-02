@@ -1147,6 +1147,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         mStickerData.add(bean);
 
         //todo
+        
         bean=new MenuBean();
         bean.name="";
         bean.path="hairone";
