@@ -1,10 +1,9 @@
-package com.example.camerabeautify.camfilter;
+package com.loetech.camerabeautify.camfilter;
 
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;

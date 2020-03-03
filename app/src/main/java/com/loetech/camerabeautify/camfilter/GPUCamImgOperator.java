@@ -1,10 +1,10 @@
-package com.example.camerabeautify.camfilter;
+package com.loetech.camerabeautify.camfilter;
 
 import android.content.Context;
 import android.os.Environment;
 
 
-import com.example.camerabeautify.camfilter.widget.LuoGLBaseView;
+import com.loetech.camerabeautify.camfilter.widget.LuoGLBaseView;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

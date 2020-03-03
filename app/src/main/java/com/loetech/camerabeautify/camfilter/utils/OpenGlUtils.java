@@ -1,10 +1,10 @@
-package com.example.camerabeautify.camfilter.utils;
+package com.loetech.camerabeautify.camfilter.utils;
 
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.util.Log;
 
-import com.example.camerabeautify.camfilter.GPUCamImgOperator;
+import com.loetech.camerabeautify.camfilter.GPUCamImgOperator;
 
 import java.io.BufferedReader;
 import java.io.IOException;

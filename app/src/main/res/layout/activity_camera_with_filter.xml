@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.camerabeautify.Activity.CameraWithFilterActivity">
+    tools:context="com.loetech.camerabeautify.Activity.CameraWithFilterActivity">
 
     <RelativeLayout
         android:id="@+id/idrl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.camerabeautify.camfilter.widget.LuoGLCameraView
+        <com.loetech.camerabeautify.camfilter.widget.LuoGLCameraView
             android:id="@+id/glsurfaceview_camera"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

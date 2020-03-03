@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.camerabeautify.camfilter.utils;
+package com.loetech.camerabeautify.camfilter.utils;
 
 public class TextureRotationUtil {
 

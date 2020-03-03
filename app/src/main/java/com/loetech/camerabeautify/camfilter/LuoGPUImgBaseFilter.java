@@ -1,12 +1,12 @@
 
-package com.example.camerabeautify.camfilter;
+package com.loetech.camerabeautify.camfilter;
 
 
 import android.opengl.GLES20;
 
-import com.example.camerabeautify.camfilter.utils.OpenGlUtils;
-import com.example.camerabeautify.camfilter.utils.Rotation;
-import com.example.camerabeautify.camfilter.utils.TextureRotationUtil;
+import com.loetech.camerabeautify.camfilter.utils.OpenGlUtils;
+import com.loetech.camerabeautify.camfilter.utils.Rotation;
+import com.loetech.camerabeautify.camfilter.utils.TextureRotationUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

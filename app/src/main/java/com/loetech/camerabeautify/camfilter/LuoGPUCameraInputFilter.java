@@ -1,9 +1,9 @@
-package com.example.camerabeautify.camfilter;
+package com.loetech.camerabeautify.camfilter;
 
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 
-import com.example.camerabeautify.camfilter.utils.OpenGlUtils;
+import com.loetech.camerabeautify.camfilter.utils.OpenGlUtils;
 
 import java.nio.FloatBuffer;
 

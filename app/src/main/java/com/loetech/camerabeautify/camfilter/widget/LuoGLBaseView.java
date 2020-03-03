@@ -1,15 +1,15 @@
-package com.example.camerabeautify.camfilter.widget;
+package com.loetech.camerabeautify.camfilter.widget;
 
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
-import com.example.camerabeautify.camfilter.LuoGPUImgBaseFilter;
-import com.example.camerabeautify.camfilter.SavePictureTask;
-import com.example.camerabeautify.camfilter.utils.OpenGlUtils;
-import com.example.camerabeautify.camfilter.utils.Rotation;
-import com.example.camerabeautify.camfilter.utils.TextureRotationUtil;
+import com.loetech.camerabeautify.camfilter.LuoGPUImgBaseFilter;
+import com.loetech.camerabeautify.camfilter.SavePictureTask;
+import com.loetech.camerabeautify.camfilter.utils.OpenGlUtils;
+import com.loetech.camerabeautify.camfilter.utils.Rotation;
+import com.loetech.camerabeautify.camfilter.utils.TextureRotationUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

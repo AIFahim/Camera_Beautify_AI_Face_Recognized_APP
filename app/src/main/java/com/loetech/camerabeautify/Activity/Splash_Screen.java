@@ -1,11 +1,10 @@
-package com.example.camerabeautify.Activity;
+package com.loetech.camerabeautify.Activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,9 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import com.example.camerabeautify.R;
+import com.loetech.camerabeautify.R;
 import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 
 import java.util.ArrayList;

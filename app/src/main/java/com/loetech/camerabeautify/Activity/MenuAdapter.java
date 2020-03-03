@@ -1,4 +1,4 @@
-package com.example.camerabeautify.Activity;
+package com.loetech.camerabeautify.Activity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.camerabeautify.R;
+import com.loetech.camerabeautify.R;
 
 import java.util.ArrayList;
 

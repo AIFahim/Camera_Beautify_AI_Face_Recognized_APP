@@ -1,4 +1,4 @@
-package com.example.camerabeautify.Activity;
+package com.loetech.camerabeautify.Activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
@@ -12,15 +12,12 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,13 +37,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.camerabeautify.R;
-import com.example.camerabeautify.camfilter.FilterRecyclerViewAdapter;
-import com.example.camerabeautify.camfilter.FilterTypeHelper;
-import com.example.camerabeautify.camfilter.GPUCamImgOperator;
+import com.loetech.camerabeautify.R;
+import com.loetech.camerabeautify.camfilter.FilterRecyclerViewAdapter;
+import com.loetech.camerabeautify.camfilter.FilterTypeHelper;
+import com.loetech.camerabeautify.camfilter.GPUCamImgOperator;
 
-import com.example.camerabeautify.camfilter.SharedPref;
-import com.example.camerabeautify.camfilter.widget.LuoGLCameraView;
+import com.loetech.camerabeautify.camfilter.SharedPref;
+import com.loetech.camerabeautify.camfilter.widget.LuoGLCameraView;
 import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 
 import java.util.ArrayList;
@@ -121,7 +118,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private RecyclerView mFilterListView;
     private FilterRecyclerViewAdapter mAdapter;
-    private com.example.camerabeautify.camfilter.GPUCamImgOperator GPUCamImgOperator;
+    private com.loetech.camerabeautify.camfilter.GPUCamImgOperator GPUCamImgOperator;
     private boolean isRecording = false;
     private final int MODE_PIC = 1;
     private final int MODE_VIDEO = 2;
@@ -140,14 +137,14 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     final static MediaPlayer mpp = new MediaPlayer();
 
 
-    private final com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType[] types = new GPUCamImgOperator.GPUImgFilterType[]{
-            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.NONE,
-            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.HEALTHY,
-            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.NOSTALGIA,
-            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.COOL,
-            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.EMERALD,
-            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.EVERGREEN,
-            com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.CRAYON
+    private final com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType[] types = new GPUCamImgOperator.GPUImgFilterType[]{
+            com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.NONE,
+            com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.HEALTHY,
+            com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.NOSTALGIA,
+            com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.COOL,
+            com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.EMERALD,
+            com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.EVERGREEN,
+            com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType.CRAYON
     };
 
 
@@ -892,7 +889,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private FilterRecyclerViewAdapter.onFilterChangeListener onFilterChangeListener = new FilterRecyclerViewAdapter.onFilterChangeListener() {
 
         @Override
-        public void onFilterChanged(com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType filterType) {
+        public void onFilterChanged(com.loetech.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType filterType) {
             String filterName = FilterTypeHelper.FilterType2FilterName(filterType);
             XJGArSdkApi.XJGARSDKChangeFilter(filterName);
         }

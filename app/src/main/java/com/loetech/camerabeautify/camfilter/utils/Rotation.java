@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.camerabeautify.camfilter.utils;
+package com.loetech.camerabeautify.camfilter.utils;
 
 public enum Rotation {
     NORMAL, ROTATION_90, ROTATION_180, ROTATION_270;

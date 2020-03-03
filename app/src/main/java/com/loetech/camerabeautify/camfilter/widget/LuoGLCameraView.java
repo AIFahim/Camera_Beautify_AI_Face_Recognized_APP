@@ -1,4 +1,4 @@
-package com.example.camerabeautify.camfilter.widget;
+package com.loetech.camerabeautify.camfilter.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,11 +11,11 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 
-import com.example.camerabeautify.camfilter.CameraEngine;
-import com.example.camerabeautify.camfilter.LuoGPUCameraInputFilter;
-import com.example.camerabeautify.camfilter.LuoGPUImgBaseFilter;
-import com.example.camerabeautify.camfilter.SavePictureTask;
-import com.example.camerabeautify.camfilter.utils.OpenGlUtils;
+import com.loetech.camerabeautify.camfilter.CameraEngine;
+import com.loetech.camerabeautify.camfilter.LuoGPUCameraInputFilter;
+import com.loetech.camerabeautify.camfilter.LuoGPUImgBaseFilter;
+import com.loetech.camerabeautify.camfilter.SavePictureTask;
+import com.loetech.camerabeautify.camfilter.utils.OpenGlUtils;
 import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 
 import java.util.ArrayList;

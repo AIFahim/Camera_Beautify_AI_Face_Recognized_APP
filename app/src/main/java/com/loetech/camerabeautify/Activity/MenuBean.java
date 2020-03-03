@@ -1,5 +1,5 @@
 
-package com.example.camerabeautify.Activity;
+package com.loetech.camerabeautify.Activity;
 
 
 public class MenuBean {

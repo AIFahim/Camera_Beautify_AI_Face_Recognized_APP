@@ -1,4 +1,4 @@
-package com.example.camerabeautify.Activity;
+package com.loetech.camerabeautify.Activity;
 
 import java.io.File;
 import java.io.FileInputStream;

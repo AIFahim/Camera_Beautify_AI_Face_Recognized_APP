@@ -1,4 +1,4 @@
-package com.example.camerabeautify;
+package com.loetech.camerabeautify;
 
 import android.content.Context;
 

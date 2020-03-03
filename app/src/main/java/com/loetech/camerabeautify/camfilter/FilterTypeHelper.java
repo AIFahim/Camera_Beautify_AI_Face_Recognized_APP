@@ -1,6 +1,6 @@
-package com.example.camerabeautify.camfilter;
+package com.loetech.camerabeautify.camfilter;
 
-import com.example.camerabeautify.R;
+import com.loetech.camerabeautify.R;
 
 
 public class FilterTypeHelper {

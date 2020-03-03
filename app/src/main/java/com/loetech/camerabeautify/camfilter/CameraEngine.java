@@ -1,4 +1,4 @@
-package com.example.camerabeautify.camfilter;
+package com.loetech.camerabeautify.camfilter;
 
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;

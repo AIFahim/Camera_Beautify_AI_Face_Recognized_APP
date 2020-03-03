@@ -1,4 +1,4 @@
-package com.example.camerabeautify.camfilter;
+package com.loetech.camerabeautify.camfilter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.camerabeautify.R;
+import com.loetech.camerabeautify.R;
 
 
 public class FilterRecyclerViewAdapter extends RecyclerView.Adapter<FilterRecyclerViewAdapter.FilterHolder>{

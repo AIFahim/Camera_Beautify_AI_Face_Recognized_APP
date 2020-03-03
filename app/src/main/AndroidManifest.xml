@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.camerabeautify">
+    package="com.loetech.camerabeautify">
 
     <uses-permission
         android:name="android.permission.CAMERA"
@@ -26,11 +26,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".Activity.CameraWithFilterActivity"
+            android:name="com.loetech.camerabeautify.Activity.CameraWithFilterActivity"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"
             tools:replace="android:theme" />
         <activity
-            android:name=".Activity.Splash_Screen"
+            android:name="com.loetech.camerabeautify.Activity.Splash_Screen"
             android:theme="@style/splash_theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
