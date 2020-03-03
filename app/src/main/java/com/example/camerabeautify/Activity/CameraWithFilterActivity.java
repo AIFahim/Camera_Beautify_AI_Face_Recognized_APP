@@ -40,8 +40,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.camerabeautify.Dev_Infos;
-import com.example.camerabeautify.ImageDisplay;
 import com.example.camerabeautify.R;
 import com.example.camerabeautify.camfilter.FilterRecyclerViewAdapter;
 import com.example.camerabeautify.camfilter.FilterTypeHelper;

@@ -29,7 +29,6 @@
         <activity
             android:name=".Dev_Infos"
             android:parentActivityName=".Activity.CameraWithFilterActivity" />
-        <activity android:name=".MainActivity" />
         <activity
             android:name=".Activity.CameraWithFilterActivity"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"
@@ -43,7 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ImageDisplay" />
     </application>
 
 </manifest>
