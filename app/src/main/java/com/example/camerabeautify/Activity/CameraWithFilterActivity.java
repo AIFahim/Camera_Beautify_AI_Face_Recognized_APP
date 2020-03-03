@@ -51,11 +51,6 @@ import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 
 import java.util.ArrayList;
 
-
-
-
-
-
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class CameraWithFilterActivity extends Activity implements  View.OnClickListener , SeekBar.OnSeekBarChangeListener {
 
@@ -64,7 +59,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
     //Switch
-    private Switch Swt_Setting_SDcard,Swt_Setting_Shutter_Sound;
+    private Switch Swt_Setting_SDcard, Swt_Setting_Shutter_Sound;
     SharedPref sharedPref;
 
     //Transparent dev_info
@@ -83,16 +78,16 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private TextView TimeShow;
     //new seekbar..............
-    private LinearLayout llt_face_seek,llt_face_col;
+    private LinearLayout llt_face_seek, llt_face_col;
 
-    public static int x=0;
-    // public static String rstrt = "0";
+    public static int x = 0;
 
     //view
-    private ImageView img_face_rosy,img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
+    private ImageView img_face_rosy, img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
 
     private SeekBar seekBarScale, seekBarFace;
     private int seekBarValue = 0;
+
     private enum FACEEFFECT {
         ROSY,
         WHITE,
@@ -100,6 +95,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         LIFTING,
         BIGEYES
     }
+
     private FACEEFFECT faceeffect = FACEEFFECT.ROSY;
     private int smoothVal, whiteVal, liftingVal, bigEyesVal, redValue;
 
@@ -110,16 +106,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     //Flash............................
     private LinearLayout llt_timer_col;
 
-    //,llt_timer_normal,llt_timer_three,llt_timer_five,llt_timer_ten
-
     private ImageView img_timer_normal, img_timer_three, img_timer_five, img_timer_ten, img_timer;
-    boolean isTorchOn = false;
 
 
 //........................................
 
-    //    trangle....
-    private LinearLayout Trangle_1,Trangle_2,Trangle_3,Trangle_4;
 
     private LinearLayout mFilterLayout;
     private LinearLayout mFaceSurgeryLayout;
@@ -128,7 +119,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     protected SeekBar mSkinSmoothSeek;
     protected SeekBar mSkinWihtenSeek;
     protected SeekBar mRedFaceSeek;
-
 
 
     private ArrayList<MenuBean> mStickerData;
@@ -144,17 +134,14 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private int mode = MODE_PIC;
 
     private ImageView btn_shutter;
-    private ImageView btn_more,Btn_Touch;
+    private ImageView btn_more, Btn_Touch;
 
     private ObjectAnimator animator;
     private int PERMISSION_CALLBACK_CONSTANT = 1000;
 
 
-
     LinearLayout onTouchLayout;
-    static int b = 0;
 
-    //final MediaPlayer mp = MediaPlayer.create(this,R.raw.capturesound );
     final static MediaPlayer mp = new MediaPlayer();
     final static MediaPlayer mpp = new MediaPlayer();
 
@@ -170,31 +157,28 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_with_filter);
 
 
-        //rstrt = "0";
 
         onCreate();
 
     }
 
-    private void onCreate(){
+    private void onCreate() {
 
 
         sharedPref = new SharedPref(this);
 
-        GPUCamImgOperator =  new GPUCamImgOperator();
-        LuoGLCameraView luoGLCameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
+        GPUCamImgOperator = new GPUCamImgOperator();
+        LuoGLCameraView luoGLCameraView = (LuoGLCameraView) findViewById(R.id.glsurfaceview_camera);
         GPUCamImgOperator.context = luoGLCameraView.getContext();
         GPUCamImgOperator.luoGLBaseView = luoGLCameraView;
 
 
-        //Flash............
         initView();
         TimerInitView();
         Sticker();
@@ -204,23 +188,19 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         About_App_func();
 
 
-
-
         OffTouchMode();
 
         XJGArSdkApi.XJGARSDKSetOptimizationMode(0);
         XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
 
 
-
-
     }
 
 
-    private void OffTouchMode(){
+    private void OffTouchMode() {
 
 
-        relativeLayout = (RelativeLayout)findViewById(R.id.idrl);
+        relativeLayout = (RelativeLayout) findViewById(R.id.idrl);
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -243,7 +223,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                         onTouchLayout.setVisibility(View.GONE);
                     }
 
-                }catch(Exception ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 return false;
@@ -254,20 +234,14 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
 
 
+    private void DevInfo() {
 
-
-    private void DevInfo(){
-
-        // findViewById(R.id.btn_camera_shutter).setClickable(false);
         Dev_Info = findViewById(R.id.idDev_info);
         Dev_Info_layout = findViewById(R.id.layout_dev_info);
 
         Dev_Info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                Intent intents = new Intent(CameraWithFilterActivity.this, Dev_Infos.class);
-//                startActivity(intents);
 
                 llt_layout_more.setVisibility(View.GONE);
                 Dev_Info_layout.setVisibility(View.VISIBLE);
@@ -284,7 +258,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         });
 
     }
-    private void About_App_func(){
+
+    private void About_App_func() {
         About_App = findViewById(R.id.llt_About_layout);
         About_layout = findViewById(R.id.layout_about);
 
@@ -299,8 +274,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             @Override
             public void onClick(View v) {
 
-                /*Intent intents = new Intent(CameraWithFilterActivity.this, AboutApp.class);
-                startActivity(intents);*/
                 llt_layout_more.setVisibility(View.GONE);
                 About_layout.setVisibility(View.VISIBLE);
 
@@ -311,39 +284,35 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 llt_face_seek.setVisibility(View.GONE);
 
 
-
             }
         });
 
     }
 
+//Sound ON & OFF
 
-    private void SwitchButton(){
+    private void SwitchButton() {
 
-//        Swt_Setting_SDcard = findViewById(R.id.swt_setting_sdcard);
         Swt_Setting_Shutter_Sound = findViewById(R.id.swt_setting_shutter_sound);
-        if (sharedPref.loadSoundModeState()==true){
+        if (sharedPref.loadSoundModeState() == true) {
             Swt_Setting_Shutter_Sound.setChecked(true);
         }
         Swt_Setting_Shutter_Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d("TMP",isChecked+" ");
-                if (isChecked){
+                Log.d("TMP", isChecked + " ");
+                if (isChecked) {
                     sharedPref.setSoundModeState(true);
-                }
-                else {
+                } else {
                     sharedPref.setSoundModeState(false);
                 }
             }
         });
 
 
-
-
     }
 
-    private void more_button(){
+    private void more_button() {
 
 
         onTouchLayout.setVisibility(View.GONE);
@@ -353,33 +322,24 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         About_layout.setVisibility(View.GONE);
 
 
-        if (llt_layout_more.getVisibility() == View.GONE )
-        {
+        if (llt_layout_more.getVisibility() == View.GONE) {
             llt_layout_more.setVisibility(View.VISIBLE);
-        }
-        else if (llt_layout_more.getVisibility() == View.VISIBLE) {
+        } else if (llt_layout_more.getVisibility() == View.VISIBLE) {
             llt_layout_more.setVisibility(View.GONE);
         }
-
-
-
-        // Toast.makeText(CameraWithFilterActivity.this, "Work in Process", Toast.LENGTH_SHORT).show();
 
 
     }
 
     //seekbar beauty
 
-    private void beauty(){
+    private void beauty() {
 
         img_face_brasion = findViewById(R.id.img_main_smooth);
-        //   img_face_rosy = findViewById(R.id.img_main_face_rosy);
         img_face_white = findViewById(R.id.img_main_white);
         img_face_lifting = findViewById(R.id.img_main_slimming);
         img_face_eyes = findViewById(R.id.img_main_big_eye);
 
-//        findViewById(R.id.llt_main_face).setOnClickListener(this);
-//        findViewById(R.id.llt_main_face_rosy).setOnClickListener(this);
         findViewById(R.id.llt_main_smooth).setOnClickListener(this);
         findViewById(R.id.llt_main_white).setOnClickListener(this);
         findViewById(R.id.llt_main_slimming).setOnClickListener(this);
@@ -409,7 +369,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         img_face_eyes.setImageResource(R.drawable.ico_bigeye);
         img_face_brasion.setImageResource(R.drawable.ico_smoothly);
         img_face_white.setImageResource(R.drawable.ico_whitening);
-//        img_face_rosy.setImageResource(R.drawable.ico_flash);
         img_face_lifting.setImageResource(R.drawable.ico_slimming);
 
         llt_face_seek.setVisibility(View.GONE);
@@ -417,9 +376,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
 
 
-
     private void initFaceMenu(int value) {
-//        img_face.setImageResource(R.drawable.ico_face_sel);
         llt_face_col.setVisibility(View.VISIBLE);
         llt_face_seek.setVisibility(View.VISIBLE);
         seekBarFace.setProgress(value);
@@ -427,14 +384,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
     //Flash Start...........................................
-    private void TimerInitView(){
+    private void TimerInitView() {
 
         img_timer = findViewById(R.id.img_main_timer);
-//        img_timer = findViewById(R.id.img_main_timer);
-//        img_timer = findViewById(R.id.img_main_timer);
-//        img_timer = findViewById(R.id.img_main_timer);
-
-
         img_timer_normal = findViewById(R.id.img_main_timer_normal);
         img_timer_three = findViewById(R.id.img_main_timer_three);
         img_timer_five = findViewById(R.id.img_main_timer_five);
@@ -442,48 +394,28 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         llt_timer_col = findViewById(R.id.llt_main_timer_col);
 
-//        llt_timer_normal = findViewById(R.id.llt_main_timer_normal);
-//        llt_timer_three = findViewById(R.id.llt_main_timer_three);
-//        llt_timer_five = findViewById(R.id.llt_main_timer_five);
-//        llt_timer_ten = findViewById(R.id.llt_main_timer_ten);
-
-        //  Btn_Touch = findViewById(R.id.btn_touch);
-
-        findViewById(R.id.img_main_timer).setOnClickListener( this);
+        findViewById(R.id.img_main_timer).setOnClickListener(this);
         findViewById(R.id.llt_main_timer_normal).setOnClickListener(this);
         findViewById(R.id.llt_main_timer_three).setOnClickListener(this);
         findViewById(R.id.llt_main_timer_five).setOnClickListener(this);
         findViewById(R.id.llt_main_timer_ten).setOnClickListener(this);
-
-
-
         findViewById(R.id.btn_sticker).setOnClickListener(this);
         findViewById(R.id.btn_touch).setOnClickListener(this);
-
-
 
         llt_timer_col.setVisibility(View.GONE);
 
     }
 
-    private void Sticker(){
-        mMenuView= (RecyclerView)findViewById(R.id.mMenuView);
+    private void Sticker() {
+        mMenuView = (RecyclerView) findViewById(R.id.mMenuView);
         BtnSticker = findViewById(R.id.btn_sticker);
         mMenuView.setVisibility(View.GONE);
 
     }
 
-//    private void initFlashMenu() {
-//
-//        img_flash_on.setImageResource(R.drawable.ico_flash_on);
-//        img_flash_off.setImageResource(R.drawable.ico_flash_off);
-//
-//    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
 
 
             case R.id.img_main_timer:
@@ -492,13 +424,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 Dev_Info_layout.setVisibility(View.GONE);
                 About_layout.setVisibility(View.GONE);
 
-                if (llt_timer_col.getVisibility() == View.GONE)
-                {
+                if (llt_timer_col.getVisibility() == View.GONE) {
                     llt_timer_col.setVisibility(View.VISIBLE);
 
-                }
-                else if (llt_timer_col.getVisibility() == View.VISIBLE)
-                {
+                } else if (llt_timer_col.getVisibility() == View.VISIBLE) {
                     llt_timer_col.setVisibility(View.GONE);
                 }
                 break;
@@ -506,89 +435,34 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             case R.id.llt_main_timer_normal:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_normal);
-                x=0;
+                x = 0;
 
                 break;
 
             case R.id.llt_main_timer_three:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_three);
-                x=3;
+                x = 3;
                 break;
 
             case R.id.llt_main_timer_five:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_five);
-                x=5;
+                x = 5;
                 break;
 
             case R.id.llt_main_timer_ten:
                 llt_timer_col.setVisibility(View.GONE);
                 img_timer.setImageResource(R.drawable.icon_timer_ten);
-                x=10;
+                x = 10;
 
                 break;
-
-
-
-
-
-
-
-
-            // ----- Flash column -----
-
-//            case R.id.img_main_flash:
-//
-//                onTouchLayout.setVisibility(View.GONE);
-//
-//                //TODO
-//                llt_layout_more.setVisibility(View.GONE);
-//
-//                if (llt_timer_col.getVisibility() == View.GONE)
-//                {
-//
-//
-//                    llt_timer_col.setVisibility(View.VISIBLE);
-//
-//                    Trangle_2.setVisibility(View.VISIBLE);
-//
-//                }
-//                else if (llt_timer_col.getVisibility() == View.VISIBLE) {
-//
-//                    llt_timer_col.setVisibility(View.GONE);
-//
-//                    Trangle_2.setVisibility(View.INVISIBLE);
-//
-//                }
-//                break;
-
-
-//           case R.id.llt_main_flash_on:
-//                initFlashMenu();
-//                img_flash_on.setImageResource(R.drawable.ico_flash_on_sel);
-//                Trangle_2.setVisibility(View.INVISIBLE);
-//
-//                torchToggle("on");
-//
-//                break;
-//            case R.id.llt_main_flash_off:
-//                initFlashMenu();
-//                img_flash_off.setImageResource(R.drawable.ico_flash_off_sel);
-//                Trangle_2.setVisibility(View.INVISIBLE);
-//
-//                torchToggle("off");
-//                break;
-
-
-            //Sticker_Button...................
 
 
             case R.id.btn_touch:
                 Dev_Info_layout.setVisibility(View.GONE);
                 About_layout.setVisibility(View.GONE);
-                if (onTouchLayout.getVisibility() == View.GONE)
-                {
+                if (onTouchLayout.getVisibility() == View.GONE) {
 
                     onTouchLayout.setVisibility(View.VISIBLE);
                     Btn_Touch.setImageResource(R.drawable.icon_touch_enble_sel);
@@ -598,12 +472,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                         public boolean onTouch(View v, MotionEvent event) {
 
 
-
-
                             onTouchLayout.setVisibility(View.GONE);
-                            if(mode == MODE_PIC){
+                            if (mode == MODE_PIC) {
 
-                                Log.d("TEMP","Touch");
+                                Log.d("TEMP", "Touch");
                                 startcount();
 
 
@@ -612,7 +484,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
                                     @Override
                                     public void run() {
-                                        // Toast.makeText(CameraWithFilterActivity.this, "3sec", Toast.LENGTH_SHORT).show();
                                         onTouchLayout.setVisibility(View.VISIBLE);
                                     }
 
@@ -625,15 +496,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     });
 
 
-                }
-                else if (onTouchLayout.getVisibility() == View.VISIBLE) {
+                } else if (onTouchLayout.getVisibility() == View.VISIBLE) {
 
                     onTouchLayout.setVisibility(View.GONE);
                     Btn_Touch.setImageResource(R.drawable.icon_touch_enble);
                     Btn_Touch.setTag(R.drawable.icon_touch_enble);
                 }
                 break;
-
 
             case R.id.btn_sticker:
 
@@ -645,33 +514,16 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 llt_face_seek.setVisibility(View.GONE);
 
 
-                if (mMenuView.getVisibility() == View.GONE)
-                {
+                if (mMenuView.getVisibility() == View.GONE) {
                     mMenuView.setVisibility(View.VISIBLE);
 
 
-                }
-                else if (mMenuView.getVisibility() == View.VISIBLE) {
+                } else if (mMenuView.getVisibility() == View.VISIBLE) {
 
                     mMenuView.setVisibility(View.GONE);
                 }
                 break;
 
-
-
-            //face
-
-//            case R.id.llt_main_face:
-//                img_face.setImageResource(R.drawable.ico_face_sel);
-//                llt_face_col.setVisibility(View.VISIBLE);
-//                break;
-
-
-//            case R.id.llt_main_face_rosy:
-//                faceeffect = FACEEFFECT.ROSY;
-//                initFaceMenu(redValue);
-//                img_face_rosy.setImageResource(R.drawable.ico_face_sel);
-//                break;
             case R.id.llt_main_smooth:
                 faceeffect = FACEEFFECT.BRASION;
                 initFaceMenu(smoothVal);
@@ -680,7 +532,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 img_face_lifting.setImageResource(R.drawable.ico_slimming);
                 img_face_eyes.setImageResource(R.drawable.ico_bigeye);
 
-                //      txt_face_smooth.setTextColor(getResources().getColor(R.color.color_yellow_sel));
                 break;
             case R.id.llt_main_white:
                 faceeffect = FACEEFFECT.WHITE;
@@ -690,7 +541,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 img_face_lifting.setImageResource(R.drawable.ico_slimming);
                 img_face_eyes.setImageResource(R.drawable.ico_bigeye);
 
-                //    txt_face_white.setTextColor(getResources().getColor(R.color.color_yellow_sel));
                 break;
             case R.id.llt_main_slimming:
                 faceeffect = FACEEFFECT.LIFTING;
@@ -699,7 +549,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 img_face_white.setImageResource(R.drawable.ico_whitening);
                 img_face_lifting.setImageResource(R.drawable.ico_slimming_sel);
                 img_face_eyes.setImageResource(R.drawable.ico_bigeye);
-                //    txt_face_slimming.setTextColor(getResources().getColor(R.color.color_yellow_sel));
+
                 break;
             case R.id.llt_main_big_eye:
                 faceeffect = FACEEFFECT.BIGEYES;
@@ -708,22 +558,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 img_face_white.setImageResource(R.drawable.ico_whitening);
                 img_face_lifting.setImageResource(R.drawable.ico_slimming);
                 img_face_eyes.setImageResource(R.drawable.ico_bigeye_sel);
-                //   txt_face_bigeye.setTextColor(getResources().getColor(R.color.color_yellow_sel));
                 break;
-
-
-
-
 
         }
 
     }
-
-
-    //.....................................
-
-
-
 
 
     @Override
@@ -739,9 +578,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         switch (seekBar.getId()) {
-//            case R.id.skb_main_scale:
-////                activity.changeCameraZoomExposure(seekBarValue, true);
-//                break;
+
             case R.id.skb_main_face:
                 switch (faceeffect) {
 
@@ -766,7 +603,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }
     }
 
-    private void showFaceBeauty(){
+    private void showFaceBeauty() {
 
         About_layout.setVisibility(View.GONE);
         Dev_Info_layout.setVisibility(View.GONE);
@@ -775,76 +612,38 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         mMenuView.setVisibility(View.GONE);
 
 
-        if (llt_face_col.getVisibility() == View.GONE )
-
-
-        {
+        if (llt_face_col.getVisibility() == View.GONE) {
 
             llt_face_col.setVisibility(View.VISIBLE);
             llt_face_seek.setVisibility(View.GONE);
 
-        }
-        else if (llt_face_col.getVisibility() == View.VISIBLE || llt_face_seek.getVisibility()==View.VISIBLE) {
+        } else if (llt_face_col.getVisibility() == View.VISIBLE || llt_face_seek.getVisibility() == View.VISIBLE) {
             llt_face_col.setVisibility(View.GONE);
             llt_face_seek.setVisibility(View.GONE);
         }
     }
 
-
-
-
     //.....................................
 
 
+    private void initView() {
 
+        mFilterLayout = (LinearLayout) findViewById(R.id.layout_filter);
+        onTouchLayout = (LinearLayout) findViewById(R.id.idOnTouch);
 
-    private void torchToggle(String command) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            CameraManager camManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-            String cameraId = null; // Usually back camera is at 0 position.
-            try {
-                if (camManager != null) {
-                    cameraId = camManager.getCameraIdList()[0];
-                }
-                if (camManager != null) {
-                    if (command.equals("on")) {
-                        camManager.setTorchMode(cameraId, true);   // Turn ON
-                        isTorchOn = true;
-                    }
-                    else {
-                        camManager.setTorchMode(cameraId, false);  // Turn OFF
-                        isTorchOn = false;
-                    }
-                }
-            } catch (CameraAccessException e) {
-                e.getMessage();
-            }
-        }
-    }
-
-
-    //Flash End......................................................................
-
-
-
-    private void initView(){
-
-        mFilterLayout = (LinearLayout)findViewById(R.id.layout_filter);
-        onTouchLayout = (LinearLayout)findViewById(R.id.idOnTouch);
-
-        Timing_layout = (LinearLayout)findViewById(R.id.idtiminglayout);
+        Timing_layout = (LinearLayout) findViewById(R.id.idtiminglayout);
         TimeShow = (TextView) findViewById(R.id.idshowtime);
-        mFaceSurgeryLayout = (LinearLayout)findViewById(R.id.layout_facesurgery);
-        mFaceSurgeryFaceShapeSeek = (SeekBar)findViewById(R.id.faceShapeValueBar);
+        mFaceSurgeryLayout = (LinearLayout) findViewById(R.id.layout_facesurgery);
+        mFaceSurgeryFaceShapeSeek = (SeekBar) findViewById(R.id.faceShapeValueBar);
         mFaceSurgeryFaceShapeSeek.setProgress(0);
-        mFaceSurgeryBigEyeSeek = (SeekBar)findViewById(R.id.bigeyeValueBar);
+        mFaceSurgeryBigEyeSeek = (SeekBar) findViewById(R.id.bigeyeValueBar);
         mFaceSurgeryBigEyeSeek.setProgress(0);
 
-        mSkinSmoothSeek = (SeekBar)findViewById(R.id.skinSmoothValueBar);
+        mSkinSmoothSeek = (SeekBar) findViewById(R.id.skinSmoothValueBar);
         mSkinSmoothSeek.setProgress(0);
-        mSkinWihtenSeek = (SeekBar)findViewById(R.id.skinWhitenValueBar);
+        mSkinWihtenSeek = (SeekBar) findViewById(R.id.skinWhitenValueBar);
         mSkinWihtenSeek.setProgress(0);
-        mRedFaceSeek = (SeekBar)findViewById(R.id.redFaceValueBar);
+        mRedFaceSeek = (SeekBar) findViewById(R.id.redFaceValueBar);
         mRedFaceSeek.setProgress(0);
         XJGArSdkApi.XJGARSDKSetSkinSmoothParam(0);
         XJGArSdkApi.XJGARSDKSetWhiteSkinParam(0);
@@ -853,100 +652,110 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         mFaceSurgeryFaceShapeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public int value;
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 value = i;
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int strength = value;//(int)(value*(float)1.0/100);
+                int strength = value;
                 XJGArSdkApi.XJGARSDKSetThinChinParam(strength);
             }
         });
         mFaceSurgeryBigEyeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public int value;
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 value = i;
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int strength = value;//(int)(value*(float)1.0/100);
+                int strength = value;
                 XJGArSdkApi.XJGARSDKSetBigEyeParam(strength);
             }
         });
         mSkinSmoothSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public int value;
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 value = i;
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int level = value;//(int)(value/18);
+                int level = value;
                 XJGArSdkApi.XJGARSDKSetSkinSmoothParam(level);
-//                GPUCamImgOperator.setBeautyLevel(level);
             }
         });
 
         mSkinWihtenSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public int value;
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 value = i;
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int level = value;//(int)(value/18);
+                int level = value;
                 XJGArSdkApi.XJGARSDKSetWhiteSkinParam(level);
-//                GPUCamImgOperator.setBeautyLevel(level);
             }
         });
         mRedFaceSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             public int value;
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 value = i;
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 int level = value;//(int)(value/18);
                 XJGArSdkApi.XJGARSDKSetRedFaceParam(level);
-//                GPUCamImgOperator.setBeautyLevel(level);
             }
         });
 
         mFilterListView = (RecyclerView) findViewById(R.id.filter_listView);
 
-        btn_shutter = (ImageView)findViewById(R.id.btn_camera_shutter);
-        btn_more = (ImageView)findViewById(R.id.btn_more);
+        btn_shutter = (ImageView) findViewById(R.id.btn_camera_shutter);
+        btn_more = (ImageView) findViewById(R.id.btn_more);
         llt_layout_more = findViewById(R.id.layout_more);
-        Btn_Touch = (ImageView)findViewById(R.id.btn_touch);
+        Btn_Touch = (ImageView) findViewById(R.id.btn_touch);
 
 
         findViewById(R.id.btn_camera_filter).setOnClickListener(btn_listener);
-        //findViewById(R.id.btn_camera_closefilter).setOnClickListener(btn_listener);
         findViewById(R.id.btn_camera_shutter).setOnClickListener(btn_listener);
         findViewById(R.id.btn_camera_switch).setOnClickListener(btn_listener);
         findViewById(R.id.btn_more).setOnClickListener(btn_listener);
         findViewById(R.id.btn_camera_beauty).setOnClickListener(btn_listener);
         findViewById(R.id.btn_gallery).setOnClickListener(btn_listener);
-        // findViewById(R.id.btn_touch).setOnClickListener(btn_listener);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -956,45 +765,40 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         mFilterListView.setAdapter(mAdapter);
         mAdapter.setOnFilterChangeListener(onFilterChangeListener);
 
-        animator = ObjectAnimator.ofFloat(btn_shutter,"rotation",0,360);
+        animator = ObjectAnimator.ofFloat(btn_shutter, "rotation", 0, 360);
         animator.setDuration(500);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         Point screenSize = new Point();
         getWindowManager().getDefaultDisplay().getSize(screenSize);
-        LuoGLCameraView cameraView = (LuoGLCameraView)findViewById(R.id.glsurfaceview_camera);
+        LuoGLCameraView cameraView = (LuoGLCameraView) findViewById(R.id.glsurfaceview_camera);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) cameraView.getLayoutParams();
         params.width = screenSize.x;
-        params.height = screenSize.y;//screenSize.x * 4 / 3;
+        params.height = screenSize.y;
         cameraView.setLayoutParams(params);
 
 
-
-        mMenuView= (RecyclerView)findViewById(R.id.mMenuView);
-        mStickerData=new ArrayList<>();
-        mMenuView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        mStickerAdapter=new MenuAdapter(this,mStickerData);
+        mMenuView = (RecyclerView) findViewById(R.id.mMenuView);
+        mStickerData = new ArrayList<>();
+        mMenuView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mStickerAdapter = new MenuAdapter(this, mStickerData);
         mStickerAdapter.setOnClickListener(new ClickUtils.OnClickListener() {
             @Override
             public void onClick(View v, int type, int pos, int child) {
-                MenuBean m=mStickerData.get(pos);
-                String name=m.name;
+                MenuBean m = mStickerData.get(pos);
+                String name = m.name;
                 String path = m.path;
                 if (name.equals("None")) {
                     XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
-                    mStickerAdapter.checkPos=pos;
+                    mStickerAdapter.checkPos = pos;
                     v.setSelected(true);
-//                }else if(name.equals("")){
-//
-//                    mStickerAdapter.checkPos=pos;
-//                    v.setSelected(true);
-                }else{
+                } else {
                     String stickerPaperdir = XJGArSdkApi.getPrivateResDataDir(getApplicationContext());
-                    stickerPaperdir = stickerPaperdir +"/StickerPapers/"+ path;
+                    stickerPaperdir = stickerPaperdir + "/StickerPapers/" + path;
                     ZIP.unzipAStickPaperPackages(stickerPaperdir);
 
                     XJGArSdkApi.XJGARSDKSetShowStickerPapers(true);
                     XJGArSdkApi.XJGARSDKChangeStickpaper(path);
-                    mStickerAdapter.checkPos=pos;
+                    mStickerAdapter.checkPos = pos;
                     v.setSelected(true);
                 }
                 mStickerAdapter.notifyDataSetChanged();
@@ -1007,201 +811,189 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     protected void initEffectMenu() {
 
-        MenuBean bean=new MenuBean();
-        bean.name="None";
-        bean.path="";
+        MenuBean bean = new MenuBean();
+        bean.name = "None";
+        bean.path = "";
         bean.image = R.drawable.orginal;
 
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="Mathal";
-        bean.path="mathal"; //mymask
+        bean = new MenuBean();
+        bean.name = "Mathal";
+        bean.path = "mathal"; //mymask
         bean.image = R.drawable.st_mathal;
         mStickerData.add(bean);
 
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="headflag";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "headflag";
         bean.image = R.drawable.st_headflag;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="cheekflag";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "cheekflag";
         bean.image = R.drawable.st_cheekflag;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="cutepecha";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "cutepecha";
         bean.image = R.drawable.st_cute_pecha;
         mStickerData.add(bean);
 
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="pagri";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "pagri";
         bean.image = R.drawable.st_pagri;
         mStickerData.add(bean);
 
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="redghomta";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "redghomta";
         bean.image = R.drawable.st_ghomta_two;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="flower";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "flower";
         bean.image = R.drawable.st_flower;
         mStickerData.add(bean);
 
         //todo
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="golaygamcha";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "golaygamcha";
         bean.image = R.drawable.st_gamcha;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="crowngold";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "crowngold";
         bean.image = R.drawable.st_crowngold;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="rabitear";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "rabitear";
         bean.image = R.drawable.st_rabitear;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="hgamcha";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "hgamcha";
         bean.image = R.drawable.st_hgamcha;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="cutetiger";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "cutetiger";
         bean.image = R.drawable.st_cute_tiger;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="nurse";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "nurse";
         bean.image = R.drawable.st_nurse;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="pinkribon";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "pinkribon";
         bean.image = R.drawable.st_pinkribon;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="bridal";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "bridal";
         bean.image = R.drawable.st_bridal;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="kanerdul";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "kanerdul";
         bean.image = R.drawable.st_kanerdul;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="headribon";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "headribon";
         bean.image = R.drawable.st_headribon;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="girlcap";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "girlcap";
         bean.image = R.drawable.st_girls_cap;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="eyeliner";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "eyeliner";
         bean.image = R.drawable.st_eyeliner;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="eyelass";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "eyelass";
         bean.image = R.drawable.st_eyelass;
         mStickerData.add(bean);
 
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="kalacasma";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "kalacasma";
         bean.image = R.drawable.st_kalachasma;
         mStickerData.add(bean);
 
         //todo
-        
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="hairone";
+
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "hairone";
         bean.image = R.drawable.st_hairone;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="longear";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "longear";
         bean.image = R.drawable.st_longear;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="scrf";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "scrf";
         bean.image = R.drawable.st_scarf;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="hairtwo";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "hairtwo";
         bean.image = R.drawable.st_hairtwo;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="noth";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "noth";
         bean.image = R.drawable.st_noth;
         mStickerData.add(bean);
 
-        bean=new MenuBean();
-        bean.name="";
-        bean.path="btiger";
+        bean = new MenuBean();
+        bean.name = "";
+        bean.path = "btiger";
         bean.image = R.drawable.st_bangla_tiger;
         mStickerData.add(bean);
-
-
-
-//        bean=new MenuBean();
-//        bean.name="";
-//        bean.path="bluetiptwo";
-//        bean.image = R.drawable.st_tip;
-//        mStickerData.add(bean);
-
-
-
 
         mStickerAdapter.notifyDataSetChanged();
     }
 
-    private FilterRecyclerViewAdapter.onFilterChangeListener onFilterChangeListener = new FilterRecyclerViewAdapter.onFilterChangeListener(){
+    private FilterRecyclerViewAdapter.onFilterChangeListener onFilterChangeListener = new FilterRecyclerViewAdapter.onFilterChangeListener() {
 
         @Override
         public void onFilterChanged(com.example.camerabeautify.camfilter.GPUCamImgOperator.GPUImgFilterType filterType) {
-//            GPUCamImgOperator.setFilter(filterType);
             String filterName = FilterTypeHelper.FilterType2FilterName(filterType);
             XJGArSdkApi.XJGARSDKChangeFilter(filterName);
         }
@@ -1211,30 +1003,29 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
         if (grantResults.length != 1 || grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            if(mode == MODE_PIC)
+            if (mode == MODE_PIC)
                 takePhoto();
             else
                 takeVideo();
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        if (requestCode==1){
-            if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    static boolean bShowFaceSurgery = false;
     static boolean bShowImgFilters = false;
     private View.OnClickListener btn_listener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
             int buttonId = v.getId();
-            if( buttonId == R.id.btn_more) {
+            if (buttonId == R.id.btn_more) {
                 more_button();
             }
             if (buttonId == R.id.btn_camera_shutter) {
@@ -1243,55 +1034,38 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                         checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                             PERMISSION_CALLBACK_CONSTANT);
-                }  else {
-                    if(mode == MODE_PIC)
-                    {
+                } else {
+                    if (mode == MODE_PIC) {
 
                         btn_shutter.setVisibility(View.GONE);
-                        //capturewithtime();
-
-                        Log.d("TEMP","Button");
+                        Log.d("TEMP", "Button");
                         startcount();
 
-
-                    }
-                    else
+                    } else
                         takeVideo();
                 }
-            }
-            else if (buttonId == R.id.btn_camera_filter) {
+            } else if (buttonId == R.id.btn_camera_filter) {
                 bShowImgFilters = !bShowImgFilters;
-                if(bShowImgFilters)
+                if (bShowImgFilters)
                     showFilters();
                 else
                     hideFilters();
-            }
-            else if (buttonId == R.id.btn_camera_switch) {
+            } else if (buttonId == R.id.btn_camera_switch) {
                 Dev_Info_layout.setVisibility(View.GONE);
                 About_layout.setVisibility(View.GONE);
                 GPUCamImgOperator.switchCamera();
-            }
-            else if (buttonId == R.id.btn_camera_beauty) {
+            } else if (buttonId == R.id.btn_camera_beauty) {
 
                 showFaceBeauty();
 
-            }
-
-
-            else if (buttonId ==  R.id.btn_gallery) {
+            } else if (buttonId == R.id.btn_gallery) {
 
                 Dev_Info_layout.setVisibility(View.GONE);
 
-                if (ContextCompat.checkSelfPermission(CameraWithFilterActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
-//                    String pictureFolderPath = "/storage/emulated/0/Pictures/Camera Beautify";
-//                    String folderName = "Camera Beautify";
-//                    Intent galleryIntent = new Intent(CameraWithFilterActivity.this, ImageDisplay.class);
-//                    galleryIntent.putExtra("folderPath",pictureFolderPath);
-//                    galleryIntent.putExtra("folderName",folderName);
-//                    startActivity(galleryIntent);
+                if (ContextCompat.checkSelfPermission(CameraWithFilterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     Intent pickPhoto = new Intent(Intent.ACTION_VIEW, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivity(pickPhoto);
-                }else{
+                } else {
                     requestStoragePermission();
                 }
 
@@ -1300,9 +1074,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     };
 
 
-
-    private void  requestStoragePermission(){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             new AlertDialog.Builder(this)
                     .setTitle("Permission needed")
                     .setMessage("This permission is needed because of this and that")
@@ -1310,7 +1083,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            ActivityCompat.shouldShowRequestPermissionRationale(CameraWithFilterActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE);
+                            ActivityCompat.shouldShowRequestPermissionRationale(CameraWithFilterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
                         }
                     })
                     .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -1320,25 +1093,23 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                         }
                     })
                     .create().show();
-        }else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
     }
 
 
-
-
-    private void takePhoto(){
+    private void takePhoto() {
         Dev_Info_layout.setVisibility(View.GONE);
         About_layout.setVisibility(View.GONE);
         GPUCamImgOperator.savePicture();
     }
 
-    private void takeVideo(){
-        if(isRecording) {
+    private void takeVideo() {
+        if (isRecording) {
             animator.end();
             GPUCamImgOperator.stopRecord();
-        }else {
+        } else {
             animator.start();
             GPUCamImgOperator.startRecord();
         }
@@ -1346,81 +1117,14 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
 
 
-    private void showFaceSurgery()
-    {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mFaceSurgeryLayout, "translationY", mFaceSurgeryLayout.getHeight(), 0);
-        animator.setDuration(200);
-        animator.addListener(new Animator.AnimatorListener() {
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-                findViewById(R.id.btn_camera_shutter).setClickable(false);
-                mFaceSurgeryLayout.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-        });
-        animator.start();
-
-    }
-
-    private void hideFaceSurgery()
-    {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mFaceSurgeryLayout, "translationY", 0 ,  mFaceSurgeryLayout.getHeight());
-        animator.setDuration(200);
-        animator.addListener(new Animator.AnimatorListener() {
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                // TODO Auto-generated method stub
-                mFaceSurgeryLayout.setVisibility(View.INVISIBLE);
-                findViewById(R.id.btn_camera_shutter).setClickable(true);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-                // TODO Auto-generated method stub
-                mFaceSurgeryLayout.setVisibility(View.INVISIBLE);
-                findViewById(R.id.btn_camera_shutter).setClickable(true);
-            }
-        });
-        animator.start();
-
-    }
-
     //todo
-    private void showFilters(){
+    private void showFilters() {
         ObjectAnimator animator = ObjectAnimator.ofFloat(mFilterLayout, "translationY", mFilterLayout.getHeight(), 0);
         animator.setDuration(200);
         animator.addListener(new Animator.AnimatorListener() {
 
             @Override
             public void onAnimationStart(Animator animation) {
-                // findViewById(R.id.btn_camera_shutter).setClickable(true);
 
                 Dev_Info_layout.setVisibility(View.GONE);
                 About_layout.setVisibility(View.GONE);
@@ -1453,8 +1157,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
 
 
-    private void hideFilters(){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mFilterLayout, "translationY", 0 ,  mFilterLayout.getHeight());
+    private void hideFilters() {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mFilterLayout, "translationY", 0, mFilterLayout.getHeight());
         animator.setDuration(200);
         animator.addListener(new Animator.AnimatorListener() {
 
@@ -1489,17 +1193,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
 
 
-
     @Override
     protected void onPause() {
         super.onPause();
-        if(mCamera!= null)
-        {
+        if (mCamera != null) {
             mCamera.stopPreview();
             mCamera.release();
         }
-
-
 
 
     }
@@ -1508,11 +1208,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     protected void onDestroy() {
         super.onDestroy();
 
-        if(mCamera!= null)
-        {
+        if (mCamera != null) {
 
             mCamera.release();
-            mCamera=null;
+            mCamera = null;
         }
 
         finish();
@@ -1527,18 +1226,17 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
 
 
+    public void startcount() {
 
-    public void startcount(){
 
-
-        new CountDownTimer(x*1000, 1000) {
+        new CountDownTimer(x * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
 
                 onTouchLayout.setVisibility(View.GONE);
                 btn_shutter.setVisibility(View.GONE);
                 Timing_layout.setVisibility(View.VISIBLE);
-                TimeShow.setText( ""+ millisUntilFinished / 1000);
+                TimeShow.setText("" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
@@ -1546,8 +1244,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 Toast.makeText(CameraWithFilterActivity.this, "Captured", Toast.LENGTH_SHORT).show();
                 takePhoto();
                 Timing_layout.setVisibility(View.GONE);
-                MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this,R.raw.capturesound );
-                if (sharedPref.loadSoundModeState()==true){
+                MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
+                if (sharedPref.loadSoundModeState() == true) {
                     mp.start();
                 }
 
@@ -1571,7 +1269,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                         onTouchLayout.setVisibility(View.GONE);
                     }
 
-                }catch(Exception ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
@@ -1579,26 +1277,4 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }.start();
 
     }
-
-
-//    private void restartFirstActivity()
-//    {
-//
-//        Intent intent = getIntent();
-//        rstrt =  intent.getExtras().getString("IntentValue");
-//
-//        if(rstrt.equals(1)) {
-//
-//
-//            Intent i = getApplicationContext().getPackageManager()
-//                    .getLaunchIntentForPackage(getApplicationContext().getPackageName());
-//
-//            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(i);
-//
-//        }
-//
-//        rstrt = "0";
-//    }
-
 }
