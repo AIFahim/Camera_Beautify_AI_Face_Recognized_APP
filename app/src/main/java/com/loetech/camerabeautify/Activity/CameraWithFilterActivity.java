@@ -847,11 +847,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         //todo
 
-        bean = new MenuBean();
-        bean.name = "";
-        bean.path = "hairone";
-        bean.image = R.drawable.st_hairone;
-        mStickerData.add(bean);
+//        bean = new MenuBean();
+//        bean.name = "";
+//        bean.path = "hairone";
+//        bean.image = R.drawable.st_hairone;
+//        mStickerData.add(bean);
 
         bean = new MenuBean();
         bean.name = "";
