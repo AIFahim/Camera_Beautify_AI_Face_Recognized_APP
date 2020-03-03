@@ -1062,128 +1062,128 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         mStickerData.add(bean);
 
         //todo
-//        bean=new MenuBean();
-//        bean.name="";
-//        bean.path="gamcha";
-//        bean.image = R.drawable.st_gamcha;
-//        mStickerData.add(bean);
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="golaygamcha";
+        bean.image = R.drawable.st_gamcha;
+        mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="crowngold";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_crowngold;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="rabitear";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_rabitear;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="hgamcha";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_hgamcha;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="cutetiger";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_cute_tiger;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="nurse";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_nurse;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="pinkribon";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_pinkribon;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="bridal";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_bridal;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="kanerdul";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_kanerdul;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="headribon";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_headribon;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="girlcap";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_girls_cap;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="eyeliner";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_eyeliner;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="eyelass";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_eyelass;
         mStickerData.add(bean);
 
 
         bean=new MenuBean();
         bean.name="";
         bean.path="kalacasma";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_kalachasma;
         mStickerData.add(bean);
 
         //todo
         
-//        bean=new MenuBean();
-//        bean.name="";
-//        bean.path="hairone";
-//        bean.image = R.drawable.st_gamcha;
-//        mStickerData.add(bean);
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="hairone";
+        bean.image = R.drawable.st_hairone;
+        mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="longear";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_longear;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="scrf";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_scarf;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="hairtwo";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_hairtwo;
         mStickerData.add(bean);
 
         bean=new MenuBean();
         bean.name="";
         bean.path="noth";
-        bean.image = R.drawable.st_gamcha;
+        bean.image = R.drawable.st_noth;
         mStickerData.add(bean);
 
-//        bean=new MenuBean();
-//        bean.name="";
-//        bean.path="tip";
-//        bean.image = R.drawable.st_gamcha;
-//        mStickerData.add(bean);
+        bean=new MenuBean();
+        bean.name="";
+        bean.path="tip";
+        bean.image = R.drawable.st_tip;
+        mStickerData.add(bean);
 
 
 
