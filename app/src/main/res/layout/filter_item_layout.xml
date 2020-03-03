@@ -44,19 +44,7 @@
                     android:layout_height="34.0dip"
                     android:src="@drawable/selector_filter_selected" />
             </FrameLayout>
-            <!--        <FrameLayout-->
-            <!--            android:id="@+id/filter_thumb_favorite_layout"-->
-            <!--            android:background="@drawable/take_filter_favorite_icon01_skin_flat"-->
-            <!--            android:layout_width="18.0dip"-->
-            <!--            android:layout_height="18.0dip">-->
-            <!--            <ImageView-->
-            <!--                android:id="@+id/filter_thumb_favorite"-->
-            <!--                android:layout_width="18.0dip"-->
-            <!--                android:layout_height="18.0dip"-->
-            <!--                android:src="@drawable/take_filter_favorite_icon02_skin_flat"-->
-            <!--                android:transformPivotX="4.0dip"-->
-            <!--                android:transformPivotY="4.0dip" />-->
-            <!--        </FrameLayout>-->
+
 
         </FrameLayout>
         <TextView

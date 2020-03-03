@@ -113,12 +113,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
     private LinearLayout mFilterLayout;
-    private LinearLayout mFaceSurgeryLayout;
-    protected SeekBar mFaceSurgeryFaceShapeSeek;
-    protected SeekBar mFaceSurgeryBigEyeSeek;
-    protected SeekBar mSkinSmoothSeek;
-    protected SeekBar mSkinWihtenSeek;
-    protected SeekBar mRedFaceSeek;
 
 
     private ArrayList<MenuBean> mStickerData;
@@ -603,6 +597,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }
     }
 
+
+
     private void showFaceBeauty() {
 
         About_layout.setVisibility(View.GONE);
@@ -633,114 +629,17 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         Timing_layout = (LinearLayout) findViewById(R.id.idtiminglayout);
         TimeShow = (TextView) findViewById(R.id.idshowtime);
-        mFaceSurgeryLayout = (LinearLayout) findViewById(R.id.layout_facesurgery);
-        mFaceSurgeryFaceShapeSeek = (SeekBar) findViewById(R.id.faceShapeValueBar);
-        mFaceSurgeryFaceShapeSeek.setProgress(0);
-        mFaceSurgeryBigEyeSeek = (SeekBar) findViewById(R.id.bigeyeValueBar);
-        mFaceSurgeryBigEyeSeek.setProgress(0);
 
-        mSkinSmoothSeek = (SeekBar) findViewById(R.id.skinSmoothValueBar);
-        mSkinSmoothSeek.setProgress(0);
-        mSkinWihtenSeek = (SeekBar) findViewById(R.id.skinWhitenValueBar);
-        mSkinWihtenSeek.setProgress(0);
-        mRedFaceSeek = (SeekBar) findViewById(R.id.redFaceValueBar);
-        mRedFaceSeek.setProgress(0);
-        XJGArSdkApi.XJGARSDKSetSkinSmoothParam(0);
-        XJGArSdkApi.XJGARSDKSetWhiteSkinParam(0);
-        XJGArSdkApi.XJGARSDKSetRedFaceParam(0);
-
-
-        mFaceSurgeryFaceShapeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public int value;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                value = i;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int strength = value;
-                XJGArSdkApi.XJGARSDKSetThinChinParam(strength);
-            }
-        });
-        mFaceSurgeryBigEyeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public int value;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                value = i;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int strength = value;
-                XJGArSdkApi.XJGARSDKSetBigEyeParam(strength);
-            }
-        });
-        mSkinSmoothSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public int value;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                value = i;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int level = value;
-                XJGArSdkApi.XJGARSDKSetSkinSmoothParam(level);
-            }
-        });
-
-        mSkinWihtenSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public int value;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                value = i;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int level = value;
-                XJGArSdkApi.XJGARSDKSetWhiteSkinParam(level);
-            }
-        });
-        mRedFaceSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            public int value;
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                value = i;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                int level = value;//(int)(value/18);
-                XJGArSdkApi.XJGARSDKSetRedFaceParam(level);
-            }
-        });
+        //...........................
+        whiteVal = seekBarValue;
+        XJGArSdkApi.XJGARSDKSetWhiteSkinParam(whiteVal);
+        bigEyesVal = seekBarValue;
+        XJGArSdkApi.XJGARSDKSetBigEyeParam(bigEyesVal);
+        smoothVal = seekBarValue;
+        XJGArSdkApi.XJGARSDKSetSkinSmoothParam(smoothVal);
+        liftingVal = seekBarValue;
+        XJGArSdkApi.XJGARSDKSetThinChinParam(liftingVal);
+        //............................
 
         mFilterListView = (RecyclerView) findViewById(R.id.filter_listView);
 
