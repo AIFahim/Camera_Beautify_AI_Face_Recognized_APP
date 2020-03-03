@@ -25,7 +25,7 @@ public class Dev_Infos extends AppCompatActivity {
         mToolbar = findViewById( R.id.dev_toolbar );
         TextView mTitle = (TextView) mToolbar.findViewById(R.id.toolbar_title);
 
-        //toolbar name ==>
+
         mTitle.setText("Developer Information");
         setSupportActionBar( mToolbar );
 

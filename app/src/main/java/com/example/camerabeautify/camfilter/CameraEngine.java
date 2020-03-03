@@ -57,19 +57,6 @@ public class CameraEngine {
         }
     }
 
-    public void resumeCamera(){
-        openCamera();
-    }
-
-    public void setParameters(Parameters parameters){
-        camera.setParameters(parameters);
-    }
-
-    public Parameters getParameters(){
-        if(camera != null)
-            camera.getParameters();
-        return null;
-    }
 
     public static void switchCamera(){
         releaseCamera();
@@ -85,10 +72,10 @@ public class CameraEngine {
         {
             parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
         }
-//        Size previewSize = getLargePreviewSize(camera);
+
         Size previewSize = getNearestPreviewSize(camera, 1280, 720);
         parameters.setPreviewSize(previewSize.width, previewSize.height);
-//        Size pictureSize = getLargePictureSize(camera);
+
         Size pictureSize = getNearestPictureSize(camera, 1280, 720);
         parameters.setPictureSize(pictureSize.width, pictureSize.height);
         parameters.setRotation(90);
@@ -123,25 +110,16 @@ public class CameraEngine {
         camera.stopPreview();
     }
 
-    //by luo
+
     private static int mCameraID = 0;
     public static int getOrientation(){
         CameraInfo cameraInfo = new CameraInfo();
         Camera.getCameraInfo(mCameraID, cameraInfo);
         return cameraInfo.orientation;
     }
-    //by luo
-    public static boolean isFlipHorizontal(){
-        return true;
-        //return LuoCameraEngine.getCameraInfo().facing == CameraInfo.CAMERA_FACING_FRONT ? true : false;
-    }
 
 
-    public static void setRotation(int rotation){
-        Parameters params = camera.getParameters();
-        params.setRotation(rotation);
-        camera.setParameters(params);
-    }
+
 
     //Todo
     public static void takePicture(Camera.ShutterCallback shutterCallback, Camera.PictureCallback rawCallback,
@@ -194,10 +172,6 @@ public class CameraEngine {
                         + (curHeight - targetHeight)*(curHeight - targetHeight);
 
                 float scale = (float)(sizes.get(i).height) / sizes.get(i).width;
-//                if(scale < 0.6f && scale > 0.5f)
-//                {
-//
-//                }
 
                 if(distance < minDistance) {
                     minDistance = distance;
@@ -227,7 +201,6 @@ public class CameraEngine {
                 float distance = (curWidth - targetWidth)*(curWidth - targetWidth)
                         + (curHeight - targetHeight)*(curHeight - targetHeight);
 
-//                float scale = (float)(sizes.get(i).height) / sizes.get(i).width;
                 if(distance < minDistance) {
                     minDistance = distance;
                     minIndex = i;
@@ -241,32 +214,5 @@ public class CameraEngine {
     }
 
 
-    public static Size getLargePictureSize(Camera camera){
-        if(camera != null){
-            List<Size> sizes = camera.getParameters().getSupportedPictureSizes();
-            Size temp = sizes.get(0);
-            for(int i = 1;i < sizes.size();i ++){
-                float scale = (float)(sizes.get(i).height) / sizes.get(i).width;
-                if(temp.width < sizes.get(i).width && scale < 0.6f && scale > 0.5f)
-                    temp = sizes.get(i);
-            }
-            return temp;
-        }
-        return null;
-    }
 
-
-    public static Size getLargePreviewSize(Camera camera){
-        if(camera != null){
-
-            List<Size> sizes = camera.getParameters().getSupportedPreviewSizes();
-            Size temp = sizes.get(0);
-            for(int i = 1;i < sizes.size();i ++){
-                if(temp.width < sizes.get(i).width)
-                    temp = sizes.get(i);
-            }
-            return temp;
-        }
-        return null;
-    }
 }

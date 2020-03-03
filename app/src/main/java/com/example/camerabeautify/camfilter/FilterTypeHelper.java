@@ -64,9 +64,6 @@ public class FilterTypeHelper {
 	}
 
 
-//				"filter_warm",
-//				"filter_antique",
-//				"filter_sketch"
 	public static String FilterType2FilterName(GPUCamImgOperator.GPUImgFilterType filterType){
 		switch (filterType) {
 			case NONE:
