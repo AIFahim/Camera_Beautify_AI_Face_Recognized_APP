@@ -1181,9 +1181,18 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         bean=new MenuBean();
         bean.name="";
-        bean.path="tip";
-        bean.image = R.drawable.st_tip;
+        bean.path="btiger";
+        bean.image = R.drawable.st_bangla_tiger;
         mStickerData.add(bean);
+
+
+
+//        bean=new MenuBean();
+//        bean.name="";
+//        bean.path="bluetiptwo";
+//        bean.image = R.drawable.st_tip;
+//        mStickerData.add(bean);
+
 
 
 
