@@ -64,12 +64,9 @@ public class Splash_Screen extends AppCompatActivity {
             permissionsNeeded.add("WRITE");
         if (!addPermission(permissionsList, Manifest.permission.READ_EXTERNAL_STORAGE))
             permissionsNeeded.add("READ");
-//        if (!addPermission(permissionsList, Manifest.permission.READ_SMS))
-//            permissionsNeeded.add("SMS");
 
         if (permissionsList.size() > 0) {
             if (permissionsNeeded.size() > 0) {
-                // Need Rationale
                 String message = "You need to grant access to " + permissionsNeeded.get(0);
                 for (int i = 1; i < permissionsNeeded.size(); i++)
                     message = message + ", " + permissionsNeeded.get(i);
@@ -79,13 +76,10 @@ public class Splash_Screen extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 if (Build.VERSION.SDK_INT >= 23) {
-                                    // Marshmallow+
                                     requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
                                             REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
 
 
-                                } else {
-                                    // Pre-Marshmallow
                                 }
 
                             }
@@ -99,19 +93,14 @@ public class Splash_Screen extends AppCompatActivity {
                         REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
 
 
-            } else {
-                // Pre-Marshmallow
-
             }
 
             return;
         }else
         {
-            // Toast.makeText(this,"Permission",Toast.LENGTH_LONG).show();
             LaunchApp();
         }
 
-        //insertDummyContact();
     }
 
 
@@ -122,7 +111,6 @@ public class Splash_Screen extends AppCompatActivity {
             // Marshmallow+
             if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                 permissionsList.add(permission);
-                // Check for Rationale Option
                 if (!shouldShowRequestPermissionRationale(permission))
                     //  return false;
 

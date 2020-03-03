@@ -12,8 +12,6 @@ import com.example.camerabeautify.R;
 
 import java.util.ArrayList;
 
-//import com.xiaojigou.luo.xjgarsdk.xjgarsdkdemoapp.R;
-
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
