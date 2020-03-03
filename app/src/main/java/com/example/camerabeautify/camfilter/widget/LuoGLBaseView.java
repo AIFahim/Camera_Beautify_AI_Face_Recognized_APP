@@ -6,7 +6,6 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
 import com.example.camerabeautify.camfilter.LuoGPUImgBaseFilter;
-import com.example.camerabeautify.camfilter.LuoGPUImgBaseFilter;
 import com.example.camerabeautify.camfilter.SavePictureTask;
 import com.example.camerabeautify.camfilter.utils.OpenGlUtils;
 import com.example.camerabeautify.camfilter.utils.Rotation;
@@ -55,7 +54,7 @@ public abstract class LuoGLBaseView extends GLSurfaceView implements GLSurfaceVi
                 .asFloatBuffer();
         gLTextureBuffer.put(TextureRotationUtil.TEXTURE_NO_ROTATION).position(0);
 
-        //setEGLConfigChooser(8,8,8,8,8,8);
+
         setEGLContextClientVersion(2);
         setRenderer(this);
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
@@ -74,7 +73,6 @@ public abstract class LuoGLBaseView extends GLSurfaceView implements GLSurfaceVi
         GLES20.glViewport(0,0,width, height);
         surfaceWidth = width;
         surfaceHeight = height;
-//        onFilterChanged();
     }
 
     @Override
@@ -83,22 +81,6 @@ public abstract class LuoGLBaseView extends GLSurfaceView implements GLSurfaceVi
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
     }
 
-
-
-
-    protected void deleteTextures() {
-        if(textureId != OpenGlUtils.NO_TEXTURE){
-            queueEvent(new Runnable() {
-                @Override
-                public void run() {
-                    GLES20.glDeleteTextures(1, new int[]{
-                            textureId
-                    }, 0);
-                    textureId = OpenGlUtils.NO_TEXTURE;
-                }
-            });
-        }
-    }
 
     public abstract void savePicture(SavePictureTask savePictureTask);
 
