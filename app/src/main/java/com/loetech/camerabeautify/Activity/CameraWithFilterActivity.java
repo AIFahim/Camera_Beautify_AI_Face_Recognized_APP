@@ -1,10 +1,12 @@
 package com.loetech.camerabeautify.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.Manifest;
 import android.animation.Animator;
@@ -12,18 +14,31 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.hardware.Camera;
+import android.hardware.display.DisplayManager;
+import android.hardware.display.VirtualDisplay;
+import android.media.Image;
+import android.media.ImageReader;
 import android.media.MediaPlayer;
+import android.media.MediaScannerConnection;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -46,7 +61,31 @@ import com.loetech.camerabeautify.camfilter.SharedPref;
 import com.loetech.camerabeautify.camfilter.widget.LuoGLCameraView;
 import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
 
+import org.reactivestreams.Publisher;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
+import static android.os.Environment.DIRECTORY_PICTURES;
+import static android.os.Environment.getExternalStoragePublicDirectory;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class CameraWithFilterActivity extends Activity implements  View.OnClickListener , SeekBar.OnSeekBarChangeListener {
@@ -54,6 +93,17 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     //Webview
     WebView webView;
 
+    //////////////////////////////////////
+    private MediaProjectionManager mProjectionManager;
+    private static final int REQUEST_CODE = 5588;
+    private ImageReader mImageReader;
+    private VirtualDisplay mVirtualDisplay;
+    private ImageReader.OnImageAvailableListener mImageListener;
+    private MediaScannerConnection.OnScanCompletedListener mScanListener;
+    private MediaProjection mProjection;
+    private Context mContext;
+    private final int MY_PERMISSIONS_REQUEST_WRITE_STORAGE = 5566;
+    /////////////////////////////////////
 
     //Switch
     private Switch Swt_Setting_SDcard, Swt_Setting_Shutter_Sound;
@@ -84,6 +134,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
     private SeekBar seekBarScale, seekBarFace;
     private int seekBarValue = 0;
+    private int requestCode;
+    private String[] permissions;
+    private int[] grantResults;
 
     private enum FACEEFFECT {
         ROSY,
@@ -109,7 +162,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //........................................
 
 
-    private LinearLayout mFilterLayout;
+    private LinearLayout mFilterLayout, HeaderLayout, MotherMenu;
 
 
     private ArrayList<MenuBean> mStickerData;
@@ -154,7 +207,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         setContentView(R.layout.activity_camera_with_filter);
 
 
-
+        mContext = this;
+        askWritePermission();
         onCreate();
 
     }
@@ -466,8 +520,19 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                             onTouchLayout.setVisibility(View.GONE);
                             if (mode == MODE_PIC) {
 
-                                Log.d("TEMP", "Touch");
-                                startcount();
+//                                Log.d("TEMP", "Touch");
+//                                startcount();
+
+                                if (Build.VERSION.SDK_INT >= 28) {
+                                    //Toast.makeText(CameraWithFilterActivity.this, "ScreenShot", Toast.LENGTH_SHORT).show();
+                                    //screenShot();
+                                    HeaderLayout.setVisibility(View.GONE);
+                                    MotherMenu.setVisibility(View.GONE);
+                                    startcountforscreenshot();
+                                }else{
+                                    // Toast.makeText(CameraWithFilterActivity.this, "photoCapture", Toast.LENGTH_SHORT).show();
+                                    startcount();
+                                }
 
 
                                 Handler handler = new Handler();
@@ -623,6 +688,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         mFilterLayout = (LinearLayout) findViewById(R.id.layout_filter);
         onTouchLayout = (LinearLayout) findViewById(R.id.idOnTouch);
+        HeaderLayout = (LinearLayout) findViewById(R.id.header_layout);
+        MotherMenu = (LinearLayout) findViewById(R.id.mOtherMenu);
 
         Timing_layout = (LinearLayout) findViewById(R.id.idtiminglayout);
         TimeShow = (TextView) findViewById(R.id.idshowtime);
@@ -895,25 +962,25 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }
     };
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-        if (grantResults.length != 1 || grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            if (mode == MODE_PIC)
-                takePhoto();
-            else
-                takeVideo();
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-        if (requestCode == 1) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                                           int[] grantResults) {
+//        if (grantResults.length != 1 || grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//            if (mode == MODE_PIC)
+//                takePhoto();
+//            else
+//                takeVideo();
+//        } else {
+//            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
+//        if (requestCode == 1) {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 
     static boolean bShowImgFilters = false;
     private View.OnClickListener btn_listener = new View.OnClickListener() {
@@ -933,12 +1000,26 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 } else {
                     if (mode == MODE_PIC) {
 
-                        btn_shutter.setVisibility(View.GONE);
-                        Log.d("TEMP", "Button");
-                        startcount();
+//                        btn_shutter.setVisibility(View.GONE);
+//                        Log.d("TEMP", "Button");
+//                        startcount();
 
-                    } else
-                        takeVideo();
+
+
+                        if (Build.VERSION.SDK_INT >= 28) {
+                            //Toast.makeText(CameraWithFilterActivity.this, "ScreenShot", Toast.LENGTH_SHORT).show();
+                            //screenShot();
+                            HeaderLayout.setVisibility(View.GONE);
+                            MotherMenu.setVisibility(View.GONE);
+                            startcountforscreenshot();
+                        }else{
+                           // Toast.makeText(CameraWithFilterActivity.this, "photoCapture", Toast.LENGTH_SHORT).show();
+                            startcount();
+                        }
+                        
+
+
+                    }
                 }
             } else if (buttonId == R.id.btn_camera_filter) {
                 bShowImgFilters = !bShowImgFilters;
@@ -1122,6 +1203,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
 
 
+    //TODO
+    /////////////////////////////////////////////capture///////////////////////////////////////////
+
     public void startcount() {
 
 
@@ -1151,7 +1235,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     @Override
                     public void run() {
 
-                        btn_shutter.setVisibility(View.VISIBLE);
+
+                        MotherMenu.setVisibility(View.VISIBLE);
                     }
 
                 }, 1000);
@@ -1173,4 +1258,333 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         }.start();
 
     }
+
+
+    //TODO
+
+
+
+    //////////////////////////////////////call screenshot///////////////////////////
+
+
+    public void startcountforscreenshot() {
+
+
+        new CountDownTimer(x * 1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+                HeaderLayout.setVisibility(View.GONE);
+                MotherMenu.setVisibility(View.GONE);
+
+                onTouchLayout.setVisibility(View.GONE);
+                btn_shutter.setVisibility(View.GONE);
+                Timing_layout.setVisibility(View.VISIBLE);
+                TimeShow.setText("" + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+
+               // Toast.makeText(CameraWithFilterActivity.this, "Captured", Toast.LENGTH_SHORT).show();
+                Timing_layout.setVisibility(View.GONE);
+                screenShot();
+                //takePhoto();
+
+                MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
+                if (sharedPref.loadSoundModeState() == true) {
+                    mp.start();
+                }
+
+                Handler handlerr = new Handler();
+                handlerr.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        HeaderLayout.setVisibility(View.VISIBLE);
+                        MotherMenu.setVisibility(View.VISIBLE);
+                        btn_shutter.setVisibility(View.VISIBLE);
+
+                        Toast.makeText(mContext, "Captured", Toast.LENGTH_SHORT).show();
+                    }
+
+                }, 1000);
+
+                try {
+
+                    if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel) {
+                        onTouchLayout.setVisibility(View.VISIBLE);
+
+                    } else if (((Integer) Btn_Touch.getTag()) == R.drawable.icon_touch_enble_sel) {
+                        onTouchLayout.setVisibility(View.GONE);
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+        }.start();
+
+    }
+
+
+    ///////////////////////////////////ScreenShot///////////////////////////////////
+
+    private void screenShot(){
+        if(mProjectionManager != null) {
+            startActivityForResult(mProjectionManager.createScreenCaptureIntent(), REQUEST_CODE);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @androidx.annotation.NonNull String permissions[],
+                                           @androidx.annotation.NonNull int[] grantResults) {
+
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_WRITE_STORAGE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    initState();
+                }
+                break;
+            }
+        }
+    }
+
+    private void askWritePermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                    MY_PERMISSIONS_REQUEST_WRITE_STORAGE);
+        }
+        else{
+            initState();
+        }
+    }
+
+    private void initState(){
+        mProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        //mButton.setClickable(true);
+    }
+
+    private Bitmap createBitmap(Image image){
+        Log.d("kanna", "check create bitmap: " + Thread.currentThread().toString());
+        Bitmap bitmap;
+        Image.Plane[] planes = image.getPlanes();
+        ByteBuffer buffer = planes[0].getBuffer();
+        int pixelStride = planes[0].getPixelStride();
+        int rowStride = planes[0].getRowStride();
+        int rowPadding = rowStride - pixelStride * image.getWidth();
+        // create bitmap
+        bitmap = Bitmap.createBitmap(image.getWidth() + rowPadding / pixelStride,
+                image.getHeight(), Bitmap.Config.ARGB_8888);
+        bitmap.copyPixelsFromBuffer(buffer);
+        image.close();
+        return bitmap;
+    }
+
+
+    private Flowable<Image> getScreenShot(){
+        final Point screenSize = new Point();
+        final DisplayMetrics metrics = getResources().getDisplayMetrics();
+        Display display = getWindowManager().getDefaultDisplay();
+        display.getRealSize(screenSize);
+        return Flowable.create(new FlowableOnSubscribe<Image>() {
+            @Override
+            public void subscribe(@NonNull final FlowableEmitter<Image> emitter) throws Exception {
+                mImageReader = ImageReader.newInstance(screenSize.x-20, screenSize.y-20, PixelFormat.RGBA_8888, 2);
+                mVirtualDisplay = mProjection.createVirtualDisplay("cap", screenSize.x-20, screenSize.y-20, metrics.densityDpi,
+                        DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null);
+                mImageListener = new ImageReader.OnImageAvailableListener() {
+                    Image image = null;
+                    @Override
+                    public void onImageAvailable(ImageReader imageReader) {
+                        try {
+                            image = imageReader.acquireLatestImage();
+                            Log.d("kanna", "check reader: " + Thread.currentThread().toString());
+                            if (image != null) {
+                                emitter.onNext(image);
+                                emitter.onComplete();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            emitter.onError(new Throwable("ImageReader error"));
+                        }
+                        mImageReader.setOnImageAvailableListener(null, null);
+                    }
+
+                };
+                mImageReader.setOnImageAvailableListener(mImageListener, null);
+
+            }
+        }, BackpressureStrategy.DROP);
+    }
+    private Flowable<String> createFile(){
+        return Flowable.create(new FlowableOnSubscribe<String>() {
+            @Override
+            public void subscribe(@NonNull FlowableEmitter<String> emitter) throws Exception {
+                Log.d("kanna", "check create filename: " + Thread.currentThread().toString());
+                String directory, fileHead, fileName;
+                int count = 0;
+                File externalFilesDir = getExternalStoragePublicDirectory(DIRECTORY_PICTURES);
+                if (externalFilesDir != null) {
+                    directory = getExternalStoragePublicDirectory(DIRECTORY_PICTURES)
+                            .getAbsolutePath() + "/screenshots/";
+
+                    Log.d("kanna", directory);
+                    File storeDirectory = new File(directory);
+                    if (!storeDirectory.exists()) {
+                        boolean success = storeDirectory.mkdirs();
+                        if (!success) {
+                            emitter.onError(new Throwable("failed to create file storage directory."));
+                            return;
+                        }
+                    }
+                } else {
+                    emitter.onError(new Throwable("failed to create file storage directory," +
+                            " getExternalFilesDir is null."));
+                    return;
+                }
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Calendar c = Calendar.getInstance();
+                fileHead = simpleDateFormat.format(c.getTime()) + "_";
+                fileName = directory + fileHead + count + ".jpeg";
+                File storeFile = new File(fileName);
+                while (storeFile.exists()) {
+                    count++;
+                    fileName = directory + fileHead + count + ".jpeg";
+                    storeFile = new File(fileName);
+                }
+                emitter.onNext(fileName);
+                emitter.onComplete();
+            }
+        },BackpressureStrategy.DROP).subscribeOn(Schedulers.io());
+    }
+    private void writeFile(Bitmap bitmap, String fileName) throws IOException {
+        Log.d("kanna", "check write file: " + Thread.currentThread().toString());
+        FileOutputStream fos = new FileOutputStream(fileName);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        fos.close();
+        bitmap.recycle();
+    }
+    private Flowable<String> updateScan(final String fileName){
+        return Flowable.create(new FlowableOnSubscribe<String>() {
+            @Override
+            public void subscribe(@NonNull final FlowableEmitter<String> emitter) throws Exception {
+                String[] path = new String[]{fileName};
+                mScanListener = new MediaScannerConnection.OnScanCompletedListener() {
+                    @Override
+                    public void onScanCompleted(String s, Uri uri) {
+                        Log.d("kanna", "check scan file: " + Thread.currentThread().toString());
+                        if (uri == null) {
+                            emitter.onError(new Throwable("Scan fail" + s));
+                        }
+                        else {
+                            emitter.onNext(s);
+                            emitter.onComplete();
+                        }
+                    }
+                };
+                MediaScannerConnection.scanFile(mContext, path, null, mScanListener);
+            }
+        },BackpressureStrategy.DROP);
+    }
+    private void finalRelease(){
+        if (mVirtualDisplay != null){
+           // mVirtualDisplay.release();
+        }
+        if (mImageReader != null){
+            mImageReader = null;
+        }
+        if(mImageListener != null){
+            mImageListener = null;
+        }
+        if(mScanListener != null){
+            mScanListener = null;
+        }
+        if(mProjection != null){
+            mProjection.stop();
+            mProjection = null;
+        }
+    }
+
+    /*
+    RXJava
+     */
+    private void shotScreen(){
+        getScreenShot()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
+                .map(new Function<Image, Bitmap>() {
+                    @Override
+                    public Bitmap apply(@NonNull Image image) throws Exception {
+                        return createBitmap(image);
+                    }
+                })
+                .zipWith(createFile(), new BiFunction<Bitmap, String, String>() {
+                    @Override
+                    public String apply(@NonNull Bitmap bitmap, @NonNull String fileName) throws Exception {
+                        writeFile(bitmap, fileName);
+                        return fileName;
+                    }
+                })
+                .flatMap(new Function<String, Publisher<String>>() {
+                    @Override
+                    public Publisher<String> apply(@NonNull String fileName) throws Exception {
+                        return updateScan(fileName);
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .doFinally(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.d("kanna", "check do finally: " + Thread.currentThread().toString());
+                        finalRelease();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                    }
+
+                    @Override
+                    public void onNext(String filename) {
+                        Log.d("kanna", "onNext: " + filename);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.w("kanna", "onError: ", t);
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("kanna", "onComplete");
+                    }
+                });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE) {
+            mProjection = mProjectionManager.getMediaProjection(resultCode, data);
+            if(mProjection != null) {
+                shotScreen();
+            }
+        }
+    }
+
+
+
+
 }

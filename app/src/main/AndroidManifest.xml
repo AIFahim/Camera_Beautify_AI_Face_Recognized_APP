@@ -16,6 +16,10 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
