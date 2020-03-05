@@ -523,7 +523,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //                                Log.d("TEMP", "Touch");
 //                                startcount();
 
-                                if (Build.VERSION.SDK_INT >= 28) {
+                                if (Build.VERSION.SDK_INT >= 28 || Build.VERSION.SDK_INT <= 23) {
                                     //Toast.makeText(CameraWithFilterActivity.this, "ScreenShot", Toast.LENGTH_SHORT).show();
                                     //screenShot();
                                     HeaderLayout.setVisibility(View.GONE);
@@ -1006,7 +1006,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 
 
-                        if (Build.VERSION.SDK_INT >= 28) {
+                        if (Build.VERSION.SDK_INT >= 28 || Build.VERSION.SDK_INT <= 23) {
                             //Toast.makeText(CameraWithFilterActivity.this, "ScreenShot", Toast.LENGTH_SHORT).show();
                             //screenShot();
                             HeaderLayout.setVisibility(View.GONE);
@@ -1014,6 +1014,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                             startcountforscreenshot();
                         }else{
                            // Toast.makeText(CameraWithFilterActivity.this, "photoCapture", Toast.LENGTH_SHORT).show();
+                            btn_shutter.setVisibility(View.GONE);
                             startcount();
                         }
                         
@@ -1214,7 +1215,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             public void onTick(long millisUntilFinished) {
 
                 onTouchLayout.setVisibility(View.GONE);
-                btn_shutter.setVisibility(View.GONE);
+
                 Timing_layout.setVisibility(View.VISIBLE);
                 TimeShow.setText("" + millisUntilFinished / 1000);
             }
@@ -1236,7 +1237,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     public void run() {
 
 
-                        MotherMenu.setVisibility(View.VISIBLE);
+                        btn_shutter.setVisibility(View.VISIBLE);
+                       // MotherMenu.setVisibility(View.VISIBLE);
                     }
 
                 }, 1000);
@@ -1497,7 +1499,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     }
     private void finalRelease(){
         if (mVirtualDisplay != null){
-           // mVirtualDisplay.release();
+            mVirtualDisplay.release();
         }
         if (mImageReader != null){
             mImageReader = null;
