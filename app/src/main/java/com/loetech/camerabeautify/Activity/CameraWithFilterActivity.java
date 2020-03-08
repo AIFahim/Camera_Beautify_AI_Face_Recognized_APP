@@ -127,7 +127,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     //new seekbar..............
     private LinearLayout llt_face_seek, llt_face_col;
 
-    public static int x = 0;
+    public static int x = 0, b=0;
 
     //view
     private ImageView img_face_rosy, img_face_brasion, img_face_white, img_face_lifting, img_face_eyes;
@@ -517,6 +517,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                         public boolean onTouch(View v, MotionEvent event) {
 
 
+
                             onTouchLayout.setVisibility(View.GONE);
                             if (mode == MODE_PIC) {
 
@@ -531,6 +532,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                                     startcountforscreenshot();
                                 }else{
                                     // Toast.makeText(CameraWithFilterActivity.this, "photoCapture", Toast.LENGTH_SHORT).show();
+                                    btn_shutter.setVisibility(View.GONE);
                                     startcount();
                                 }
 
@@ -1215,6 +1217,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             public void onTick(long millisUntilFinished) {
 
                 onTouchLayout.setVisibility(View.GONE);
+                HeaderLayout.setVisibility(View.GONE);
+                MotherMenu.setVisibility(View.GONE);
 
                 Timing_layout.setVisibility(View.VISIBLE);
                 TimeShow.setText("" + millisUntilFinished / 1000);
@@ -1255,6 +1259,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+
+                HeaderLayout.setVisibility(View.VISIBLE);
+                MotherMenu.setVisibility(View.VISIBLE);
             }
 
         }.start();
