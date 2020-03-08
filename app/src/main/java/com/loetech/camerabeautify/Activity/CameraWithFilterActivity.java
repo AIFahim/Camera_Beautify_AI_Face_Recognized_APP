@@ -35,6 +35,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -1201,7 +1202,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     protected void onResume() {
         super.onResume();
 
-        onCreate();
+        //onCreate();
 
     }
 
@@ -1296,8 +1297,17 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
                // Toast.makeText(CameraWithFilterActivity.this, "Captured", Toast.LENGTH_SHORT).show();
                 Timing_layout.setVisibility(View.GONE);
-                screenShot();
-                //takePhoto();
+
+
+                try {
+
+                    screenShot();
+
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
 
                 MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
                 if (sharedPref.loadSoundModeState() == true) {
@@ -1406,8 +1416,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         return Flowable.create(new FlowableOnSubscribe<Image>() {
             @Override
             public void subscribe(@NonNull final FlowableEmitter<Image> emitter) throws Exception {
-                mImageReader = ImageReader.newInstance(screenSize.x-20, screenSize.y-20, PixelFormat.RGBA_8888, 2);
-                mVirtualDisplay = mProjection.createVirtualDisplay("cap", screenSize.x-20, screenSize.y-20, metrics.densityDpi,
+                mImageReader = ImageReader.newInstance(screenSize.x, screenSize.y, PixelFormat.RGBA_8888, 2);
+                mVirtualDisplay = mProjection.createVirtualDisplay("cap", screenSize.x, screenSize.y, metrics.densityDpi,
                         DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null);
                 mImageListener = new ImageReader.OnImageAvailableListener() {
                     Image image = null;
@@ -1440,12 +1450,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 Log.d("kanna", "check create filename: " + Thread.currentThread().toString());
                 String directory, fileHead, fileName;
                 int count = 0;
-                File externalFilesDir = getExternalStoragePublicDirectory(DIRECTORY_PICTURES);
+                File externalFilesDir = new File(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES), "Camera Beautify");
                 if (externalFilesDir != null) {
                     directory = getExternalStoragePublicDirectory(DIRECTORY_PICTURES)
-                            .getAbsolutePath() + "/screenshots/";
+                            .getAbsolutePath() + "/Camera Beautify/";
 
-                    Log.d("kanna", directory);
+
                     File storeDirectory = new File(directory);
                     if (!storeDirectory.exists()) {
                         boolean success = storeDirectory.mkdirs();
@@ -1586,6 +1597,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE) {
+
             mProjection = mProjectionManager.getMediaProjection(resultCode, data);
             if(mProjection != null) {
                 shotScreen();
