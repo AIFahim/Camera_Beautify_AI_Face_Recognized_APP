@@ -58,6 +58,7 @@ import com.loetech.camerabeautify.camfilter.FilterRecyclerViewAdapter;
 import com.loetech.camerabeautify.camfilter.FilterTypeHelper;
 import com.loetech.camerabeautify.camfilter.GPUCamImgOperator;
 
+import com.loetech.camerabeautify.camfilter.MyService;
 import com.loetech.camerabeautify.camfilter.SharedPref;
 import com.loetech.camerabeautify.camfilter.widget.LuoGLCameraView;
 import com.xiaojigou.luo.xjgarsdk.XJGArSdkApi;
@@ -207,7 +208,9 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_with_filter);
 
-
+//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.FOREGROUND_SERVICE}, PackageManager.PERMISSION_GRANTED);
+//        final Intent intent = new Intent(this, MyService.class);
+//        startService(intent);
         mContext = this;
         askWritePermission();
         onCreate();
@@ -530,10 +533,12 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                                     //screenShot();
                                     HeaderLayout.setVisibility(View.GONE);
                                     MotherMenu.setVisibility(View.GONE);
+                                    mMenuView.setVisibility(View.GONE);
                                     startcountforscreenshot();
                                 }else{
                                     // Toast.makeText(CameraWithFilterActivity.this, "photoCapture", Toast.LENGTH_SHORT).show();
                                     btn_shutter.setVisibility(View.GONE);
+                                    mMenuView.setVisibility(View.GONE);
                                     startcount();
                                 }
 
@@ -1014,10 +1019,12 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                             //screenShot();
                             HeaderLayout.setVisibility(View.GONE);
                             MotherMenu.setVisibility(View.GONE);
+                            mMenuView.setVisibility(View.GONE);
                             startcountforscreenshot();
                         }else{
                            // Toast.makeText(CameraWithFilterActivity.this, "photoCapture", Toast.LENGTH_SHORT).show();
                             btn_shutter.setVisibility(View.GONE);
+                            mMenuView.setVisibility(View.GONE);
                             startcount();
                         }
                         
@@ -1220,7 +1227,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 onTouchLayout.setVisibility(View.GONE);
                 HeaderLayout.setVisibility(View.GONE);
                 MotherMenu.setVisibility(View.GONE);
-
+                mMenuView.setVisibility(View.GONE);
                 Timing_layout.setVisibility(View.VISIBLE);
                 TimeShow.setText("" + millisUntilFinished / 1000);
             }
@@ -1286,7 +1293,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
                 HeaderLayout.setVisibility(View.GONE);
                 MotherMenu.setVisibility(View.GONE);
-
+                mMenuView.setVisibility(View.GONE);
                 onTouchLayout.setVisibility(View.GONE);
                 btn_shutter.setVisibility(View.GONE);
                 Timing_layout.setVisibility(View.VISIBLE);

@@ -34,10 +34,10 @@
         android:supportsRtl="true">
 
 
-<!--        <service-->
-<!--            android:name=".ScreenRecorder"-->
-<!--            android:enabled="true"-->
-<!--            android:foregroundServiceType="mediaProjection"/>-->
+        <service
+            android:name=".camfilter.MyService"
+            android:enabled="true"
+            android:foregroundServiceType="mediaProjection"/>
 
         <activity
             android:name="com.loetech.camerabeautify.Activity.CameraWithFilterActivity"
