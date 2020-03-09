@@ -21,4 +21,6 @@
     <string name="short_des_Dev_info">Application Developers information</string>
     <string name="about">About</string>
     <string name="about_app">About Application</string>
+    <string name="channel_name">CameraBeautify</string>
+    <string name="channel_description">service</string>
 </resources>

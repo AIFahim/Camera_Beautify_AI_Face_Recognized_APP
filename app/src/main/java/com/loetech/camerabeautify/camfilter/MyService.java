@@ -1,34 +1,38 @@
 package com.loetech.camerabeautify.camfilter;
 
-import android.app.Notification;
+
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.NotificationCompat;
 
-import com.loetech.camerabeautify.Activity.CameraWithFilterActivity;
 import com.loetech.camerabeautify.R;
 
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Objects;
+
+import static android.content.ContentValues.TAG;
 
 public class MyService extends Service {
 
 
-    private Integer alarmHour;
-    private Integer alarmMinute;
-    private Ringtone ringtone;
-    private Timer t = new Timer();
+
+
+
+    private MediaProjection mMediaProjection;
+    private MediaProjectionManager mMediaProjectionManager;
+    private int mResultCode;
+
 
     private static final String CHANNEL_ID = "MyNotificationChannelID";
 
@@ -42,50 +46,33 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        //alarmHour = intent.getIntExtra("alarmHour", 0);
-       // alarmMinute = intent.getIntExtra("alarmMinute", 0);
+        createNotificationChannel();
 
-        ringtone = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+        //mResultCode = intent.getIntExtra("code", -1);
+        //Parcelable   mResultData = intent.getParcelableExtra("data");
+        //mResultData = intent.getSelector();
 
-        try {
-            Intent notificationIntent = new Intent(this, CameraWithFilterActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-
-            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID )
-                    .build();
-
-            startForeground(1, notification);
-
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, "My Alarm clock Service", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(notificationChannel);
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        t.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-//                if (Calendar.getInstance().getTime().getHours() == alarmHour &&
-//                        Calendar.getInstance().getTime().getMinutes() == alarmMinute){
-//                    ringtone.play();
-//                }
-//                else {
-//                    ringtone.stop();
-//                }
-
-            }
-        }, 0, 2000);
+       // mMediaProjection = mMediaProjectionManager.getMediaProjection(mResultCode, (Intent) Objects.requireNonNull(mResultData));
+        //mMediaProjection =  ((MediaProjectionManager) Objects.requireNonNull(getSystemService(Context.MEDIA_PROJECTION_SERVICE))).getMediaProjection(mResultCode, (Intent) mResultData);
+        Log.e(TAG, "mMediaProjection created: " + mMediaProjection);
 
         return super.onStartCommand(intent, flags, startId);
     }
 
-    @Override
-    public void onDestroy() {
-        ringtone.stop();
-        t.cancel();
-        super.onDestroy();
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
+
 }

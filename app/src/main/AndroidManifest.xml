@@ -24,6 +24,7 @@
 
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:largeHeap="true"
@@ -35,9 +36,11 @@
 
 
         <service
-            android:name=".camfilter.MyService"
+            android:name=".ExampleService"
             android:enabled="true"
             android:foregroundServiceType="mediaProjection"/>
+
+<!--        <service android:name=".ExampleService" />-->
 
         <activity
             android:name="com.loetech.camerabeautify.Activity.CameraWithFilterActivity"

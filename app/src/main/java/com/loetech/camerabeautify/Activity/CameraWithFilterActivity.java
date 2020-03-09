@@ -53,6 +53,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loetech.camerabeautify.ExampleService;
 import com.loetech.camerabeautify.R;
 import com.loetech.camerabeautify.camfilter.FilterRecyclerViewAdapter;
 import com.loetech.camerabeautify.camfilter.FilterTypeHelper;
@@ -203,6 +204,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     };
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,7 +215,22 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //        startService(intent);
         mContext = this;
         askWritePermission();
+
+
+
+        if (Build.VERSION.SDK_INT >= 29 ) {
+            startService();
+        }else{
+
+        }
+
+
         onCreate();
+
+//        Intent service = new Intent(this, MyService.class);
+//        service.putExtra("code", resultCode);
+//        service.putExtra("data", data);
+//        startForegroundService(service);
 
     }
 
@@ -1023,6 +1040,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                             startcountforscreenshot();
                         }else{
                            // Toast.makeText(CameraWithFilterActivity.this, "photoCapture", Toast.LENGTH_SHORT).show();
+
+
                             btn_shutter.setVisibility(View.GONE);
                             mMenuView.setVisibility(View.GONE);
                             startcount();
@@ -1189,7 +1208,11 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             mCamera.release();
         }
 
+        if (Build.VERSION.SDK_INT >= 29 ) {
+            startService();
+        }else{
 
+        }
     }
 
     @Override
@@ -1201,6 +1224,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
             mCamera.release();
             mCamera = null;
         }
+        stopService();
 
         finish();
     }
@@ -1210,6 +1234,13 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         super.onResume();
 
         //onCreate();
+
+        if (Build.VERSION.SDK_INT >= 29 ) {
+            startService();
+            onCreate();
+        }else{
+
+        }
 
     }
 
@@ -1601,6 +1632,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE) {
@@ -1610,9 +1642,29 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 shotScreen();
             }
         }
+
+
+
     }
 
 
+
+
+    ///////////////////////////////////////////
+    public void startService() {
+        String input = "Camera Beautify";
+
+        Intent serviceIntent = new Intent(this, ExampleService.class);
+        serviceIntent.putExtra("inputExtra", input);
+
+        ContextCompat.startForegroundService(this, serviceIntent);
+    }
+
+    public void stopService() {
+        Intent serviceIntent = new Intent(this, ExampleService.class);
+        stopService(serviceIntent);
+    }
+    /////////////////////////////////////////////////
 
 
 }
