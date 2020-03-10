@@ -17,6 +17,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -111,6 +112,15 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     //Switch
     private Switch Swt_Setting_SDcard, Swt_Setting_Shutter_Sound;
     SharedPref sharedPref;
+    SharedPreferences sharedPreferences;
+
+
+
+    //////////////////////////////////////////saveinstantsate////////////////////////
+    public static String Spath = null;
+    public static String Sname = null;
+    public static int Spos = 0;
+
 
     //Transparent dev_info
     private LinearLayout Dev_Info_layout;
@@ -215,6 +225,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 //        startService(intent);
         mContext = this;
         askWritePermission();
+        sharedPreferences = getSharedPreferences( "myPrefs", Context.MODE_PRIVATE );
 
 
 
@@ -227,10 +238,6 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         onCreate();
 
-//        Intent service = new Intent(this, MyService.class);
-//        service.putExtra("code", resultCode);
-//        service.putExtra("data", data);
-//        startForegroundService(service);
 
     }
 
@@ -772,9 +779,18 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         mStickerAdapter.setOnClickListener(new ClickUtils.OnClickListener() {
             @Override
             public void onClick(View v, int type, int pos, int child) {
+
                 MenuBean m = mStickerData.get(pos);
                 String name = m.name;
                 String path = m.path;
+
+                Sname = name;
+                Spath = path;
+                Spos = pos;
+
+
+
+
                 if (name.equals("None")) {
                     XJGArSdkApi.XJGARSDKSetShowStickerPapers(false);
                     mStickerAdapter.checkPos = pos;
@@ -783,6 +799,8 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     String stickerPaperdir = XJGArSdkApi.getPrivateResDataDir(getApplicationContext());
                     stickerPaperdir = stickerPaperdir + "/StickerPapers/" + path;
                     ZIP.unzipAStickPaperPackages(stickerPaperdir);
+
+
 
                     XJGArSdkApi.XJGARSDKSetShowStickerPapers(true);
                     XJGArSdkApi.XJGARSDKChangeStickpaper(path);
@@ -796,6 +814,16 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
         initEffectMenu();
     }
 
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+//        savedInstanceState.putBoolean("MyBoolean", true);
+//        savedInstanceState.putDouble("myDouble", 1.9);
+//        savedInstanceState.putInt("MyInt", 1);
+//        savedInstanceState.putString("MyString", "Welcome back to Android");
+    }
 
     protected void initEffectMenu() {
 
@@ -1237,13 +1265,19 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
         if (Build.VERSION.SDK_INT >= 29 ) {
             startService();
-            onCreate();
+           // onCreate();
         }else{
+
 
         }
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        onCreate();
+    }
 
     //TODO
     /////////////////////////////////////////////capture///////////////////////////////////////////
