@@ -171,6 +171,8 @@
             android:layout_above="@+id/llt_main_face_seekbar"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:visibility="gone"
             android:layout_height="wrap_content">
 
