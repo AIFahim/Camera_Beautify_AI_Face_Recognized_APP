@@ -14,10 +14,13 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -38,6 +41,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -244,6 +248,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
     private void onCreate() {
 
 
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         sharedPref = new SharedPref(this);
 
         GPUCamImgOperator = new GPUCamImgOperator();
@@ -551,6 +556,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
 
 //                                Log.d("TEMP", "Touch");
 //                                startcount();
+
 
                                 if (Build.VERSION.SDK_INT >= 28 || Build.VERSION.SDK_INT <= 23) {
                                     //Toast.makeText(CameraWithFilterActivity.this, "ScreenShot", Toast.LENGTH_SHORT).show();
@@ -1522,6 +1528,10 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 Log.d("kanna", "check create filename: " + Thread.currentThread().toString());
                 String directory, fileHead, fileName;
                 int count = 0;
+
+
+
+
                 File externalFilesDir = new File(Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_PICTURES), "Camera Beautify");
                 if (externalFilesDir != null) {
@@ -1543,10 +1553,15 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                     return;
                 }
 
+
+
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 Calendar c = Calendar.getInstance();
                 fileHead = simpleDateFormat.format(c.getTime()) + "_";
                 fileName = directory + fileHead + count + ".jpeg";
+
+
+
                 File storeFile = new File(fileName);
                 while (storeFile.exists()) {
                     count++;
