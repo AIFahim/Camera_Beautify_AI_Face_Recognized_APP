@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.loetech.camerabeautify.Activity.CameraWithFilterActivity">
 
     <RelativeLayout
@@ -19,33 +18,30 @@
         <LinearLayout
             android:id="@+id/header_layout"
             style="@style/header_layout_size"
-            android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
             android:background="@color/transparent_white"
+            android:gravity="center_horizontal"
             android:orientation="horizontal"
             android:padding="5dp">
 
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
+
                 <ImageView
                     android:id="@+id/btn_more"
                     style="@style/header_layout_icon_size"
                     android:src="@drawable/icon_more" />
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
 
                 <ImageView
                     android:id="@+id/img_main_timer"
                     style="@style/header_layout_icon_size"
-                    android:src="@drawable/icon_timer_normal"/>
+                    android:src="@drawable/icon_timer_normal" />
             </LinearLayout>
 
 
-
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
 
                 <ImageView
                     android:id="@+id/btn_touch"
@@ -55,8 +51,7 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
 
                 <ImageView
                     android:id="@+id/btn_camera_switch"
@@ -69,17 +64,16 @@
         </LinearLayout>
 
 
-
         <LinearLayout
 
-            android:visibility="gone"
             android:id="@+id/llt_main_timer_col"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/header_layout"
             android:background="@drawable/rectanguler_shape"
             android:orientation="horizontal"
-            android:padding="6.5dp">
+            android:padding="6.5dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/llt_main_timer_normal"
@@ -125,18 +119,16 @@
         </LinearLayout>
 
 
-
         <LinearLayout
 
-            android:orientation="vertical"
             android:id="@+id/idOnTouch"
-            android:layout_below="@+id/llt_main_timer_col"
-            android:layout_above="@+id/llt_main_face_seekbar"
             android:layout_width="match_parent"
-            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/llt_main_face_seekbar"
+            android:layout_below="@+id/llt_main_timer_col"
             android:gravity="center"
-            android:layout_height="wrap_content">
-
+            android:orientation="vertical"
+            android:visibility="gone">
 
 
         </LinearLayout>
@@ -147,34 +139,33 @@
             layout="@layout/dev_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:visibility="gone"
             android:layout_below="@id/header_layout"
-            />
+            android:layout_marginBottom="80dp"
+            android:visibility="gone" />
+
         <include
 
             android:id="@+id/layout_about"
             layout="@layout/activity_about_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:visibility="gone"
             android:layout_below="@id/header_layout"
-            />
+            android:layout_marginBottom="80dp"
+            android:visibility="gone" />
 
 
         <LinearLayout
 
-            android:orientation="vertical"
             android:id="@+id/idtiminglayout"
-            android:layout_below="@+id/llt_main_timer_col"
-            android:layout_above="@+id/llt_main_face_seekbar"
             android:layout_width="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/llt_main_face_seekbar"
+            android:layout_below="@+id/llt_main_timer_col"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:visibility="gone"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
 
 
             <TextView
@@ -189,30 +180,30 @@
         </LinearLayout>
 
 
-
         <LinearLayout
 
-            android:layout_above="@+id/llt_main_face_seekbar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_above="@+id/llt_main_face_seekbar"
             android:layout_weight="1"
             android:gravity="center_vertical">
+
             <SeekBar
                 android:id="@+id/skb_main_scale"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:progressDrawable="@drawable/back_seekbar_progress"
-                android:thumb="@drawable/back_seekbar_thumb"
                 android:rotation="270"
-                android:visibility="gone"/>
+                android:thumb="@drawable/back_seekbar_thumb"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
 
-            android:layout_above="@+id/llt_main_beauty_col"
             android:id="@+id/llt_main_face_seekbar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_above="@+id/llt_main_beauty_col"
             android:gravity="center_vertical">
 
             <SeekBar
@@ -274,27 +265,22 @@
             </LinearLayout>
 
 
-
-
         </LinearLayout>
-
-
 
 
         <LinearLayout
 
+            android:id="@+id/mOtherMenu"
             style="@style/header_layout_size"
-            android:gravity="center_horizontal"
-            android:background="@color/transparent_white"
-            android:orientation="horizontal"
-            android:padding="5dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
+            android:background="@color/transparent_white"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
 
-            android:id="@+id/mOtherMenu">
+            android:padding="5dp">
 
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
 
                 <ImageView
                     android:id="@+id/btn_gallery"
@@ -303,17 +289,15 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
 
                 <ImageView
                     android:id="@+id/btn_camera_filter"
                     style="@style/header_layout_icon_size"
-                    android:src="@drawable/icon_filter"/>
+                    android:src="@drawable/icon_filter" />
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
 
                 <ImageView
                     android:id="@+id/btn_camera_shutter"
@@ -322,8 +306,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
 
                 <ImageView
                     android:id="@+id/btn_sticker"
@@ -333,8 +316,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/llt_menu_item">
+            <LinearLayout style="@style/llt_menu_item">
 
                 <ImageView
                     android:id="@+id/btn_camera_beauty"
@@ -344,24 +326,16 @@
             </LinearLayout>
 
 
-
-
-
-
         </LinearLayout>
-
-
-
-
 
 
         <!--      Sticker-->
         <androidx.recyclerview.widget.RecyclerView
 
+            android:id="@+id/mMenuView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/mOtherMenu"
-            android:id="@+id/mMenuView"
             android:layout_marginBottom="7dp">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -373,9 +347,8 @@
             layout="@layout/more_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_below="@id/header_layout"
-            />
+            android:visibility="gone" />
 
         <include
 
@@ -383,12 +356,12 @@
             layout="@layout/filter_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-
-            android:background="@android:color/transparent"
-            android:visibility="invisible"
             android:layout_above="@id/mOtherMenu"
-            android:layout_marginBottom="7dp"/>
+
+            android:layout_gravity="center"
+            android:layout_marginBottom="7dp"
+            android:background="@android:color/transparent"
+            android:visibility="invisible" />
 
 
         <!--</FrameLayout>-->

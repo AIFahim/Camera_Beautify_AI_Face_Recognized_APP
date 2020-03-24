@@ -11,11 +11,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:cardCornerRadius="10dp"
-        >
+        app:cardCornerRadius="10dp" >
         <FrameLayout
 
             android:layout_width="fill_parent"

@@ -36,13 +36,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_manoj_roy"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -66,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
@@ -141,13 +140,11 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"
 
-                    app:cardCornerRadius="70dp">
+                    app:cardCornerRadius="50dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_faisal_khan"
-
                         android:layout_centerHorizontal="true">
                     </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -165,7 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:layout_marginRight="60dp"
+                        android:layout_marginRight="70dp"
                         android:layout_marginLeft="10dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
@@ -236,13 +233,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_anjon"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -266,7 +262,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
@@ -349,13 +345,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_asif_fahim"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -379,7 +374,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
@@ -445,11 +440,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"
 
-                    app:cardCornerRadius="70dp">
+                    app:cardCornerRadius="50dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/moinakash"
 
                         android:layout_centerHorizontal="true">
@@ -486,7 +480,7 @@
                             <LinearLayout
                                 android:id="@+id/Details"
                                 android:layout_marginLeft="0dp"
-                                android:layout_marginRight="70dp"
+                                android:layout_marginRight="40dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
@@ -532,13 +526,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_farhad_hossen"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -562,7 +555,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
@@ -635,11 +628,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"
 
-                    app:cardCornerRadius="70dp">
+                    app:cardCornerRadius="50dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_nakib_mim"
 
                         android:layout_centerHorizontal="true">
@@ -729,13 +721,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_majeda_bithi"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -759,7 +750,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
@@ -830,13 +821,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_md_arif_mahmud"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -860,7 +850,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
@@ -926,11 +916,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"
 
-                    app:cardCornerRadius="70dp">
+                    app:cardCornerRadius="50dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_liza"
 
                         android:layout_centerHorizontal="true">
@@ -1013,13 +1002,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_ariful_islamm"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -1043,7 +1031,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
@@ -1108,11 +1096,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"
 
-                    app:cardCornerRadius="70dp">
+                    app:cardCornerRadius="50dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_shakib_f"
 
                         android:layout_centerHorizontal="true">
@@ -1195,13 +1182,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_akthar"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -1225,7 +1211,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
@@ -1292,11 +1278,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"
 
-                    app:cardCornerRadius="70dp">
+                    app:cardCornerRadius="50dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_riyad"
 
                         android:layout_centerHorizontal="true">
@@ -1379,13 +1364,12 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="70dp"
+                    app:cardCornerRadius="50dp"
 
                     android:layout_marginLeft="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                        style="@style/dev_info_circle_size"
                         android:src="@drawable/img_tuhin"
                         android:elevation="1dp"
                         android:layout_centerHorizontal="true">
@@ -1409,7 +1393,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="40dp"
                         app:cardCornerRadius="10dp"
                         app:contentPaddingBottom="15dp"
                         app:contentPaddingLeft="15dp"
