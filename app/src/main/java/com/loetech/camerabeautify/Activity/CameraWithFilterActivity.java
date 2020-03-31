@@ -1387,6 +1387,7 @@ public class CameraWithFilterActivity extends Activity implements  View.OnClickL
                 }
 
 
+                
                 MediaPlayer mp = MediaPlayer.create(CameraWithFilterActivity.this, R.raw.capturesound);
                 if (sharedPref.loadSoundModeState() == true) {
                     mp.start();
