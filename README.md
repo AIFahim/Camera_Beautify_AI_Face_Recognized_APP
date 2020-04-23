@@ -2,7 +2,7 @@
 ## This is the bangladeshi traditional AI Camera Stickers and Face Beautify Application.
 ### Technologies used : Open CV , MVC Architecture , Open Graphics Library (OpenGL®) , HTML ,and Many Android Components like recyclerview , webview , shared preference etc. and Many More
 #### We ( Team Alachi : Android Team  ) , [ME](https://github.com/AIFahim) , [Moin Akash](https://github.com/moinakash) ,and [Farhad Hossen](https://github.com/farhadhossen) did this project with UI team and Animator team. 
- To complete this project we( 13 members ) worked full day and <b><b>I was the team leader of this team<b><b> .
+ To complete this project we worked full day and <b><b>I was the team leader of this team<b><b> .
 ### Promotional Screens :
   <br><br><br>
 ![Camera Screen 1](https://user-images.githubusercontent.com/33654834/80011048-1c971380-84ed-11ea-85e8-a993a512db99.jpg)
