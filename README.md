@@ -5,6 +5,7 @@
  To complete this project we worked full day and <b><b>I was the team leader of this team<b><b> .
 ### Promotional Screens :
   <br><br><br>
+:-------------------------:|:-------------------------:
 ![Camera Screen 1](https://user-images.githubusercontent.com/33654834/80011048-1c971380-84ed-11ea-85e8-a993a512db99.jpg) | ![Camera Screen 2](https://user-images.githubusercontent.com/33654834/80011060-202a9a80-84ed-11ea-9d33-ea984ee1678a.jpg)
   <br><br><br>
 ![Camera Screen 3](https://user-images.githubusercontent.com/33654834/80011070-23258b00-84ed-11ea-811a-c384c4d5fa2e.jpg)
