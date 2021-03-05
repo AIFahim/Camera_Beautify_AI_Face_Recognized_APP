@@ -26,7 +26,7 @@ MVC | Java | Open CV , Open Graphics Library (OpenGL®) , HTML ,and Many Android
 
 
 
-
+<hr>
 
 ### Code practices
 Please help us follow the best practices to make it easy for the reviewer as well as the contributor. We want to focus on the code quality more than on managing pull request ethics.
