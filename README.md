@@ -2,11 +2,11 @@
 
 ![Author](https://img.shields.io/badge/author-AIFahim-orange)
 [![License Badge](https://img.shields.io/badge/license-GPL%203.0-blue)](https://github.com/AIFahim/Camera_Beautify_AI_Face_Recognized_APP/blob/master/LICENSE)
-[]
+
 
 <hr>
 
-This is the bangladeshi traditional AI Camera Stickers and Face Beautify Application.
+### This is the bangladeshi traditional AI Camera Stickers and Face Beautify Application.
 <hr>
 
 ## Technologies used 
