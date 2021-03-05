@@ -2,7 +2,7 @@
 
 ![Author](https://img.shields.io/badge/author-AIFahim-orange)
 [![MIT](https://img.shields.io/badge/license-MIT-5eba00.svg)](https://github.com/AIFahim/Predict-Profit-Using-Linear-Regression-/blob/main/LICENSE.md)
-[![License Badge(https://img.shields.io/badge/license-GPL%203.0-blue)](https://github.com/AIFahim/Camera_Beautify_AI_Face_Recognized_APP/blob/master/LICENSE)
+[![License Badge](https://img.shields.io/badge/license-GPL%203.0-blue)](https://github.com/AIFahim/Camera_Beautify_AI_Face_Recognized_APP/blob/master/LICENSE)
 
 <hr>
 
