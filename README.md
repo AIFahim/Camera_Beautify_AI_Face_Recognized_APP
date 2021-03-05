@@ -47,7 +47,7 @@ Please help us follow the best practices to make it easy for the reviewer as wel
 
 ## Maintainers and Developers (Team Alachi)
 This repository is owned and maintained by 
- * [ME](https://github.com/AIFahim)
+ * [Md. Asif Iqbal Fahim](https://github.com/AIFahim)
  * [Farhad Hossen](https://github.com/farhadhossen)
  * [Moin Akash](https://github.com/moinakash)
   
