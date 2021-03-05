@@ -9,9 +9,21 @@
 ### This is the bangladeshi traditional AI Camera Stickers and Face Beautify Application.
 <hr>
 
+## Architecture Pattern Used 
+
+MVC
+
+<hr>
+
+## Language Used 
+
+Java
+
+<hr>
+
 ## Technologies used 
 
-Open CV , MVC Architecture , Open Graphics Library (OpenGL®) , HTML ,and Many Android Components like recyclerview , webview , shared preference etc.
+Open CV , Open Graphics Library (OpenGL®) , HTML ,and Many Android Components like recyclerview , webview , shared preference etc.
 
 <hr>
 
