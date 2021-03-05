@@ -6,7 +6,7 @@
 
 <hr>
 
-### This is the bangladeshi traditional AI Camera Stickers and Face Beautify Application.
+### This is the bangladeshi traditional AI based Camera Stickers and Face Beautify Application.
 <hr>
 
  Architecture Pattern Used             |   Language Used   |   Technologies used     
