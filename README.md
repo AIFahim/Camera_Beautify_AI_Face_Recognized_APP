@@ -1,4 +1,4 @@
-# Camera Beautify AI Face Recognized Application 
+# **Camera Beautify AI Face Recognized Application**  
 ## This is the bangladeshi traditional AI Camera Stickers and Face Beautify Application.
 ### Technologies used : Open CV , MVC Architecture , Open Graphics Library (OpenGL®) , HTML ,and Many Android Components like recyclerview , webview , shared preference etc. and Many More
 #### We ( Team Alachi : Android Team  ) ,  ,  ,and [Farhad Hossen](https://github.com/farhadhossen) did this project with UI team and Animator team. 
